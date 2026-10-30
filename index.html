@@ -1537,7 +1537,7 @@
 
     <!-- ==================== PRE-ENTRY VIDEO ==================== -->
     <div class="pre-entry-video" id="preEntry">
-        <video autoplay muted playsinline>
+        <video id="preEntryVideo" autoplay muted playsinline>
             <source src="assets-raw/hf_20261030_133320_8c6dabd0-5979-4841-9545-f201a1e53c47.mp4" type="video/mp4">
         </video>
     </div>
@@ -1937,16 +1937,26 @@
     <script>
         // ==================== PRE-ENTRY VIDEO (ACCELERATED) ====================
         function initPreEntry() {
+            const preVideo = document.getElementById('preEntryVideo');
             const preEntry = document.getElementById('preEntry');
-            const preVideo = preEntry?.querySelector('video');
 
             if (preVideo) {
-                // Accélérer la vidéo 2x
+                // Accélérer la vidéo 2x immédiatement
                 preVideo.playbackRate = 2;
+
+                // Forcer la lecture
+                const playPromise = preVideo.play();
+                if (playPromise !== undefined) {
+                    playPromise.catch(error => {
+                        console.log('Autoplay prevented, retrying...');
+                        // Retry après interaction
+                        document.addEventListener('click', () => preVideo.play(), { once: true });
+                    });
+                }
 
                 // Masquer la pré-vidéo après 3.5s
                 setTimeout(() => {
-                    preEntry.classList.add('hidden');
+                    if (preEntry) preEntry.classList.add('hidden');
                 }, 3500);
             }
         }
