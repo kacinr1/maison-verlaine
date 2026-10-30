@@ -1,0 +1,33 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><style>html,body{margin:0;height:100%;background:#12161c}</style></head>
+<body><canvas id="c" style="display:block;width:100vw;height:100vh"></canvas>
+<script type="importmap">{"imports":{"three":"https://unpkg.com/three@0.160.0/build/three.module.js","three/addons/":"https://unpkg.com/three@0.160.0/examples/jsm/"}}</script>
+<script type="module">
+import * as THREE from 'three';
+import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
+import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
+import {RoomEnvironment} from 'three/addons/environments/RoomEnvironment.js';
+const canvas=document.getElementById('c');
+const renderer=new THREE.WebGLRenderer({canvas,antialias:true});
+renderer.setPixelRatio(1.5);renderer.setSize(innerWidth,innerHeight);
+renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.1;renderer.outputColorSpace=THREE.SRGBColorSpace;
+const scene=new THREE.Scene();
+const pmrem=new THREE.PMREMGenerator(renderer);scene.environment=pmrem.fromScene(new RoomEnvironment(),.04).texture;
+const camera=new THREE.PerspectiveCamera(40,innerWidth/innerHeight,.01,100);camera.position.set(0,0,3.4);
+const controls=new OrbitControls(camera,canvas);controls.enableDamping=true;
+scene.add(new THREE.DirectionalLight(0xffffff,2).translateZ(5).translateY(3).translateX(2));
+scene.add(new THREE.AmbientLight(0xffffff,.3));
+const q=new URLSearchParams(location.search);const file=q.get('f')||'ensemble.glb';
+window.__ready=false;window.__bbox=null;
+new GLTFLoader().load('../3d-pieces/glb/'+file,(g)=>{
+  const m=g.scene;
+  m.traverse(o=>{if(o.isMesh){o.geometry.computeVertexNormals();o.material=new THREE.MeshStandardMaterial({color:0x9a9ca0,roughness:.72,metalness:.02});}});
+  const box=new THREE.Box3().setFromObject(m);const size=box.getSize(new THREE.Vector3());const c=box.getCenter(new THREE.Vector3());
+  const s=2.0/Math.max(size.x,size.y,size.z);m.scale.setScalar(s);m.position.sub(c.multiplyScalar(s));
+  scene.add(m);
+  window.__bbox={size:[size.x,size.y,size.z],center:[c.x,c.y,c.z]};
+  window.__ready=true;
+});
+window.setView=(az)=>{const r=3.4;camera.position.set(Math.sin(az)*r,0,Math.cos(az)*r);camera.lookAt(0,0,0);controls.update();};
+addEventListener('resize',()=>{camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight);});
+(function l(){requestAnimationFrame(l);controls.update();renderer.render(scene,camera);})();
+</script></body></html>

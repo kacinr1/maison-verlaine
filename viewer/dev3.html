@@ -1,0 +1,50 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><style>html,body{margin:0;height:100%;background:#12161c}</style></head>
+<body><canvas id="c" style="display:block;width:100vw;height:100vh"></canvas>
+<script type="importmap">{"imports":{"three":"https://unpkg.com/three@0.160.0/build/three.module.js","three/addons/":"https://unpkg.com/three@0.160.0/examples/jsm/"}}</script>
+<script type="module">
+import * as THREE from 'three';
+import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
+import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
+import {RoomEnvironment} from 'three/addons/environments/RoomEnvironment.js';
+const canvas=document.getElementById('c');
+const renderer=new THREE.WebGLRenderer({canvas,antialias:true});
+renderer.setPixelRatio(1.5);renderer.setSize(innerWidth,innerHeight);
+renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.1;renderer.outputColorSpace=THREE.SRGBColorSpace;
+const scene=new THREE.Scene();
+const pmrem=new THREE.PMREMGenerator(renderer);scene.environment=pmrem.fromScene(new RoomEnvironment(),.04).texture;
+const camera=new THREE.PerspectiveCamera(38,innerWidth/innerHeight,.01,100);camera.position.set(0,0.9,4.2);
+const controls=new OrbitControls(camera,canvas);controls.enableDamping=true;controls.target.set(0,0.9,0);
+const dl=new THREE.DirectionalLight(0xffffff,2);dl.position.set(2,3,5);scene.add(dl);
+scene.add(new THREE.AmbientLight(0xffffff,.3));
+
+// layer transforms: rot(deg), targetH along Y, anchor bottom/top Y, zoff
+const COL={chemise:0xf2f1ec,pantalon:0x3a3f49,veste:0x25304c,cravate:0x5b2130,chaussures:0x4a3121,gilet:0x30384a};
+const LAYERS=[
+  {name:'chemise',  rot:[0,0,0], H:0.60, sx:0.58, sz:0.62, bottom:0.93, z:-0.02, rough:.6},
+  {name:'pantalon', rot:[0,0,0], H:0.92, bottom:0.06, z:0, rough:.7},
+  {name:'veste',    rot:[0,0,0], H:0.76, bottom:0.78, z:0, rough:.7},
+  {name:'cravate',  rot:[0,0,0], H:0.44, sx:0.9, top:1.44, z:0.12, rough:.34},
+  {name:'chaussures',rot:[0,0,0],H:0.11, bottom:0.0, z:0.02, rough:.32},
+];
+const loader=new GLTFLoader();let done=0;window.__ready=false;
+LAYERS.forEach(L=>{
+  loader.load('../3d-pieces/glb/'+L.name+'.glb',(g)=>{
+    const root=g.scene;const mat=new THREE.MeshStandardMaterial({color:COL[L.name],roughness:L.rough,metalness:.03});
+    root.traverse(o=>{if(o.isMesh){o.geometry.computeVertexNormals();o.material=mat;}});
+    if(L.rot) root.rotation.set(L.rot[0]*Math.PI/180,L.rot[1]*Math.PI/180,L.rot[2]*Math.PI/180);
+    root.updateMatrixWorld(true);
+    let box=new THREE.Box3().setFromObject(root);let size=box.getSize(new THREE.Vector3());
+    const s=L.H/size.y; root.scale.setScalar(s);
+    if(L.sx)root.scale.x*=L.sx; if(L.sz)root.scale.z*=L.sz;
+    root.updateMatrixWorld(true); box=new THREE.Box3().setFromObject(root);size=box.getSize(new THREE.Vector3());
+    const c=box.getCenter(new THREE.Vector3());
+    root.position.x-=c.x; root.position.z-=c.z+ (L.z?-L.z:0);
+    if(L.top!=null) root.position.y+=L.top-box.max.y; else root.position.y+=L.bottom-box.min.y;
+    scene.add(root);
+    done++; if(done===LAYERS.length) window.__ready=true;
+  },undefined,(e)=>{console.error(L.name,e);done++;if(done===LAYERS.length)window.__ready=true;});
+});
+window.setView=(az)=>{const r=4.2;camera.position.set(Math.sin(az)*r,0.9,Math.cos(az)*r);camera.lookAt(0,0.9,0);controls.update();};
+addEventListener('resize',()=>{camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight);});
+(function l(){requestAnimationFrame(l);controls.update();renderer.render(scene,camera);})();
+</script></body></html>

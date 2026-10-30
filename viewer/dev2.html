@@ -1,0 +1,71 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><style>html,body{margin:0;height:100%;background:#12161c}</style></head>
+<body><canvas id="c" style="display:block;width:100vw;height:100vh"></canvas>
+<script type="importmap">{"imports":{"three":"https://unpkg.com/three@0.160.0/build/three.module.js","three/addons/":"https://unpkg.com/three@0.160.0/examples/jsm/"}}</script>
+<script type="module">
+import * as THREE from 'three';
+import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
+import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
+import {RoomEnvironment} from 'three/addons/environments/RoomEnvironment.js';
+const canvas=document.getElementById('c');
+const renderer=new THREE.WebGLRenderer({canvas,antialias:true});
+renderer.setPixelRatio(1.5);renderer.setSize(innerWidth,innerHeight);
+renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.1;renderer.outputColorSpace=THREE.SRGBColorSpace;
+const scene=new THREE.Scene();
+const pmrem=new THREE.PMREMGenerator(renderer);scene.environment=pmrem.fromScene(new RoomEnvironment(),.04).texture;
+const camera=new THREE.PerspectiveCamera(40,innerWidth/innerHeight,.01,100);camera.position.set(0,0,3.4);
+const controls=new OrbitControls(camera,canvas);controls.enableDamping=true;
+const dl=new THREE.DirectionalLight(0xffffff,2);dl.position.set(2,3,5);scene.add(dl);
+scene.add(new THREE.AmbientLight(0xffffff,.3));
+const dbg=new URLSearchParams(location.search).get('dbg')==='1';
+
+// materials
+const Msuit =new THREE.MeshStandardMaterial({color:0x9a9ca0,roughness:.72,metalness:.02});
+const Mgilet=new THREE.MeshStandardMaterial({color:0x9a9ca0,roughness:.72,metalness:.02});
+const Mtie  =new THREE.MeshStandardMaterial({color:0x5b2130,roughness:.34,metalness:.05});
+const Mshoe =new THREE.MeshStandardMaterial({color:0x5a3a26,roughness:.3,metalness:.05});
+const Mshirt=new THREE.MeshStandardMaterial({color:0xf0efe9,roughness:.6,metalness:.0});
+if(dbg){Msuit.color.set(0x888888);Mgilet.color.set(0x19a35a);Mtie.color.set(0xd11a2a);Mshoe.color.set(0x1a66d1);Mshirt.color.set(0xd11ad1);}
+const mats=[Msuit,Mgilet,Mtie,Mshoe,Mshirt];
+window.MATS={suit:Msuit,gilet:Mgilet,tie:Mtie,shoe:Mshoe,shirt:Mshirt};
+
+function segment(geo){
+  const pos=geo.attributes.position;
+  let idx=geo.index?Array.from(geo.index.array):null;
+  if(!idx){idx=[];for(let i=0;i<pos.count;i++)idx.push(i);}
+  geo.computeBoundingBox();const bb=geo.boundingBox;
+  const dx=bb.max.x-bb.min.x,dy=bb.max.y-bb.min.y,dz=bb.max.z-bb.min.z;
+  const buckets=[[],[],[],[],[]];
+  const v=new THREE.Vector3();
+  for(let t=0;t<idx.length;t+=3){
+    let cx=0,cy=0,cz=0;
+    for(let k=0;k<3;k++){v.fromBufferAttribute(pos,idx[t+k]);cx+=v.x;cy+=v.y;cz+=v.z;}
+    cx/=3;cy/=3;cz/=3;
+    const fx=(cx-bb.min.x)/dx, fy=(cy-bb.min.y)/dy, fz=(cz-bb.min.z)/dz, ax=Math.abs(fx-0.5);
+    let r=0;                                                                 // 0 suit
+    if(fy<0.075) r=3;                                                        // shoes
+    else if(fz>0.70 && ax<0.028 && fy>0.62 && fy<0.90) r=2;                  // tie (thin center)
+    else if(fz>0.52 && ax<0.055 && fy>0.785 && fy<0.90) r=4;                 // shirt (collar/upper center)
+    else if(fz>0.56 && ax<0.11 && fy>0.555 && fy<0.80) r=1;                  // gilet (front panel)
+    buckets[r].push(idx[t],idx[t+1],idx[t+2]);
+  }
+  const total=buckets.reduce((s,b)=>s+b.length,0);
+  const newIdx=new Uint32Array(total);const groups=[];let off=0;
+  buckets.forEach((b,mi)=>{if(b.length){groups.push([off,b.length,mi]);newIdx.set(b,off);off+=b.length;}});
+  geo.setIndex(new THREE.BufferAttribute(newIdx,1));geo.clearGroups();groups.forEach(g=>geo.addGroup(g[0],g[1],g[2]));
+  geo.computeVertexNormals();
+  return buckets.map(b=>b.length/3);
+}
+
+window.__ready=false;
+new GLTFLoader().load('../3d-pieces/glb/ensemble.glb',(g)=>{
+  const root=g.scene;let counts=null;
+  root.traverse(o=>{if(o.isMesh){counts=segment(o.geometry);o.material=mats;}});
+  const box=new THREE.Box3().setFromObject(root);const size=box.getSize(new THREE.Vector3());const c=box.getCenter(new THREE.Vector3());
+  const s=2.0/Math.max(size.x,size.y,size.z);root.scale.setScalar(s);root.position.sub(c.multiplyScalar(s));
+  scene.add(root);
+  window.__counts=counts;window.__ready=true;
+});
+window.setView=(az)=>{const r=3.4;camera.position.set(Math.sin(az)*r,0,Math.cos(az)*r);camera.lookAt(0,0,0);controls.update();};
+addEventListener('resize',()=>{camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight);});
+(function l(){requestAnimationFrame(l);controls.update();renderer.render(scene,camera);})();
+</script></body></html>

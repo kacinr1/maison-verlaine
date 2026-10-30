@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maison Verlaine — Configurateur 3D</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{--ink:#0d1014;--chalk:#ECE7DC;--muted:#8b9199;--gold:#C5A469;--line:rgba(197,164,105,.2)}
+  *{margin:0;box-sizing:border-box}
+  html,body{height:100%}
+  body{background:radial-gradient(130% 95% at 50% 8%,#171d26,#0d1014 62%);color:var(--chalk);
+    font-family:'Jost',sans-serif;font-weight:300;overflow:hidden}
+  #c{position:fixed;inset:0;display:block}
+  .top{position:fixed;top:0;left:0;right:0;display:flex;justify-content:space-between;align-items:center;padding:20px 30px;z-index:6;pointer-events:none}
+  .logo{font-family:'Cormorant Garamond',serif;font-size:1.3rem;letter-spacing:.14em;text-transform:uppercase}
+  .logo b{color:var(--gold)}
+  .eyebrow{font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold)}
+  .dock{position:fixed;top:0;right:0;height:100%;width:320px;z-index:5;
+    background:linear-gradient(90deg,rgba(13,16,20,0),rgba(13,16,20,.85) 20%);backdrop-filter:blur(8px);
+    display:flex;flex-direction:column;justify-content:center;gap:2px;padding:64px 28px 28px;overflow-y:auto}
+  .blk{border-top:1px solid var(--line);padding:13px 0}
+  .blk:first-of-type{border-top:none}
+  .blk h3{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:1.06rem;margin-bottom:9px;display:flex;align-items:center;gap:9px}
+  .blk h3 .d{width:6px;height:6px;border-radius:50%;background:var(--gold);box-shadow:0 0 8px var(--gold)}
+  .sw{display:flex;flex-wrap:wrap;gap:7px}
+  .sw button{width:27px;height:27px;border-radius:50%;border:1px solid rgba(255,255,255,.14);cursor:pointer;padding:0;transition:transform .18s,box-shadow .18s}
+  .sw button:hover{transform:scale(1.14)}
+  .sw button.active{box-shadow:0 0 0 2px var(--ink),0 0 0 3px var(--gold)}
+  .foot{position:fixed;left:30px;bottom:26px;z-index:6;display:flex;gap:10px}
+  .btn{font-family:'Jost';font-size:.64rem;letter-spacing:.16em;text-transform:uppercase;color:var(--chalk);
+    background:rgba(13,16,20,.6);border:1px solid var(--line);border-radius:5px;padding:10px 15px;cursor:pointer;transition:.3s}
+  .btn:hover,.btn.on{background:var(--gold);color:var(--ink)}
+  .hint{position:fixed;left:30px;bottom:68px;z-index:6;font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+  #load{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:14px;background:var(--ink);z-index:20;transition:opacity .6s}
+  #load.hide{opacity:0;pointer-events:none}
+  #load .ring{width:38px;height:38px;border:2px solid rgba(197,164,105,.25);border-top-color:var(--gold);border-radius:50%;animation:spin 1s linear infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  @media(max-width:760px){.dock{width:100%;height:auto;bottom:0;top:auto;flex-direction:row;overflow-x:auto;gap:16px;padding:14px 16px;background:rgba(13,16,20,.92);justify-content:flex-start}
+    .blk{border-top:none;border-left:1px solid var(--line);padding:0 14px;flex:0 0 auto}.blk:first-of-type{border-left:none;padding-left:0}.foot{bottom:auto;top:58px}.hint{display:none}}
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<div class="top"><div class="logo">Maison <b>Verlaine</b></div><div class="eyebrow">Configurateur 3D — Grande Mesure</div></div>
+<div class="dock" id="dock"></div>
+<div class="hint">Glissez pour tourner · molette pour zoomer</div>
+<div class="foot"><button class="btn on" id="rotate">Rotation auto</button><button class="btn" id="reset">Recentrer</button></div>
+<div id="load"><div class="ring"></div><div class="eyebrow">Assemblage du costume 3D…</div></div>
+
+<script type="importmap">
+{"imports":{"three":"https://unpkg.com/three@0.160.0/build/three.module.js","three/addons/":"https://unpkg.com/three@0.160.0/examples/jsm/"}}
+</script>
+<script type="module">
+import * as THREE from 'three';
+import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
+import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
+import {RoomEnvironment} from 'three/addons/environments/RoomEnvironment.js';
+
+const canvas=document.getElementById('c');
+const renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true});
+renderer.setPixelRatio(Math.min(devicePixelRatio,2));renderer.setSize(innerWidth,innerHeight);
+renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.12;renderer.outputColorSpace=THREE.SRGBColorSpace;
+const scene=new THREE.Scene();
+const pmrem=new THREE.PMREMGenerator(renderer);scene.environment=pmrem.fromScene(new RoomEnvironment(),.04).texture;
+const camera=new THREE.PerspectiveCamera(36,innerWidth/innerHeight,.01,100);
+const HOME=new THREE.Vector3(0,0.86,3.25);camera.position.copy(HOME);const TGT=new THREE.Vector3(0,0.82,0);
+const controls=new OrbitControls(camera,canvas);controls.enableDamping=true;controls.dampingFactor=.07;
+controls.autoRotate=true;controls.autoRotateSpeed=1.2;controls.minDistance=1.8;controls.maxDistance=8;controls.target.copy(TGT);
+const key=new THREE.DirectionalLight(0xffffff,2.1);key.position.set(2.5,3,4);scene.add(key);
+const rim=new THREE.DirectionalLight(0xD8BC86,1.0);rim.position.set(-3,2,-3);scene.add(rim);
+scene.add(new THREE.AmbientLight(0xffffff,.28));
+
+const DEF={veste:0x25304c,pantalon:0x25304c,gilet:0x25304c,chemise:0xf2f1ec,cravate:0x5b2130,chaussures:0x4a3121};
+const M={};  // materials per piece
+
+// ---- matières : cartes de normales tileables + mapping triplanaire (sans UV) ----
+const texLoader=new THREE.TextureLoader();
+function loadN(f){const t=texLoader.load('tex/'+f);t.wrapS=t.wrapT=THREE.RepeatWrapping;t.colorSpace=THREE.NoColorSpace;t.anisotropy=8;return t;}
+const TEX={wool:loadN('wool_n.png'),cotton:loadN('cotton_n.png'),satin:loadN('satin_n.png'),leather:loadN('leather_n.png')};
+// [carte, échelle(répétitions/unité monde), force du relief]
+const FABRIC={veste:['wool',24,1.15],gilet:['wool',24,1.15],pantalon:['wool',24,1.15],chemise:['cotton',38,.7],cravate:['satin',20,.45],chaussures:['leather',15,1.2]};
+function applyFabric(mat,key){
+  const [tk,scale,strength]=FABRIC[key]; const tex=TEX[tk];
+  mat.onBeforeCompile=(sh)=>{
+    sh.uniforms.uDetail={value:tex};sh.uniforms.uScale={value:scale};sh.uniforms.uStrength={value:strength};
+    sh.vertexShader='varying vec3 vWPos;varying vec3 vWN;\n'+sh.vertexShader
+      .replace('#include <begin_vertex>','#include <begin_vertex>\n vWPos=(modelMatrix*vec4(transformed,1.0)).xyz;')
+      .replace('#include <beginnormal_vertex>','#include <beginnormal_vertex>\n vWN=normalize(mat3(modelMatrix)*objectNormal);');
+    sh.fragmentShader='uniform sampler2D uDetail;uniform float uScale;uniform float uStrength;varying vec3 vWPos;varying vec3 vWN;\n'+sh.fragmentShader
+      .replace('#include <normal_fragment_maps>', `#include <normal_fragment_maps>
+      {
+        vec3 bl=abs(normalize(vWN));bl/=(bl.x+bl.y+bl.z);
+        vec3 dX=texture2D(uDetail,vWPos.zy*uScale).xyz*2.0-1.0;
+        vec3 dY=texture2D(uDetail,vWPos.xz*uScale).xyz*2.0-1.0;
+        vec3 dZ=texture2D(uDetail,vWPos.xy*uScale).xyz*2.0-1.0;
+        vec3 det=vec3(0.0,dX.y,dX.x)*bl.x+vec3(dY.x,0.0,dY.y)*bl.y+vec3(dZ.x,dZ.y,0.0)*bl.z;
+        vec3 detView=(viewMatrix*vec4(det,0.0)).xyz;
+        normal=normalize(normal+uStrength*detView);
+      }`);
+  };
+  mat.needsUpdate=true;
+}
+const LAYERS=[
+  {name:'chemise',  H:0.60, sx:0.58, sz:0.62, bottom:0.93, z:-0.02, rough:.6,  metal:0},
+  {name:'pantalon', H:0.92, bottom:0.06, z:0, rough:.84, metal:.03},
+  {name:'gilet',    H:0.54, sx:0.9,  bottom:0.92, z:0.0, rough:.84, metal:.03, optional:true},
+  {name:'veste',    H:0.76, bottom:0.78, z:0, rough:.84, metal:.03},
+  {name:'cravate',  H:0.44, sx:0.9, top:1.44, z:0.12, rough:.34, metal:.06},
+  {name:'chaussures',H:0.11, bottom:0.0, z:0.02, rough:.32, metal:.08},
+];
+const loader=new GLTFLoader();let pending=LAYERS.length;
+function place(root,L){
+  root.updateMatrixWorld(true);
+  let box=new THREE.Box3().setFromObject(root);let size=box.getSize(new THREE.Vector3());
+  const s=L.H/size.y;root.scale.setScalar(s);if(L.sx)root.scale.x*=L.sx;if(L.sz)root.scale.z*=L.sz;
+  root.updateMatrixWorld(true);box=new THREE.Box3().setFromObject(root);const c=box.getCenter(new THREE.Vector3());
+  root.position.x-=c.x;root.position.z-=c.z-(L.z||0);
+  if(L.top!=null)root.position.y+=L.top-box.max.y;else root.position.y+=L.bottom-box.min.y;
+  scene.add(root);
+}
+LAYERS.forEach(L=>{
+  loader.load('../3d-pieces/glb/'+L.name+'.glb',(g)=>{
+    const mat=new THREE.MeshStandardMaterial({color:DEF[L.name],roughness:L.rough,metalness:L.metal});
+    mat.envMapIntensity=(L.name==='cravate'||L.name==='chaussures')?0.9:0.55;
+    applyFabric(mat,L.name); M[L.name]=mat;
+    g.scene.traverse(o=>{if(o.isMesh){o.geometry.computeVertexNormals();o.material=mat;}});
+    place(g.scene,L);done();
+  },undefined,()=>{done();}); // optional pieces may 404 silently
+});
+function done(){if(--pending<=0)document.getElementById('load').classList.add('hide');}
+
+// ---------- UI ----------
+const PAL={
+  wool:[['#25304c','Bleu nuit'],['#9a9ca0','Gris'],['#3a3d42','Anthracite'],['#17181b','Noir'],['#5b2130','Bordeaux'],['#22402f','Vert anglais'],['#b59a63','Sable'],['#9c7536','Camel']],
+  silk:[['#5b2130','Bordeaux'],['#1f2a44','Bleu nuit'],['#c5a469','Or'],['#22402f','Vert'],['#15161a','Noir'],['#b8bcc4','Argent']],
+  shirt:[['#f2f1ec','Blanc'],['#9ec3e6','Bleu ciel'],['#e8c3cb','Rosé'],['#c9c6cf','Gris perle']],
+  leather:[['#4a3121','Brun'],['#2a1d14','Moka'],['#17181b','Noir'],['#6b4a2a','Cognac']],
+};
+const GROUPS=[
+  ['Veste','veste','wool'],['Gilet','gilet','wool'],['Pantalon','pantalon','wool'],
+  ['Chemise','chemise','shirt'],['Cravate','cravate','silk'],['Souliers','chaussures','leather'],
+];
+const dock=document.getElementById('dock');
+GROUPS.forEach(([title,key,palKey])=>{
+  const blk=document.createElement('div');blk.className='blk';blk.innerHTML=`<h3><span class="d"></span>${title}</h3>`;
+  const sw=document.createElement('div');sw.className='sw';
+  PAL[palKey].forEach(([hex,name],i)=>{
+    const b=document.createElement('button');b.style.background=hex;b.title=name;
+    if(parseInt(hex.slice(1),16)===DEF[key])b.classList.add('active');
+    b.onclick=()=>{sw.querySelectorAll('button').forEach(x=>x.classList.remove('active'));b.classList.add('active');
+      if(M[key])M[key].color.set(hex);};
+    sw.appendChild(b);
+  });
+  blk.appendChild(sw);dock.appendChild(blk);
+});
+const rotBtn=document.getElementById('rotate');
+rotBtn.onclick=()=>{controls.autoRotate=!controls.autoRotate;rotBtn.classList.toggle('on',controls.autoRotate);};
+document.getElementById('reset').onclick=()=>{camera.position.copy(HOME);controls.target.copy(TGT);controls.update();};
+addEventListener('resize',()=>{camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight);});
+(function loop(){requestAnimationFrame(loop);controls.update();renderer.render(scene,camera);})();
+</script>
+</body>
+</html>
