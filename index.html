@@ -1941,8 +1941,8 @@
             const preEntry = document.getElementById('preEntry');
 
             if (preVideo) {
-                // Accélérer la vidéo 2x immédiatement
-                preVideo.playbackRate = 2;
+                // Vitesse normale pour bien voir
+                preVideo.playbackRate = 1;
 
                 // Forcer la lecture
                 const playPromise = preVideo.play();
@@ -1954,10 +1954,10 @@
                     });
                 }
 
-                // Masquer la pré-vidéo après 3.5s
+                // Masquer la pré-vidéo après 10s (temps pour voir la vidéo)
                 setTimeout(() => {
                     if (preEntry) preEntry.classList.add('hidden');
-                }, 3500);
+                }, 10000);
             }
         }
 
