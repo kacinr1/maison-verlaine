@@ -1954,10 +1954,10 @@
                     });
                 }
 
-                // Masquer la pré-vidéo après 12s (vidéo entière: 10.08s)
+                // Masquer la pré-vidéo après 25s (attendre buffering + lecture complète)
                 setTimeout(() => {
                     if (preEntry) preEntry.classList.add('hidden');
-                }, 12000);
+                }, 25000);
             }
         }
 
