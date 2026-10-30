@@ -1,0 +1,301 @@
+
+Running 31 tests using 1 worker
+
+  x   1 [chromium] › test-maison-verlaine.js:8:3 › Maison Verlaine - Full Site Validation › Splash screen appears and animates correctly (desktop) (1.0m)
+  x   2 [chromium] › test-maison-verlaine.js:8:3 › Maison Verlaine - Full Site Validation › Splash screen appears and animates correctly (desktop) (retry #1) (54.2s)
+  x   3 [chromium] › test-maison-verlaine.js:25:3 › Maison Verlaine - Full Site Validation › Splash screen appears and animates correctly (mobile) (37.8s)
+  x   4 [chromium] › test-maison-verlaine.js:25:3 › Maison Verlaine - Full Site Validation › Splash screen appears and animates correctly (mobile) (retry #1) (37.5s)
+  x   5 [chromium] › test-maison-verlaine.js:37:3 › Maison Verlaine - Full Site Validation › Hero section loads with video and content (desktop) (41.5s)
+  x   6 [chromium] › test-maison-verlaine.js:37:3 › Maison Verlaine - Full Site Validation › Hero section loads with video and content (desktop) (retry #1) (41.9s)
+  ok  7 [chromium] › test-maison-verlaine.js:56:3 › Maison Verlaine - Full Site Validation › Hero section responsive layout (mobile) (39.6s)
+  x   8 [chromium] › test-maison-verlaine.js:72:3 › Maison Verlaine - Full Site Validation › Scroll cue animation is visible (40.3s)
+  x   9 [chromium] › test-maison-verlaine.js:72:3 › Maison Verlaine - Full Site Validation › Scroll cue animation is visible (retry #1) (42.5s)
+  x  10 [chromium] › test-maison-verlaine.js:82:3 › Maison Verlaine - Full Site Validation › Anchor links scroll smoothly to sections (48.3s)
+  x  11 [chromium] › test-maison-verlaine.js:104:3 › Maison Verlaine - Full Site Validation › Savoir-faire section structure and content (desktop) (0ms)
+  -  12 [chromium] › test-maison-verlaine.js:130:3 › Maison Verlaine - Full Site Validation › Savoir-faire grid responsive (tablet)
+  -  13 [chromium] › test-maison-verlaine.js:145:3 › Maison Verlaine - Full Site Validation › Savoir-faire grid responsive (mobile)
+  -  14 [chromium] › test-maison-verlaine.js:161:3 › Maison Verlaine - Full Site Validation › Étoffes masonry grid loads (desktop)
+  -  15 [chromium] › test-maison-verlaine.js:182:3 › Maison Verlaine - Full Site Validation › Étoffes grid hover effects (desktop)
+  -  16 [chromium] › test-maison-verlaine.js:202:3 › Maison Verlaine - Full Site Validation › Étoffes grid responsive (tablet)
+  -  17 [chromium] › test-maison-verlaine.js:219:3 › Maison Verlaine - Full Site Validation › Details video section loads (desktop)
+  -  18 [chromium] › test-maison-verlaine.js:238:3 › Maison Verlaine - Full Site Validation › Play icon appears on hover (desktop)
+  -  19 [chromium] › test-maison-verlaine.js:265:3 › Maison Verlaine - Full Site Validation › Configurateur 3D section loads (desktop)
+  -  20 [chromium] › test-maison-verlaine.js:295:3 › Maison Verlaine - Full Site Validation › Configurateur controls trigger config updates (desktop)
+  -  21 [chromium] › test-maison-verlaine.js:314:3 › Maison Verlaine - Full Site Validation › Configurateur responsive (mobile)
+  -  22 [chromium] › test-maison-verlaine.js:333:3 › Maison Verlaine - Full Site Validation › Lookbook section loads (desktop)
+  -  23 [chromium] › test-maison-verlaine.js:348:3 › Maison Verlaine - Full Site Validation › Lookbook card overlay appears on hover (desktop)
+  -  24 [chromium] › test-maison-verlaine.js:375:3 › Maison Verlaine - Full Site Validation › Parcours timeline loads (desktop)
+  -  25 [chromium] › test-maison-verlaine.js:399:3 › Maison Verlaine - Full Site Validation › Contact form loads (desktop)
+  -  26 [chromium] › test-maison-verlaine.js:426:3 › Maison Verlaine - Full Site Validation › Contact form submission (desktop)
+  -  27 [chromium] › test-maison-verlaine.js:455:3 › Maison Verlaine - Full Site Validation › Contact form responsive (mobile)
+  -  28 [chromium] › test-maison-verlaine.js:474:3 › Maison Verlaine - Full Site Validation › Footer displays correctly
+  -  29 [chromium] › test-maison-verlaine.js:489:3 › Maison Verlaine - Full Site Validation › Mobile viewport (375px) - full navigation
+  -  30 [chromium] › test-maison-verlaine.js:508:3 › Maison Verlaine - Full Site Validation › Tablet viewport (768px) - layout adjustments
+  -  31 [chromium] › test-maison-verlaine.js:523:3 › Maison Verlaine - Full Site Validation › Desktop viewport (1920px) - full layout
+  -  32 [chromium] › test-maison-verlaine.js:539:3 › Maison Verlaine - Full Site Validation › Page loads in under 5 seconds (excluding splash)
+  -  33 [chromium] › test-maison-verlaine.js:550:3 › Maison Verlaine - Full Site Validation › No console errors on page load
+  -  34 [chromium] › test-maison-verlaine.js:565:3 › Maison Verlaine - Full Site Validation › Form inputs have proper labels (a11y)
+  -  35 [chromium] › test-maison-verlaine.js:585:3 › Maison Verlaine - Full Site Validation › Anchor links have proper href (a11y)
+  -  36 [chromium] › test-maison-verlaine.js:82:3 › Maison Verlaine - Full Site Validation › Anchor links scroll smoothly to sections (retry #1)
+  x  37 [chromium] › test-maison-verlaine.js:104:3 › Maison Verlaine - Full Site Validation › Savoir-faire section structure and content (desktop) (retry #1) (0ms)
+  -  38 [chromium] › test-maison-verlaine.js:130:3 › Maison Verlaine - Full Site Validation › Savoir-faire grid responsive (tablet) (retry #1)
+  -  39 [chromium] › test-maison-verlaine.js:145:3 › Maison Verlaine - Full Site Validation › Savoir-faire grid responsive (mobile) (retry #1)
+  -  40 [chromium] › test-maison-verlaine.js:161:3 › Maison Verlaine - Full Site Validation › Étoffes masonry grid loads (desktop) (retry #1)
+  -  41 [chromium] › test-maison-verlaine.js:182:3 › Maison Verlaine - Full Site Validation › Étoffes grid hover effects (desktop) (retry #1)
+  -  42 [chromium] › test-maison-verlaine.js:202:3 › Maison Verlaine - Full Site Validation › Étoffes grid responsive (tablet) (retry #1)
+  -  43 [chromium] › test-maison-verlaine.js:219:3 › Maison Verlaine - Full Site Validation › Details video section loads (desktop) (retry #1)
+  -  44 [chromium] › test-maison-verlaine.js:238:3 › Maison Verlaine - Full Site Validation › Play icon appears on hover (desktop) (retry #1)
+  -  45 [chromium] › test-maison-verlaine.js:265:3 › Maison Verlaine - Full Site Validation › Configurateur 3D section loads (desktop) (retry #1)
+  -  46 [chromium] › test-maison-verlaine.js:295:3 › Maison Verlaine - Full Site Validation › Configurateur controls trigger config updates (desktop) (retry #1)
+  -  47 [chromium] › test-maison-verlaine.js:314:3 › Maison Verlaine - Full Site Validation › Configurateur responsive (mobile) (retry #1)
+  -  48 [chromium] › test-maison-verlaine.js:333:3 › Maison Verlaine - Full Site Validation › Lookbook section loads (desktop) (retry #1)
+  -  49 [chromium] › test-maison-verlaine.js:348:3 › Maison Verlaine - Full Site Validation › Lookbook card overlay appears on hover (desktop) (retry #1)
+  -  50 [chromium] › test-maison-verlaine.js:375:3 › Maison Verlaine - Full Site Validation › Parcours timeline loads (desktop) (retry #1)
+  -  51 [chromium] › test-maison-verlaine.js:399:3 › Maison Verlaine - Full Site Validation › Contact form loads (desktop) (retry #1)
+  -  52 [chromium] › test-maison-verlaine.js:426:3 › Maison Verlaine - Full Site Validation › Contact form submission (desktop) (retry #1)
+  -  53 [chromium] › test-maison-verlaine.js:455:3 › Maison Verlaine - Full Site Validation › Contact form responsive (mobile) (retry #1)
+  -  54 [chromium] › test-maison-verlaine.js:474:3 › Maison Verlaine - Full Site Validation › Footer displays correctly (retry #1)
+  -  55 [chromium] › test-maison-verlaine.js:489:3 › Maison Verlaine - Full Site Validation › Mobile viewport (375px) - full navigation (retry #1)
+  -  56 [chromium] › test-maison-verlaine.js:508:3 › Maison Verlaine - Full Site Validation › Tablet viewport (768px) - layout adjustments (retry #1)
+  -  57 [chromium] › test-maison-verlaine.js:523:3 › Maison Verlaine - Full Site Validation › Desktop viewport (1920px) - full layout (retry #1)
+  -  58 [chromium] › test-maison-verlaine.js:539:3 › Maison Verlaine - Full Site Validation › Page loads in under 5 seconds (excluding splash) (retry #1)
+  -  59 [chromium] › test-maison-verlaine.js:550:3 › Maison Verlaine - Full Site Validation › No console errors on page load (retry #1)
+  -  60 [chromium] › test-maison-verlaine.js:565:3 › Maison Verlaine - Full Site Validation › Form inputs have proper labels (a11y) (retry #1)
+  -  61 [chromium] › test-maison-verlaine.js:585:3 › Maison Verlaine - Full Site Validation › Anchor links have proper href (a11y) (retry #1)
+
+
+  1) [chromium] › test-maison-verlaine.js:8:3 › Maison Verlaine - Full Site Validation › Splash screen appears and animates correctly (desktop) 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator:  locator('.splash-screen')
+    Expected: visible
+    Received: hidden
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toBeVisible" locator('.splash-screen') with timeout 5000ms
+      - waiting for locator('.splash-screen')
+
+
+      11 |
+      12 |     const splash = page.locator('.splash-screen');
+    > 13 |     await expect(splash).toBeVisible();
+         |                          ^
+      14 |
+      15 |     // Check logo is present
+      16 |     const logo = page.locator('.splash-logo');
+        at C:\Users\kacin\maison-verlaine\test-maison-verlaine.js:13:26
+
+    Tearing down "context" exceeded the test timeout of 30000ms.
+
+    Error Context: test-results\test-maison-verlaine.js-Ma-c7876-animates-correctly-desktop--chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator:  locator('.splash-screen')
+    Expected: visible
+    Received: hidden
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toBeVisible" locator('.splash-screen') with timeout 5000ms
+      - waiting for locator('.splash-screen')
+
+
+      11 |
+      12 |     const splash = page.locator('.splash-screen');
+    > 13 |     await expect(splash).toBeVisible();
+         |                          ^
+      14 |
+      15 |     // Check logo is present
+      16 |     const logo = page.locator('.splash-logo');
+        at C:\Users\kacin\maison-verlaine\test-maison-verlaine.js:13:26
+
+    attachment #1: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\test-maison-verlaine.js-Ma-c7876-animates-correctly-desktop--chromium-retry1\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\test-maison-verlaine.js-Ma-c7876-animates-correctly-desktop--chromium-retry1\error-context.md
+
+  2) [chromium] › test-maison-verlaine.js:25:3 › Maison Verlaine - Full Site Validation › Splash screen appears and animates correctly (mobile) 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator:  locator('.splash-screen')
+    Expected: visible
+    Received: hidden
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toBeVisible" locator('.splash-screen') with timeout 5000ms
+      - waiting for locator('.splash-screen')
+        2 × locator resolved to <div id="splashScreen" class="splash-screen hidden">…</div>
+          - unexpected value "hidden"
+
+
+      28 |
+      29 |     const splash = page.locator('.splash-screen');
+    > 30 |     await expect(splash).toBeVisible();
+         |                          ^
+      31 |
+      32 |     await page.waitForTimeout(4100);
+      33 |     await expect(splash).not.toBeVisible();
+        at C:\Users\kacin\maison-verlaine\test-maison-verlaine.js:30:26
+
+    Tearing down "context" exceeded the test timeout of 30000ms.
+
+    Error: browserContext.close: Test ended.
+    Browser logs:
+
+    <launching> C:\Users\kacin\AppData\Local\ms-playwright\chromium_headless_shell-1248\chrome-headless-shell-win64\chrome-headless-shell.exe --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,AvoidCorsURLLoaderRestartOnRedirect,Translate,AutoDeElevate,OptimizationHints,NetworkTimeServiceQuerying,AimEnabled,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --user-data-dir=C:\Users\kacin\AppData\Local\Temp\playwright_chromiumdev_profile-bVxnE6 --remote-debugging-pipe --no-startup-window
+    <launched> pid=1560
+    [pid=1560][err] [1030/172238.505:ERROR:gpu\command_buffer\service\gl_utils.cc:431] [.WebGL-0x6ae400436e00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+    [pid=1560][err] [1030/172239.975:INFO:CONSOLE:0] "[.WebGL-0x6ae400436e00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels", source: http://localhost:8000/3d-configurateur.html (0)
+    [pid=1560][err] [1030/172239.984:ERROR:gpu\command_buffer\service\gl_utils.cc:431] [.WebGL-0x6ae400436e00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+    [pid=1560][err] [1030/172240.029:INFO:CONSOLE:0] "[.WebGL-0x6ae400436e00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels", source: http://localhost:8000/3d-configurateur.html (0)
+    [pid=1560][err] [1030/172240.037:ERROR:gpu\command_buffer\service\gl_utils.cc:431] [.WebGL-0x6ae400436e00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+    [pid=1560][err] [1030/172240.054:INFO:CONSOLE:0] "[.WebGL-0x6ae400436e00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels", source: http://localhost:8000/3d-configurateur.html (0)
+    [pid=1560][err] [1030/172240.060:ERROR:gpu\command_buffer\service\gl_utils.cc:431] [.WebGL-0x6ae400436e00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)
+    [pid=1560][err] [1030/172240.105:INFO:CONSOLE:0] "[.WebGL-0x6ae400436e00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)", source: http://localhost:8000/3d-configurateur.html (0)
+    [pid=1560] <gracefully close start>
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\test-maison-verlaine.js-Ma-d4b0a--animates-correctly-mobile--chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\test-maison-verlaine.js-Ma-d4b0a--animates-correctly-mobile--chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator:  locator('.splash-screen')
+    Expected: visible
+    Received: hidden
+    Timeout:  5000ms
+
+    Call log:
+      - Expect "toBeVisible" locator('.splash-screen') with timeout 5000ms
+      - waiting for locator('.splash-screen')
+
+
+      28 |
+      29 |     const splash = page.locator('.splash-screen');
+    > 30 |     await expect(splash).toBeVisible();
+         |                          ^
+      31 |
+      32 |     await page.waitForTimeout(4100);
+      33 |     await expect(splash).not.toBeVisible();
+        at C:\Users\kacin\maison-verlaine\test-maison-verlaine.js:30:26
+
+    Tearing down "context" exceeded the test timeout of 30000ms.
+
+    Error: browserContext.close: Test ended.
+    Browser logs:
+
+    <launching> C:\Users\kacin\AppData\Local\ms-playwright\chromium_headless_shell-1248\chrome-headless-shell-win64\chrome-headless-shell.exe --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,AvoidCorsURLLoaderRestartOnRedirect,Translate,AutoDeElevate,OptimizationHints,NetworkTimeServiceQuerying,AimEnabled,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --user-data-dir=C:\Users\kacin\AppData\Local\Temp\playwright_chromiumdev_profile-ril8WX --remote-debugging-pipe --no-startup-window
+    <launched> pid=23952
+    [pid=23952][err] [1030/172322.674:ERROR:gpu\command_buffer\service\gl_utils.cc:431] [.WebGL-0x370400b2d600]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+    [pid=23952][err] [1030/172323.706:INFO:CONSOLE:0] "[.WebGL-0x370400b2d600]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels", source: http://localhost:8000/3d-configurateur.html (0)
+    [pid=23952][err] [1030/172323.712:ERROR:gpu\command_buffer\service\gl_utils.cc:431] [.WebGL-0x370400b2d600]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+    [pid=23952][err] [1030/172323.734:INFO:CONSOLE:0] "[.WebGL-0x370400b2d600]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels", source: http://localhost:8000/3d-configurateur.html (0)
+    [pid=23952][err] [1030/172323.742:ERROR:gpu\command_buffer\service\gl_utils.cc:431] [.WebGL-0x370400b2d600]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+    [pid=23952][err] [1030/172323.750:INFO:CONSOLE:0] "[.WebGL-0x370400b2d600]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels", source: http://localhost:8000/3d-configurateur.html (0)
+    [pid=23952][err] [1030/172323.750:ERROR:gpu\command_buffer\service\gl_utils.cc:431] [.WebGL-0x370400b2d600]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)
+    [pid=23952][err] [1030/172323.767:INFO:CONSOLE:0] "[.WebGL-0x370400b2d600]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)", source: http://localhost:8000/3d-configurateur.html (0)
+    [pid=23952] <gracefully close start>
+
+    Error Context: test-results\test-maison-verlaine.js-Ma-d4b0a--animates-correctly-mobile--chromium-retry1\error-context.md
+
+  3) [chromium] › test-maison-verlaine.js:37:3 › Maison Verlaine - Full Site Validation › Hero section loads with video and content (desktop) 
+
+    Tearing down "context" exceeded the test timeout of 30000ms.
+
+    Error: browserContext.close: Test ended.
+    Browser logs:
+
+    <launching> C:\Users\kacin\AppData\Local\ms-playwright\chromium_headless_shell-1248\chrome-headless-shell-win64\chrome-headless-shell.exe --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,AvoidCorsURLLoaderRestartOnRedirect,Translate,AutoDeElevate,OptimizationHints,NetworkTimeServiceQuerying,AimEnabled,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --user-data-dir=C:\Users\kacin\AppData\Local\Temp\playwright_chromiumdev_profile-9vfwvT --remote-debugging-pipe --no-startup-window
+    <launched> pid=13728
+    [pid=13728][err] [1030/172424.781:ERROR:gpu\command_buffer\service\gl_utils.cc:431] [.WebGL-0x73fc00af0e00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+    [pid=13728][err] [1030/172425.661:INFO:CONSOLE:0] "[.WebGL-0x73fc00af0e00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels", source: http://localhost:8000/3d-configurateur.html (0)
+    [pid=13728][err] [1030/172426.035:ERROR:gpu\command_buffer\service\gl_utils.cc:431] [.WebGL-0x73fc00af0e00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+    [pid=13728][err] [1030/172426.661:INFO:CONSOLE:0] "[.WebGL-0x73fc00af0e00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels", source: http://localhost:8000/3d-configurateur.html (0)
+    [pid=13728][err] [1030/172426.696:ERROR:gpu\command_buffer\service\gl_utils.cc:431] [.WebGL-0x73fc00af0e00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+    [pid=13728][err] [1030/172427.250:INFO:CONSOLE:0] "[.WebGL-0x73fc00af0e00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels", source: http://localhost:8000/3d-configurateur.html (0)
+    [pid=13728][err] [1030/172427.359:ERROR:gpu\command_buffer\service\gl_utils.cc:431] [.WebGL-0x73fc00af0e00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)
+    [pid=13728][err] [1030/172427.755:INFO:CONSOLE:0] "[.WebGL-0x73fc00af0e00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)", source: http://localhost:8000/3d-configurateur.html (0)
+    [pid=13728] <gracefully close start>
+
+    Error Context: test-results\test-maison-verlaine.js-Ma-5d813--video-and-content-desktop--chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Tearing down "context" exceeded the test timeout of 30000ms.
+
+    Error: browserContext.close: Test ended.
+    Browser logs:
+
+    <launching> C:\Users\kacin\AppData\Local\ms-playwright\chromium_headless_shell-1248\chrome-headless-shell-win64\chrome-headless-shell.exe --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,AvoidCorsURLLoaderRestartOnRedirect,Translate,AutoDeElevate,OptimizationHints,NetworkTimeServiceQuerying,AimEnabled,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --user-data-dir=C:\Users\kacin\AppData\Local\Temp\playwright_chromiumdev_profile-MlQfY3 --remote-debugging-pipe --no-startup-window
+    <launched> pid=30796
+    [pid=30796][err] [1030/172515.439:ERROR:gpu\command_buffer\service\gl_utils.cc:431] [.WebGL-0x364c00434400]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+    [pid=30796][err] [1030/172516.902:INFO:CONSOLE:0] "[.WebGL-0x364c00434400]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels", source: http://localhost:8000/3d-configurateur.html (0)
+    [pid=30796][err] [1030/172517.013:ERROR:gpu\command_buffer\service\gl_utils.cc:431] [.WebGL-0x364c00434400]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+    [pid=30796][err] [1030/172517.033:INFO:CONSOLE:0] "[.WebGL-0x364c00434400]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels", source: http://localhost:8000/3d-configurateur.html (0)
+    [pid=30796][err] [1030/172517.506:ERROR:gpu\command_buffer\service\gl_utils.cc:431] [.WebGL-0x364c00434400]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+    [pid=30796][err] [1030/172518.691:INFO:CONSOLE:0] "[.WebGL-0x364c00434400]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels", source: http://localhost:8000/3d-configurateur.html (0)
+    [pid=30796][err] [1030/172518.783:ERROR:gpu\command_buffer\service\gl_utils.cc:431] [.WebGL-0x364c00434400]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)
+    [pid=30796][err] [1030/172519.213:INFO:CONSOLE:0] "[.WebGL-0x364c00434400]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)", source: http://localhost:8000/3d-configurateur.html (0)
+    [pid=30796] <gracefully close start>
+
+    Error Context: test-results\test-maison-verlaine.js-Ma-5d813--video-and-content-desktop--chromium-retry1\error-context.md
+
+  4) [chromium] › test-maison-verlaine.js:72:3 › Maison Verlaine - Full Site Validation › Scroll cue animation is visible 
+
+    Tearing down "context" exceeded the test timeout of 30000ms.
+
+    attachment #1: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\test-maison-verlaine.js-Ma-1cc7e-ll-cue-animation-is-visible-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\test-maison-verlaine.js-Ma-1cc7e-ll-cue-animation-is-visible-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Tearing down "context" exceeded the test timeout of 30000ms.
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\test-maison-verlaine.js-Ma-1cc7e-ll-cue-animation-is-visible-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\test-maison-verlaine.js-Ma-1cc7e-ll-cue-animation-is-visible-chromium-retry1\error-context.md
+
+  5) [chromium] › test-maison-verlaine.js:82:3 › Maison Verlaine - Full Site Validation › Anchor links scroll smoothly to sections 
+
+    Tearing down "context" exceeded the test timeout of 30000ms.
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\test-maison-verlaine.js-Ma-863c9-scroll-smoothly-to-sections-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\test-maison-verlaine.js-Ma-863c9-scroll-smoothly-to-sections-chromium\error-context.md
+
+  6) [chromium] › test-maison-verlaine.js:104:3 › Maison Verlaine - Full Site Validation › Savoir-faire section structure and content (desktop) 
+
+    Error: worker process exited unexpectedly (code=3221225794, signal=null)
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: worker process exited unexpectedly (code=3221225794, signal=null)
+
+  6 failed
+    [chromium] › test-maison-verlaine.js:8:3 › Maison Verlaine - Full Site Validation › Splash screen appears and animates correctly (desktop) 
+    [chromium] › test-maison-verlaine.js:25:3 › Maison Verlaine - Full Site Validation › Splash screen appears and animates correctly (mobile) 
+    [chromium] › test-maison-verlaine.js:37:3 › Maison Verlaine - Full Site Validation › Hero section loads with video and content (desktop) 
+    [chromium] › test-maison-verlaine.js:72:3 › Maison Verlaine - Full Site Validation › Scroll cue animation is visible 
+    [chromium] › test-maison-verlaine.js:82:3 › Maison Verlaine - Full Site Validation › Anchor links scroll smoothly to sections 
+    [chromium] › test-maison-verlaine.js:104:3 › Maison Verlaine - Full Site Validation › Savoir-faire section structure and content (desktop) 
+  24 did not run
+  1 passed (9.2m)
