@@ -2381,8 +2381,14 @@
 
         // ==================== SÉQUENCE D'ENTRÉE ====================
         document.addEventListener('DOMContentLoaded', () => {
-            // Appliquer la langue mémorisée dès le chargement
-            const savedLang = (() => { try { return localStorage.getItem('mv-lang'); } catch(e) {} })();
+            // Appliquer la langue mémorisée — valeur sanitisée (whitelist stricte)
+            const VALID_LANGS = ['fr', 'en', 'de'];
+            const savedLang = (() => {
+                try {
+                    const l = localStorage.getItem('mv-lang');
+                    return VALID_LANGS.includes(l) ? l : null;
+                } catch(e) { return null; }
+            })();
             applyLanguage(savedLang || 'fr');
             const introWrap = document.getElementById('introWrap');
             const langPhase = document.getElementById('introLangPhase');
@@ -2402,7 +2408,7 @@
             });
 
             function enterSite(lang) {
-                try { localStorage.setItem('mv-lang', lang); } catch(e) {}
+                applyLanguage(lang); // applique IMMÉDIATEMENT avant que la gate disparaisse
                 introWrap.style.transition = 'opacity .5s ease';
                 introWrap.style.opacity = '0';
                 setTimeout(() => introWrap.classList.add('is-gone'), 520);
@@ -2417,7 +2423,8 @@
                 });
                 switchMenu.querySelectorAll('[data-lang]').forEach(btn => {
                     btn.addEventListener('click', () => {
-                        applyLanguage(btn.dataset.lang);
+                        const lang = btn.dataset.lang;
+                        if (['fr','en','de'].includes(lang)) applyLanguage(lang);
                         switchMenu.hidden = true;
                     });
                 });
@@ -2432,15 +2439,12 @@
             if (langPhase) {
                 langPhase.querySelectorAll('[data-lang]').forEach(btn => {
                     btn.addEventListener('click', () => {
-                        // Seulement si la vidéo est finie (carte prête) ou skip autorisé
+                        // Entrer IMMÉDIATEMENT — le skip vidéo est un bonus visuel optionnel
                         const vid = btn.querySelector('.lang-card-video');
-                        if (!vid || vid.ended || !btn.querySelector('.lang-card-video')) {
-                            enterSite(btn.dataset.lang);
-                        } else {
-                            // Double-clic / clic avant la fin → skip vers la fin + entrer
-                            vid.addEventListener('ended', () => enterSite(btn.dataset.lang), { once: true });
-                            vid.currentTime = vid.duration - 0.05;
+                        if (vid && isFinite(vid.duration) && !isNaN(vid.duration) && !vid.ended) {
+                            try { vid.currentTime = vid.duration - 0.05; } catch(e) {}
                         }
+                        enterSite(btn.dataset.lang);
                     });
                 });
             }
