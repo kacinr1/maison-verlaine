@@ -42,7 +42,6 @@
             scroll-behavior: smooth;
         }
 
-        /* ==================== PRE-ENTRY VIDEO ==================== */
         /* ==================== SÉQUENCE D'ENTRÉE ==================== */
         .intro-wrap {
             position: fixed;
@@ -51,18 +50,12 @@
             background: #000;
         }
         .intro-wrap.is-gone { display: none; }
-        .intro-video-phase { position: absolute; inset: 0; transition: opacity .5s ease; }
-        .intro-video-phase.fade-out { opacity: 0; pointer-events: none; }
-        .intro-video-phase video { width: 100%; height: 100%; object-fit: cover; display: block; }
         .intro-lang-phase {
             position: absolute; inset: 0;
             display: flex; flex-direction: column; align-items: center; justify-content: center;
             padding: 24px; gap: 0;
             background: radial-gradient(ellipse at 50% 36%, rgba(44,37,27,.6), rgba(9,10,12,.97) 62%), #090a0c;
-            opacity: 0; transition: opacity .5s ease .1s;
         }
-        .intro-lang-phase:not([hidden]) { opacity: 1; }
-        .intro-lang-phase[hidden] { display: none; }
 
         /* ── Typographie de la gate langue ── */
         .lang-gate-monogram {
@@ -1607,14 +1600,8 @@
 
     <!-- ==================== INTRO + LANGUE ==================== -->
     <div class="intro-wrap" id="introWrap">
-        <!-- Phase 1 : vidéo d'entrée plein écran -->
-        <div class="intro-video-phase" id="introVideoPhase">
-            <video id="introVideo" autoplay muted playsinline preload="auto">
-                <source src="assets-raw/intro-entry.mp4" type="video/mp4">
-            </video>
-        </div>
-        <!-- Phase 2 : sélection de langue par carte vidéo brodée -->
-        <div class="intro-lang-phase" id="introLangPhase" hidden>
+        <!-- Sélection de langue par carte vidéo brodée -->
+        <div class="intro-lang-phase" id="introLangPhase">
             <span class="lang-gate-monogram">MV</span>
             <span class="lang-gate-brand">Maison Verlaine</span>
             <p class="lang-gate-prompt">Choose your language · Sprache wählen · Choisissez votre langue</p>
@@ -2051,52 +2038,28 @@
     <script>
         // ==================== SÉQUENCE D'ENTRÉE ====================
         document.addEventListener('DOMContentLoaded', () => {
-            const introWrap    = document.getElementById('introWrap');
-            const introVideo   = document.getElementById('introVideo');
-            const videoPhase   = document.getElementById('introVideoPhase');
-            const langPhase    = document.getElementById('introLangPhase');
+            const introWrap = document.getElementById('introWrap');
+            const langPhase = document.getElementById('introLangPhase');
 
-            function showLangPhase() {
-                videoPhase.classList.add('fade-out');
-                langPhase.hidden = false;
-                requestAnimationFrame(() => { langPhase.style.opacity = '1'; });
-                // Lancer les 3 vidéos de langue simultanément
-                setTimeout(() => {
-                    [
-                        { vid: 'langVideoEn', card: 'langCardEn' },
-                        { vid: 'langVideoDe', card: 'langCardDe' },
-                        { vid: 'langVideoFr', card: 'langCardFr' }
-                    ].forEach(({ vid, card }) => {
-                        const v = document.getElementById(vid);
-                        const c = document.getElementById(card);
-                        if (v && c) {
-                            v.play().catch(() => {});
-                            v.addEventListener('ended', () => {
-                                c.classList.add('is-ready');
-                            }, { once: true });
-                        }
-                    });
-                }, 300);
-            }
+            // Lancer les 3 vidéos de langue immédiatement
+            [
+                { vid: 'langVideoEn', card: 'langCardEn' },
+                { vid: 'langVideoDe', card: 'langCardDe' },
+                { vid: 'langVideoFr', card: 'langCardFr' }
+            ].forEach(({ vid, card }) => {
+                const v = document.getElementById(vid);
+                const c = document.getElementById(card);
+                if (v && c) {
+                    v.play().catch(() => {});
+                    v.addEventListener('ended', () => { c.classList.add('is-ready'); }, { once: true });
+                }
+            });
 
             function enterSite(lang) {
-                // stocker la langue choisie pour le sélecteur dans la topbar
                 try { localStorage.setItem('mv-lang', lang); } catch(e) {}
                 introWrap.style.transition = 'opacity .5s ease';
                 introWrap.style.opacity = '0';
                 setTimeout(() => introWrap.classList.add('is-gone'), 520);
-            }
-
-            // Fin de vidéo → sélection de langue
-            if (introVideo) {
-                introVideo.play().catch(() => {
-                    document.addEventListener('click', () => introVideo.play(), { once: true });
-                });
-                introVideo.addEventListener('ended', showLangPhase);
-                // Fallback : si autoplay bloqué et vidéo n'avance pas après 10s
-                setTimeout(() => { if (introVideo.currentTime < 0.5) showLangPhase(); }, 10000);
-            } else {
-                showLangPhase();
             }
 
             // Clic sur une carte langue → entrer dans le site

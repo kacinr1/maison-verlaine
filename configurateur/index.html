@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#090a0c">
+  <title>Maison Verlaine — Your bespoke suit</title>
+  <meta name="description" content="Compose your Maison Verlaine suit: cut, cloth, lining, buttons and initials." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="configurateur-2d.css">
+</head>
+<body>
+  <div class="lang-gate" id="langGate" role="dialog" aria-label="Language selection">
+    <div class="lang-gate-inner">
+      <span class="lang-gate-monogram">MV</span>
+      <span class="lang-gate-brand">Maison Verlaine</span>
+      <p class="lang-gate-prompt">Choose your language · Sprache wählen · Choisissez votre langue</p>
+      <div class="lang-gate-options">
+        <button type="button" data-lang="en"><b>EN</b><span>English</span></button>
+        <button type="button" data-lang="de"><b>DE</b><span>Deutsch</span></button>
+        <button type="button" data-lang="fr"><b>FR</b><span>Français</span></button>
+      </div>
+    </div>
+  </div>
+
+  <header class="topbar">
+    <a class="exit-link" href="../" data-i18n-aria="exit_aria" aria-label="Exit the configurator"><span aria-hidden="true">←</span><span data-i18n="exit">Quitter</span></a>
+    <div class="brand-lockup" aria-label="Maison Verlaine">
+      <span class="brand-monogram">MV</span>
+      <span class="brand-name">Maison Verlaine</span>
+      <span class="brand-tagline" data-i18n="brand_tagline">Tailleur sur mesure</span>
+    </div>
+    <div class="topbar-meta">
+      <span data-i18n="tagline_city">Genève · depuis 1987</span>
+      <a class="three-d-link" href="configurateur-3d.html" data-i18n="link_3d">Aperçu 3D</a>
+      <div class="lang-switch" id="langSwitch">
+        <button type="button" class="lang-current" id="langButton" aria-haspopup="listbox" aria-expanded="false"><span id="langCurrent">EN</span> <b aria-hidden="true">⌄</b></button>
+        <ul class="lang-menu" id="langMenu" role="listbox" hidden>
+          <li><button type="button" role="option" data-lang="en">English</button></li>
+          <li><button type="button" role="option" data-lang="de">Deutsch</button></li>
+          <li><button type="button" role="option" data-lang="fr">Français</button></li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+  <main class="workspace">
+    <div class="step-dock">
+      <nav class="step-rail" aria-label="Steps">
+        <button class="step-arrow" id="stepPrev" type="button" data-i18n-aria="aria_prev" aria-label="Previous step" disabled>‹</button>
+        <ol class="step-rail-track" id="stepRail">
+          <li><button class="step-chip is-active" type="button" data-step="model" aria-current="step"><b>1</b><span data-i18n="step_model">Modèle</span></button></li>
+          <li><button class="step-chip" type="button" data-step="fabric"><b>2</b><span data-i18n="step_fabric">Tissu</span></button></li>
+          <li><button class="step-chip" type="button" data-step="details"><b>3</b><span data-i18n="step_details">Coupe</span></button></li>
+          <li><button class="step-chip" type="button" data-step="lining"><b>4</b><span data-i18n="step_lining">Doublure</span></button></li>
+          <li><button class="step-chip" type="button" data-step="buttons"><b>5</b><span data-i18n="step_buttons">Boutons</span></button></li>
+          <li><button class="step-chip" type="button" data-step="measure"><b>6</b><span data-i18n="step_measure">Mesures</span></button></li>
+        </ol>
+        <button class="step-arrow" id="stepNext" type="button" data-i18n-aria="aria_next" aria-label="Next step">›</button>
+      </nav>
+    </div>
+
+    <div class="stage-shell">
+      <aside class="options-panel" id="stepViews">
+        <section class="step-view is-active" data-step="model" aria-label="Model">
+          <div class="step-head"><h2 data-i18n="model_h2">Votre silhouette</h2><p data-i18n="model_p">Classique, croisé 4 ou croisé 6 boutons.</p></div>
+          <div class="step-body">
+            <div class="model-list" id="modelList">
+              <button class="model-card is-selected" type="button" data-model="front" aria-pressed="true">
+                <span class="model-image"><img src="assets/layers/three-piece-front-marine.webp" alt="" /></span>
+                <span class="model-copy"><strong data-i18n="card_front_name">Veste classique</strong><small data-i18n="card_front_sub">Simple · 2 boutons</small></span>
+                <span class="model-check" aria-hidden="true">✓</span>
+              </button>
+              <button class="model-card" type="button" data-model="croise-4" aria-pressed="false">
+                <span class="model-image"><img src="assets/layers/three-piece-croise-4-marine.webp" alt="" /></span>
+                <span class="model-copy"><strong data-i18n="card_croise_name">Croisé</strong><small data-i18n="card_croise4_sub">Double · 4 boutons</small></span>
+                <span class="model-check" aria-hidden="true">✓</span>
+              </button>
+              <button class="model-card" type="button" data-model="croise-6" aria-pressed="false">
+                <span class="model-image"><img src="assets/layers/three-piece-croise-6-marine.webp" alt="" /></span>
+                <span class="model-copy"><strong data-i18n="card_croise_name">Croisé</strong><small data-i18n="card_croise6_sub">Double · 6 boutons</small></span>
+                <span class="model-check" aria-hidden="true">✓</span>
+              </button>
+            </div>
+            <div class="composition-choices" role="group" aria-label="Pieces">
+              <button type="button" class="composition-choice" data-composition="2" aria-pressed="false"><span><strong data-i18n="comp_2_name">Deux-pièces</strong><small data-i18n="comp_2_sub">Sans gilet</small></span></button>
+              <button type="button" class="composition-choice is-selected" data-composition="3" aria-pressed="true"><span><strong data-i18n="comp_3_name">Trois-pièces</strong><small data-i18n="comp_3_sub">Avec gilet</small></span></button>
+            </div>
+          </div>
+          <p class="microcopy" id="compositionNote">Veste, gilet et pantalon assortis. Le tissu reste identique sur les trois pièces.</p>
+        </section>
+
+        <section class="step-view" data-step="fabric" aria-label="Fabric" hidden>
+          <div class="step-head"><h2 data-i18n="fabric_h2">Choix du tissu</h2><span class="selected-copy" id="selectedFabricLabel">Bleu marine</span></div>
+          <div class="step-body">
+            <div class="fabric-grid" id="fabricGrid">
+              <button class="fabric-card is-selected" type="button" data-fabric="marine" aria-pressed="true" data-i18n-aria="fab_marine" aria-label="Bleu marine"><span class="fabric-image fabric-marine"></span><span data-i18n="fab_marine">Bleu marine</span></button>
+              <button class="fabric-card" type="button" data-fabric="anthracite" aria-pressed="false" data-i18n-aria="fab_anthracite" aria-label="Anthracite"><span class="fabric-image fabric-anthracite"></span><span data-i18n="fab_anthracite">Anthracite</span></button>
+              <button class="fabric-card" type="button" data-fabric="bordeaux" aria-pressed="false" data-i18n-aria="fab_bordeaux" aria-label="Bordeaux"><span class="fabric-image fabric-bordeaux"></span><span data-i18n="fab_bordeaux">Bordeaux</span></button>
+              <button class="fabric-card" type="button" data-fabric="foret" aria-pressed="false" data-i18n-aria="fab_foret" aria-label="Vert forêt"><span class="fabric-image fabric-foret"></span><span data-i18n="fab_foret">Vert forêt</span></button>
+              <button class="fabric-card" type="button" data-fabric="marine-rayures" aria-pressed="false" data-i18n-aria="fab_marine-rayures" aria-label="Marine rayures"><span class="fabric-image fabric-rayures"></span><span data-i18n="fab_marine-rayures">Marine · rayures</span></button>
+              <button class="fabric-card" type="button" data-fabric="anthracite-carreaux" aria-pressed="false" data-i18n-aria="fab_anthracite-carreaux" aria-label="Anthracite carreaux"><span class="fabric-image fabric-carreaux"></span><span data-i18n="fab_anthracite-carreaux">Anthracite · carreaux</span></button>
+              <button class="fabric-card" type="button" data-fabric="marine-carreau-fenetre" aria-pressed="false" data-i18n-aria="fab_marine-carreau-fenetre" aria-label="Marine fenêtre"><span class="fabric-image fabric-fenetre"></span><span data-i18n="fab_marine-carreau-fenetre">Marine · fenêtre</span></button>
+              <button class="fabric-card" type="button" data-fabric="tweed-couture" aria-pressed="false" data-i18n-aria="fab_tweed-couture" aria-label="Tweed fil rouge"><span class="fabric-image fabric-tweed"></span><span data-i18n="fab_tweed-couture">Tweed · fil rouge</span></button>
+            </div>
+            <label class="quality-select"><span data-i18n="label_composition">Composition</span><select id="fabricQuality"><option value="110" data-i18n="qual_110">Laine vierge 110’s · incluse</option><option value="130" data-i18n="qual_130">Laine vierge 130’s · + CHF 240</option><option value="cashmere" data-i18n="qual_cashmere">Laine &amp; cachemire · + CHF 480</option></select><b aria-hidden="true">⌄</b></label>
+          </div>
+        </section>
+
+        <section class="step-view" data-step="details" aria-label="Cut" hidden>
+          <div class="step-head">
+            <h2 data-i18n="details_h2">Les détails de coupe</h2>
+            <div class="coupe-subnav">
+              <button class="coupe-back" id="coupeBack" type="button" data-i18n="coupe_back" hidden>‹ Précédent</button>
+              <span class="selected-copy" id="coupeProgress">Revers · 1 / 6</span>
+            </div>
+          </div>
+          <div class="step-body detail-strip">
+            <div class="choice-group" data-order="1">
+              <div class="choice-heading"><span data-i18n="grp_revers">Revers</span></div>
+              <div class="detail-grid two-up">
+                <button class="detail-option is-selected" type="button" data-group="revers" data-value="Cran classique" aria-pressed="true"><span class="line-icon" aria-hidden="true"><img class="option-art" src="assets/options/photos/revers-cran-classique.webp" alt="" /></span><span data-i18n="opt_revers_notch">Cran classique</span></button>
+                <button class="detail-option" type="button" data-group="revers" data-value="Revers en pointe" aria-pressed="false"><span class="line-icon" aria-hidden="true"><img class="option-art" src="assets/options/photos/revers-revers-en-pointe.webp" alt="" /></span><span data-i18n="opt_revers_peak">Pointe</span></button>
+              </div>
+            </div>
+            <div class="choice-group" data-order="2">
+              <div class="choice-heading"><span data-i18n="grp_poches">Poches</span></div>
+              <div class="detail-grid two-up">
+                <button class="detail-option is-selected" type="button" data-group="poches" data-value="Passepoilées avec rabat" aria-pressed="true"><span class="line-icon" aria-hidden="true"><img class="option-art" src="assets/options/photos/poche-passepoil-rabat.webp" alt="" /></span><span data-i18n="opt_poche_flap">Passepoil rabat</span></button>
+                <button class="detail-option" type="button" data-group="poches" data-value="Double passepoil" aria-pressed="false"><span class="line-icon" aria-hidden="true"><img class="option-art" src="assets/options/photos/poche-double-passepoil.webp" alt="" /></span><span data-i18n="opt_poche_double">Double passepoil</span></button>
+                <button class="detail-option" type="button" data-group="poches" data-value="Poche plaquée" aria-pressed="false"><span class="line-icon" aria-hidden="true"><img class="option-art" src="assets/options/photos/poche-plaquee.webp" alt="" /></span><span data-i18n="opt_poche_patch">Plaquée</span></button>
+                <button class="detail-option" type="button" data-group="poches" data-value="Plaquée avec rabat" aria-pressed="false"><span class="line-icon" aria-hidden="true"><img class="option-art" src="assets/options/photos/poche-plaquee-rabat.webp" alt="" /></span><span data-i18n="opt_poche_patchflap">Plaquée rabat</span></button>
+              </div>
+            </div>
+            <div class="choice-group" data-order="3">
+              <div class="choice-heading"><span data-i18n="grp_dos">Dos de veste</span></div>
+              <div class="detail-grid two-up">
+                <button class="detail-option" type="button" data-group="dos" data-value="Fente centrale" aria-pressed="false"><span class="line-icon" aria-hidden="true"><img class="option-art" src="assets/options/photos/dos-fente-centrale.webp" alt="" /></span><span data-i18n="opt_dos_center">Fente centrale</span></button>
+                <button class="detail-option is-selected" type="button" data-group="dos" data-value="Fentes latérales" aria-pressed="true"><span class="line-icon" aria-hidden="true"><img class="option-art" src="assets/options/photos/dos-fentes-laterales.webp" alt="" /></span><span data-i18n="opt_dos_side">Latérales</span></button>
+              </div>
+            </div>
+            <div class="choice-group" data-order="4">
+              <div class="choice-heading"><span data-i18n="grp_pli">Plis du pantalon</span></div>
+              <div class="detail-grid three-up">
+                <button class="detail-option" type="button" data-group="pli" data-value="Sans pli" aria-pressed="false"><span class="line-icon" aria-hidden="true"><img class="option-art" src="assets/options/photos/pli-sans-pli.webp" alt="" /></span><span data-i18n="opt_pli_none">Sans pli</span></button>
+                <button class="detail-option" type="button" data-group="pli" data-value="Un pli" aria-pressed="false"><span class="line-icon" aria-hidden="true"><img class="option-art" src="assets/options/photos/pli-un-pli.webp" alt="" /></span><span data-i18n="opt_pli_one">Un pli</span></button>
+                <button class="detail-option is-selected" type="button" data-group="pli" data-value="Double pli" aria-pressed="true"><span class="line-icon" aria-hidden="true"><img class="option-art" src="assets/options/photos/pli-double-pli.webp" alt="" /></span><span data-i18n="opt_pli_double">Double pli</span></button>
+              </div>
+            </div>
+            <div class="choice-group" data-order="5">
+              <div class="choice-heading"><span data-i18n="grp_bas">Bas de pantalon</span></div>
+              <div class="detail-grid two-up">
+                <button class="detail-option" type="button" data-group="bas" data-value="Sans revers" aria-pressed="false"><span class="line-icon" aria-hidden="true"><img class="option-art" src="assets/options/photos/bas-sans-revers.webp" alt="" /></span><span data-i18n="opt_bas_plain">Sans revers</span></button>
+                <button class="detail-option is-selected" type="button" data-group="bas" data-value="Revers au bas" aria-pressed="true"><span class="line-icon" aria-hidden="true"><img class="option-art" src="assets/options/photos/bas-revers-au-bas.webp" alt="" /></span><span data-i18n="opt_bas_cuff">Avec revers</span></button>
+              </div>
+            </div>
+            <div class="choice-group" data-order="6">
+              <div class="choice-heading"><span data-i18n="grp_taille">Ajustement taille</span></div>
+              <div class="detail-grid two-up">
+                <button class="detail-option is-selected" type="button" data-group="taille" data-value="Standard" aria-pressed="true"><span class="line-icon" aria-hidden="true"><img class="option-art" src="assets/options/photos/taille-standard.webp" alt=""/></span><span data-i18n="opt_taille_standard">Standard</span></button>
+                <button class="detail-option" type="button" data-group="taille" data-value="Pattes latérales" aria-pressed="false"><span class="line-icon" aria-hidden="true"><img class="option-art" src="assets/options/photos/taille-pattes-laterales.webp" alt=""/></span><span data-i18n="opt_taille_side">Pattes latérales</span></button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="step-view" data-step="lining" aria-label="Lining" hidden>
+          <div class="step-head"><h2 data-i18n="lining_h2">La touche intérieure</h2><span class="selected-copy" id="selectedLiningLabel">Bordeaux</span></div>
+          <div class="step-body lining-row">
+            <div class="lining-block">
+              <span class="control-label" data-i18n="label_lining_color">Couleur de doublure</span>
+              <div class="lining-options" id="liningOptions">
+                <button type="button" class="lining-swatch is-selected" data-lining="bordeaux" data-filter="none" data-i18n-aria="lin_bordeaux" aria-label="Bordeaux" aria-pressed="true" style="--swatch:#742b3b"></button>
+                <button type="button" class="lining-swatch" data-lining="marine" data-filter="hue-rotate(214deg) saturate(.74)" data-i18n-aria="lin_marine" aria-label="Bleu nuit" aria-pressed="false" style="--swatch:#182641"></button>
+                <button type="button" class="lining-swatch" data-lining="foret" data-filter="hue-rotate(116deg) saturate(.8)" data-i18n-aria="lin_foret" aria-label="Vert forêt" aria-pressed="false" style="--swatch:#21483d"></button>
+                <button type="button" class="lining-swatch" data-lining="champagne" data-filter="hue-rotate(-28deg) saturate(.42) brightness(1.22)" data-i18n-aria="lin_champagne" aria-label="Champagne" aria-pressed="false" style="--swatch:#cbb894"></button>
+              </div>
+            </div>
+            <div class="lining-block">
+              <div class="monogram-row">
+                <label for="monogramInput"><span data-i18n="monogram_label">Initiales brodées</span> <span>+ CHF 100</span></label>
+                <input id="monogramInput" type="text" value="MV" maxlength="3" autocomplete="off" aria-label="Initials, 3 characters max" />
+              </div>
+              <div class="embroidery-control">
+                <span class="control-label" data-i18n="label_typo">Typographie</span>
+                <div class="font-options" role="group" aria-label="Typography">
+                  <button type="button" class="font-option is-selected" data-font="serif" aria-pressed="true">ABC</button>
+                  <button type="button" class="font-option script-font" data-font="script" aria-pressed="false">ABC</button>
+                  <button type="button" class="font-option italic-font" data-font="italic" aria-pressed="false">ABC</button>
+                </div>
+                <span class="control-label thread-color-label" data-i18n="label_thread">Couleur du fil</span>
+                <div class="embroidery-colors" role="group" aria-label="Thread colour">
+                  <button type="button" class="embroidery-color is-selected" data-thread-color="#d7b776" style="--thread-color:#d7b776" data-i18n-aria="thr_#d7b776" aria-label="Or pâle" aria-pressed="true"></button>
+                  <button type="button" class="embroidery-color" data-thread-color="#b86b78" style="--thread-color:#b86b78" data-i18n-aria="thr_#b86b78" aria-label="Rose poudré" aria-pressed="false"></button>
+                  <button type="button" class="embroidery-color" data-thread-color="#e9ded0" style="--thread-color:#e9ded0" data-i18n-aria="thr_#e9ded0" aria-label="Ivoire" aria-pressed="false"></button>
+                  <button type="button" class="embroidery-color" data-thread-color="#8091b2" style="--thread-color:#8091b2" data-i18n-aria="thr_#8091b2" aria-label="Bleu gris" aria-pressed="false"></button>
+                  <button type="button" class="embroidery-color" data-thread-color="#607b68" style="--thread-color:#607b68" data-i18n-aria="thr_#607b68" aria-label="Vert sauge" aria-pressed="false"></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="step-view" data-step="buttons" aria-label="Buttons" hidden>
+          <div class="step-head"><h2 data-i18n="buttons_h2">Finitions de corne</h2><span class="selected-copy" id="selectedButtonLabel">Corne brune</span></div>
+          <div class="step-body">
+            <div class="button-grid" id="buttonGrid">
+              <button type="button" class="button-option is-selected" data-button="corne" aria-pressed="true"><img src="assets/materials/bouton-corne.webp" alt=""/><span data-i18n="btn_corne">Corne brune</span></button>
+              <button type="button" class="button-option" data-button="gris-fonce" aria-pressed="false"><img src="assets/materials/bouton-gris-fonce.webp" alt=""/><span data-i18n="btn_gris-fonce">Gris fumé</span></button>
+              <button type="button" class="button-option" data-button="marine" aria-pressed="false"><img src="assets/materials/bouton-marine.webp" alt=""/><span data-i18n="btn_marine">Bleu marine</span></button>
+              <button type="button" class="button-option" data-button="kaki" aria-pressed="false"><img src="assets/materials/bouton-kaki.webp" alt=""/><span data-i18n="btn_kaki">Kaki</span></button>
+              <button type="button" class="button-option" data-button="ivoire" aria-pressed="false"><img src="assets/materials/bouton-ivoire.webp" alt=""/><span data-i18n="btn_ivoire">Ivoire nacré</span></button>
+              <button type="button" class="button-option" data-button="anthracite" aria-pressed="false"><img src="assets/materials/bouton-anthracite.webp" alt=""/><span data-i18n="btn_anthracite">Anthracite</span></button>
+            </div>
+          </div>
+        </section>
+
+        <section class="step-view" data-step="measure" aria-label="Measurements" hidden>
+          <div class="step-head"><h2 data-i18n="measure_h2">Votre prise de mesures</h2></div>
+          <div class="step-body measure-body">
+            <p class="microcopy" data-i18n="measure_p">Vos repères en centimètres seront relevés au rendez-vous. Rien n’est transmis depuis cette page.</p>
+            <button class="measure-open" type="button" id="openSummary"><span data-i18n="measure_open">Voir le récapitulatif</span> <span aria-hidden="true">→</span></button>
+          </div>
+        </section>
+        <p class="flow-hint" data-i18n-html="flow_hint"><b>1 clic</b> sélectionne · <b>2 clics</b> valident &amp; passent à la suite</p>
+      </aside>
+
+      <section class="stage" id="productStage" aria-label="Preview">
+      <div class="stage-light stage-light-one"></div><div class="stage-light stage-light-two"></div>
+      <div class="stage-floor"></div>
+      <div class="garment-wrap" id="garmentWrap">
+        <img id="garmentImage" src="assets/layers/three-piece-front-marine.webp" alt="" />
+        <div class="button-overlays" id="buttonOverlays" aria-hidden="true"></div>
+      </div>
+      <figure class="stage-preview" id="stagePreview" aria-live="polite" hidden>
+        <span class="stage-preview-media"><img id="previewImage" alt="" /><span class="stage-preview-mono" id="previewMono" data-font="serif" hidden>MV</span></span>
+        <figcaption id="previewLabel"></figcaption>
+      </figure>
+      <div class="stage-caption"><span class="stage-caption-title" id="stageModelName">Le Classique</span><span id="stageGarmentLine">Veste, gilet et pantalon assortis</span></div>
+      <div class="view-toggle" aria-label="View"><button type="button" class="is-selected" data-view="front" aria-pressed="true" data-i18n="view_front">Face</button><button type="button" data-view="back" aria-pressed="false" data-i18n="view_back">Dos</button></div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="summary-bar">
+    <div class="summary-description"><p id="summaryLine">Trois-pièces <i>•</i> Laine vierge 110’s · Bleu marine <i>•</i> Doublure bordeaux <i>•</i> Initiales MV</p></div>
+    <div class="summary-price"><span id="priceValue">CHF 1’890.–</span><small data-i18n="price_note">Tarif indicatif</small></div>
+    <button type="button" class="continue-button" id="continueButton">Next <span aria-hidden="true">→</span></button>
+  </footer>
+
+  <dialog class="summary-dialog" id="summaryDialog">
+    <form method="dialog" class="dialog-close-form"><button class="dialog-close" data-i18n-aria="aria_close" aria-label="Close">×</button></form>
+    <h2 data-i18n="dialog_h2">Votre tenue prend forme.</h2>
+    <p class="dialog-intro" data-i18n="dialog_intro">Un dernier regard sur l’ensemble de vos choix. Les finitions et le prix seront confirmés à l’atelier.</p>
+    <div class="dialog-visual">
+      <span class="dialog-visual-media"><img id="dialogSuit" alt="" /></span>
+      <div class="dialog-visual-meta">
+        <strong id="dialogSuitName">Le Classique</strong>
+        <span id="dialogSuitFabric">Trois-pièces · Bleu marine</span>
+        <span class="dialog-visual-price" id="dialogSuitPrice">CHF 1’890.–</span>
+      </div>
+    </div>
+    <dl class="dialog-recap" id="dialogRecap"></dl>
+    <div class="measurement-fields">
+      <p class="field-label" data-i18n="field_measures">Repères de mesures · facultatif</p>
+      <div><label><span data-i18n="meas_chest">Poitrine</span> <span>cm</span><input id="measureChest" type="number" min="60" max="180" inputmode="decimal" /></label><label><span data-i18n="meas_waist">Taille</span> <span>cm</span><input id="measureWaist" type="number" min="50" max="180" inputmode="decimal" /></label><label><span data-i18n="meas_inseam">Entrejambe</span> <span>cm</span><input id="measureInseam" type="number" min="50" max="120" inputmode="decimal" /></label></div>
+      <small data-i18n="meas_note">Ces valeurs restent dans cette page et ne sont pas envoyées à un service.</small>
+    </div>
+    <div class="dialog-actions"><button type="button" class="dialog-back" id="backToEdit" data-i18n="dialog_back">Reprendre mes choix</button><button type="button" class="dialog-save" id="saveConfiguration"><span data-i18n="dialog_save">Enregistrer sur cet appareil</span> <span>→</span></button></div>
+  </dialog>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="configurateur-2d.js" defer></script>
+</body>
+</html>
