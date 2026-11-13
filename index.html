@@ -1578,6 +1578,62 @@
             animation: grain 8s steps(10) infinite;
         }
 
+        /* ==================== LANGUAGE SWITCHER (main page) ==================== */
+        .lang-switch-main {
+            position: fixed;
+            top: 18px;
+            right: 20px;
+            z-index: 9998;
+            font-family: 'Raleway', sans-serif;
+        }
+        .lang-switch-btn {
+            background: rgba(13,16,20,.75);
+            border: 1px solid rgba(212,175,55,.4);
+            color: rgba(212,175,55,.9);
+            font: 500 11px/1 'Raleway', sans-serif;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+            padding: 7px 13px;
+            border-radius: 20px;
+            cursor: pointer;
+            backdrop-filter: blur(8px);
+            transition: border-color .2s, box-shadow .2s;
+        }
+        .lang-switch-btn:hover {
+            border-color: #d4af37;
+            box-shadow: 0 0 14px rgba(212,175,55,.3);
+        }
+        .lang-switch-menu {
+            position: absolute;
+            top: calc(100% + 6px);
+            right: 0;
+            background: rgba(13,16,20,.95);
+            border: 1px solid rgba(212,175,55,.3);
+            border-radius: 8px;
+            overflow: hidden;
+            backdrop-filter: blur(12px);
+            min-width: 110px;
+        }
+        .lang-switch-menu button {
+            display: block;
+            width: 100%;
+            padding: 9px 16px;
+            background: none;
+            border: none;
+            color: rgba(245,245,245,.7);
+            font: 400 11px/1 'Raleway', sans-serif;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+            text-align: left;
+            cursor: pointer;
+            transition: background .15s, color .15s;
+        }
+        .lang-switch-menu button:hover,
+        .lang-switch-menu button[aria-current="true"] {
+            background: rgba(212,175,55,.12);
+            color: #d4af37;
+        }
+
         /* ==================== UTILITY CLASSES ==================== */
         .hidden {
             display: none !important;
@@ -1637,6 +1693,18 @@
         </div>
     </div>
 
+    <!-- ==================== LANGUAGE SWITCHER ==================== -->
+    <div class="lang-switch-main" id="langSwitchMain">
+        <button class="lang-switch-btn" id="langSwitchBtn" aria-label="Change language">
+            <span id="langSwitchCurrent">FR</span> &#9662;
+        </button>
+        <div class="lang-switch-menu" id="langSwitchMenu" hidden>
+            <button data-lang="fr" aria-current="false">Français</button>
+            <button data-lang="en" aria-current="false">English</button>
+            <button data-lang="de" aria-current="false">Deutsch</button>
+        </div>
+    </div>
+
     <!-- ==================== GRAIN OVERLAY ==================== -->
     <div class="grain-overlay"></div>
 
@@ -1662,9 +1730,9 @@
             <div class="hero-overlay"></div>
             <!-- Zone 2 : texte (reste intact) -->
             <div class="hero-content">
-                <h1>Élégance Sur Mesure</h1>
-                <p>Depuis 1985, Maison Verlaine incarne la tradition du tailleur francais. Chaque costume est une œuvre d'art, confectionnée avec les plus belles étoffes et un savoir-faire inégalé.</p>
-                <a href="configurateur/" class="hero-cta">Configurez Votre Costume</a>
+                <h1 data-i18n="hero_title">Élégance Sur Mesure</h1>
+                <p data-i18n="hero_desc">Depuis 1985, Maison Verlaine incarne la tradition du tailleur français. Chaque costume est une œuvre d'art, confectionnée avec les plus belles étoffes et un savoir-faire inégalé.</p>
+                <a href="configurateur/" class="hero-cta" data-i18n="hero_cta">Configurez Votre Costume</a>
             </div>
             <div class="scroll-cue">
                 <div class="scroll-cue-line"></div>
@@ -1680,19 +1748,19 @@
                     </video>
                 </div>
                 <div>
-                    <h2>Notre Savoir-Faire</h2>
+                    <h2 data-i18n="sf_title">Notre Savoir-Faire</h2>
                     <div class="savoir-faire-pillars">
                         <div class="pillar">
-                            <h3>Coupe Impeccable</h3>
-                            <p>Chaque coupe est tracée à la main par nos maîtres tailleurs, respectant les proportions uniques de votre silhouette.</p>
+                            <h3 data-i18n="sf_p1_title">Coupe Impeccable</h3>
+                            <p data-i18n="sf_p1_desc">Chaque coupe est tracée à la main par nos maîtres tailleurs, respectant les proportions uniques de votre silhouette.</p>
                         </div>
                         <div class="pillar">
-                            <h3>Étoffes Nobles</h3>
-                            <p>Nous sélectionnons les plus belles étoffes auprès des manufactures italiennes et britanniques les plus prestigieuses.</p>
+                            <h3 data-i18n="sf_p2_title">Étoffes Nobles</h3>
+                            <p data-i18n="sf_p2_desc">Nous sélectionnons les plus belles étoffes auprès des manufactures italiennes et britanniques les plus prestigieuses.</p>
                         </div>
                         <div class="pillar">
-                            <h3>Finitions Raffinées</h3>
-                            <p>Main-d'œuvre minutieuse : doublures soignées, coutures invisibles, boutonnières parfaites. Aucun détail ne nous échappe.</p>
+                            <h3 data-i18n="sf_p3_title">Finitions Raffinées</h3>
+                            <p data-i18n="sf_p3_desc">Main-d'œuvre minutieuse : doublures soignées, coutures invisibles, boutonnières parfaites. Aucun détail ne nous échappe.</p>
                         </div>
                     </div>
                     <div class="savoir-faire-grid">
@@ -1709,7 +1777,7 @@
                             <img src="assets-raw/sf-img5.webp" alt="Aiguille et fil de couturier" loading="lazy">
                         </div>
                     </div>
-                    <button class="savoir-faire-cta">Découvrir Plus</button>
+                    <button class="savoir-faire-cta" data-i18n="sf_cta">Découvrir Plus</button>
                 </div>
             </div>
         </section>
@@ -1717,8 +1785,8 @@
         <!-- ==================== ÉTOFFES MASONRY ==================== -->
         <section class="etoffes" id="etoffes">
             <div class="etoffes-title">
-                <h2>Sélection d'Étoffes</h2>
-                <p>Les plus belles matières du monde sélectionnées avec passion</p>
+                <h2 data-i18n="etoffes_title">Sélection d'Étoffes</h2>
+                <p data-i18n="etoffes_desc">Les plus belles matières du monde sélectionnées avec passion</p>
             </div>
             <div class="etoffes-grid">
                 <div class="etoffe-banner featured">
@@ -1745,8 +1813,8 @@
         <!-- ==================== DÉTAILS VIDEO ==================== -->
         <section class="details-video" id="detailsVideo">
             <div class="details-video-title">
-                <h2>Détails & Techniques</h2>
-                <p>Explorez notre processus de confection en haute définition</p>
+                <h2 data-i18n="details_title">Détails & Techniques</h2>
+                <p data-i18n="details_desc">Explorez notre processus de confection en haute définition</p>
             </div>
 
             <div class="hero-video-container">
@@ -1827,8 +1895,8 @@
         <!-- ==================== CONFIGURATEUR 3D ==================== -->
         <section class="configurateur" id="configurateur">
             <div class="configurateur-title">
-                <h2>Configurateur Sur-Mesure</h2>
-                <p>Composez votre costume pièce par pièce — étoffe, revers, boutons, doublure, monogramme</p>
+                <h2 data-i18n="config_title">Configurateur Sur-Mesure</h2>
+                <p data-i18n="config_desc">Composez votre costume pièce par pièce — étoffe, revers, boutons, doublure, monogramme</p>
             </div>
 
             <div class="configurateur-container">
@@ -1836,47 +1904,47 @@
                     <a class="configurateur-3d" href="configurateur/" style="text-decoration:none;display:flex;align-items:center;justify-content:center;background:radial-gradient(900px 500px at 50% 0%, rgba(212,175,55,.1), transparent 60%), #0d1014;">
                         <span style="text-align:center;color:#f5f5f5;font-family:'Cormorant Garamond',serif;padding:24px;">
                             <span style="display:block;font-size:52px;color:#d4af37;line-height:1;">⌁</span>
-                            <span style="display:block;font-size:26px;margin:14px 0 6px;letter-spacing:1px;">Ouvrir le configurateur</span>
-                            <span style="display:block;font-family:'Jost',sans-serif;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#9a958b;">Aperçu en direct · prix instantané</span>
+                            <span data-i18n="config_open" style="display:block;font-size:26px;margin:14px 0 6px;letter-spacing:1px;">Ouvrir le configurateur</span>
+                            <span data-i18n="config_sub" style="display:block;font-family:'Jost',sans-serif;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#9a958b;">Aperçu en direct · prix instantané</span>
                         </span>
                     </a>
                     <div class="configurateur-controls">
                         <div class="control-group">
-                            <label for="tissus">Sélectionnez le Tissu</label>
+                            <label for="tissus" data-i18n="config_fabric_label">Sélectionnez le Tissu</label>
                             <select id="tissus">
-                                <option value="laine-merinos">Laine Mérinos Bleu Marine</option>
-                                <option value="laine-tweed">Laine Tweed Charbon</option>
-                                <option value="laine-gabardine">Laine Gabardine Noir</option>
-                                <option value="soie-lin">Soie & Lin Gris Perle</option>
+                                <option value="laine-merinos" data-i18n="config_fabric_1">Laine Mérinos Bleu Marine</option>
+                                <option value="laine-tweed" data-i18n="config_fabric_2">Laine Tweed Charbon</option>
+                                <option value="laine-gabardine" data-i18n="config_fabric_3">Laine Gabardine Noir</option>
+                                <option value="soie-lin" data-i18n="config_fabric_4">Soie & Lin Gris Perle</option>
                             </select>
                         </div>
 
                         <div class="control-group">
-                            <label for="style">Style de Coupe</label>
+                            <label for="style" data-i18n="config_style_label">Style de Coupe</label>
                             <select id="style">
-                                <option value="classique">Classique Français</option>
-                                <option value="moderne">Moderne Épuré</option>
-                                <option value="vintage">Vintage Élégant</option>
-                                <option value="ajuste">Ajusté Contemporain</option>
+                                <option value="classique" data-i18n="config_style_1">Classique Français</option>
+                                <option value="moderne" data-i18n="config_style_2">Moderne Épuré</option>
+                                <option value="vintage" data-i18n="config_style_3">Vintage Élégant</option>
+                                <option value="ajuste" data-i18n="config_style_4">Ajusté Contemporain</option>
                             </select>
                         </div>
 
                         <div class="control-group">
-                            <label for="couleur">Couleur Doublure</label>
+                            <label for="couleur" data-i18n="config_lining_label">Couleur Doublure</label>
                             <input type="color" id="couleur" value="#d4af37">
                         </div>
 
                         <div class="control-group">
-                            <label for="boutons">Type de Boutons</label>
+                            <label for="boutons" data-i18n="config_btn_label">Type de Boutons</label>
                             <select id="boutons">
-                                <option value="nacre">Nacre Blanche</option>
-                                <option value="corne">Corne Noire</option>
-                                <option value="metal">Métal Doré</option>
-                                <option value="bois">Bois Noyer</option>
+                                <option value="nacre" data-i18n="config_btn_1">Nacre Blanche</option>
+                                <option value="corne" data-i18n="config_btn_2">Corne Noire</option>
+                                <option value="metal" data-i18n="config_btn_3">Métal Doré</option>
+                                <option value="bois" data-i18n="config_btn_4">Bois Noyer</option>
                             </select>
                         </div>
 
-                        <a class="config-button" href="configurateur/" style="display:inline-block;text-align:center;text-decoration:none;">Lancer le configurateur</a>
+                        <a class="config-button" href="configurateur/" style="display:inline-block;text-align:center;text-decoration:none;" data-i18n="config_launch">Lancer le configurateur</a>
                     </div>
                 </div>
             </div>
@@ -1885,37 +1953,37 @@
         <!-- ==================== LOOKBOOK ==================== -->
         <section class="lookbook" id="lookbook">
             <div class="lookbook-title">
-                <h2>Lookbook</h2>
-                <p>Inspirations et réalisations de nos clients</p>
+                <h2 data-i18n="lookbook_title">Lookbook</h2>
+                <p data-i18n="lookbook_desc">Inspirations et réalisations de nos clients</p>
             </div>
 
             <div class="lookbook-grid">
                 <div class="lookbook-card">
                     <img src="assets-raw/K7.png" alt="Lookbook 1" loading="lazy">
                     <div class="lookbook-card-overlay">
-                        <h3>Gentleman Classique</h3>
-                        <p>Trois-pièces bleu marine intemporel</p>
+                        <h3 data-i18n="lookbook_card1_title">Gentleman Classique</h3>
+                        <p data-i18n="lookbook_card1_desc">Trois-pièces bleu marine intemporel</p>
                     </div>
                 </div>
                 <div class="lookbook-card">
                     <img src="assets-raw/K8.png" alt="Lookbook 2" loading="lazy">
                     <div class="lookbook-card-overlay">
-                        <h3>Élégance Moderne</h3>
-                        <p>Costume gris perle ligne épurée</p>
+                        <h3 data-i18n="lookbook_card2_title">Élégance Moderne</h3>
+                        <p data-i18n="lookbook_card2_desc">Costume gris perle ligne épurée</p>
                     </div>
                 </div>
                 <div class="lookbook-card">
                     <img src="assets-raw/K9.png" alt="Lookbook 3" loading="lazy">
                     <div class="lookbook-card-overlay">
-                        <h3>Charme Vintage</h3>
-                        <p>Tweed marron détails dorés</p>
+                        <h3 data-i18n="lookbook_card3_title">Charme Vintage</h3>
+                        <p data-i18n="lookbook_card3_desc">Tweed marron détails dorés</p>
                     </div>
                 </div>
                 <div class="lookbook-card">
                     <img src="assets-raw/K1.png" alt="Lookbook 4" loading="lazy">
                     <div class="lookbook-card-overlay">
-                        <h3>Glamour Soirée</h3>
-                        <p>Smoking noir perfectionniste</p>
+                        <h3 data-i18n="lookbook_card4_title">Glamour Soirée</h3>
+                        <p data-i18n="lookbook_card4_desc">Smoking noir perfectionniste</p>
                     </div>
                 </div>
             </div>
@@ -1924,40 +1992,40 @@
         <!-- ==================== PARCOURS SECTION ==================== -->
         <section class="parcours" id="parcours">
             <div class="parcours-title">
-                <h2>Notre Parcours</h2>
-                <p>39 ans d'excellence et de tradition</p>
+                <h2 data-i18n="parcours_title">Notre Parcours</h2>
+                <p data-i18n="parcours_desc">39 ans d'excellence et de tradition</p>
             </div>
 
             <div class="parcours-timeline">
                 <div class="timeline-item">
                     <div class="timeline-dot"></div>
                     <div class="timeline-content">
-                        <h3>1985 - Fondation</h3>
-                        <p>Pierre Verlaine fonde l'atelier dans le 7ème arrondissement de Paris avec l'ambition de créer des costumes intemporels.</p>
+                        <h3 data-i18n="parcours_1_title">1985 - Fondation</h3>
+                        <p data-i18n="parcours_1_desc">Pierre Verlaine fonde l'atelier dans le 7ème arrondissement de Paris avec l'ambition de créer des costumes intemporels.</p>
                     </div>
                 </div>
 
                 <div class="timeline-item">
                     <div class="timeline-dot"></div>
                     <div class="timeline-content">
-                        <h3>1995 - Reconnaissance</h3>
-                        <p>Maison Verlaine devient l'un des ateliers de référence, habillant hommes politiques et personnalités de haut rang.</p>
+                        <h3 data-i18n="parcours_2_title">1995 - Reconnaissance</h3>
+                        <p data-i18n="parcours_2_desc">Maison Verlaine devient l'un des ateliers de référence, habillant hommes politiques et personnalités de haut rang.</p>
                     </div>
                 </div>
 
                 <div class="timeline-item">
                     <div class="timeline-dot"></div>
                     <div class="timeline-content">
-                        <h3>2010 - Innovation</h3>
-                        <p>Intégration de techniques numériques pour la prise de mesures et la personnalisation, tout en conservant le savoir-faire traditionnel.</p>
+                        <h3 data-i18n="parcours_3_title">2010 - Innovation</h3>
+                        <p data-i18n="parcours_3_desc">Intégration de techniques numériques pour la prise de mesures et la personnalisation, tout en conservant le savoir-faire traditionnel.</p>
                     </div>
                 </div>
 
                 <div class="timeline-item">
                     <div class="timeline-dot"></div>
                     <div class="timeline-content">
-                        <h3>2024 - Excellence Numérique</h3>
-                        <p>Lancement de notre plateforme 3D et configurateur interactif pour offrir l'expérience Maison Verlaine à l'échelle mondiale.</p>
+                        <h3 data-i18n="parcours_4_title">2024 - Excellence Numérique</h3>
+                        <p data-i18n="parcours_4_desc">Lancement de notre plateforme 3D et configurateur interactif pour offrir l'expérience Maison Verlaine à l'échelle mondiale.</p>
                     </div>
                 </div>
             </div>
@@ -1966,54 +2034,54 @@
         <!-- ==================== CONTACT SECTION ==================== -->
         <section class="contact" id="contact">
             <div class="contact-title">
-                <h2>Demander Un Rendez-Vous</h2>
-                <p>Prenez rendez-vous pour une consultation personnalisée avec nos maîtres tailleurs</p>
+                <h2 data-i18n="contact_title">Demander Un Rendez-Vous</h2>
+                <p data-i18n="contact_desc">Prenez rendez-vous pour une consultation personnalisée avec nos maîtres tailleurs</p>
             </div>
 
             <div class="contact-content">
                 <form class="contact-form" id="contactForm">
                     <div class="form-group">
-                        <label for="nom">Nom Complet</label>
+                        <label for="nom" data-i18n="contact_name_label">Nom Complet</label>
                         <input type="text" id="nom" name="nom" required>
                     </div>
 
                     <div class="form-group">
-                        <label for="email">Adresse Email</label>
+                        <label for="email" data-i18n="contact_email_label">Adresse Email</label>
                         <input type="email" id="email" name="email" required>
                     </div>
 
                     <div class="form-group">
-                        <label for="telephone">Téléphone</label>
+                        <label for="telephone" data-i18n="contact_phone_label">Téléphone</label>
                         <input type="tel" id="telephone" name="telephone" required>
                     </div>
 
                     <div class="form-group">
-                        <label for="message">Message</label>
+                        <label for="message" data-i18n="contact_msg_label">Message</label>
                         <textarea id="message" name="message" rows="6" required></textarea>
                     </div>
 
-                    <button type="submit" class="submit-button">Envoyer</button>
+                    <button type="submit" class="submit-button" data-i18n="contact_submit">Envoyer</button>
                 </form>
 
                 <div class="contact-info">
                     <div class="contact-info-item">
-                        <h3>Adresse</h3>
-                        <p>12 rue de Grenelle<br>75007 Paris, France</p>
+                        <h3 data-i18n="contact_addr_title">Adresse</h3>
+                        <p data-i18n-html="contact_addr">12 rue de Grenelle<br>75007 Paris, France</p>
                     </div>
 
                     <div class="contact-info-item">
-                        <h3>Téléphone</h3>
+                        <h3 data-i18n="contact_phone_title">Téléphone</h3>
                         <p><a href="tel:+33142221234">+33 (0)1 42 22 12 34</a></p>
                     </div>
 
                     <div class="contact-info-item">
-                        <h3>Email</h3>
+                        <h3 data-i18n="contact_email_title">Email</h3>
                         <p><a href="mailto:contact@maison-verlaine.fr">contact@maison-verlaine.fr</a></p>
                     </div>
 
                     <div class="contact-info-item">
-                        <h3>Horaires</h3>
-                        <p>Lundi - Vendredi: 10h - 19h<br>Samedi: 10h - 18h<br>Dimanche: Sur rendez-vous</p>
+                        <h3 data-i18n="contact_hours_title">Horaires</h3>
+                        <p data-i18n-html="contact_hours">Lundi - Vendredi: 10h - 19h<br>Samedi: 10h - 18h<br>Dimanche: Sur rendez-vous</p>
                     </div>
                 </div>
             </div>
@@ -2023,21 +2091,299 @@
 
     <!-- ==================== FOOTER ==================== -->
     <footer>
-        <p>&copy; 2024 Maison Verlaine. Tous droits réservés.</p>
+        <p data-i18n="footer_copy">&copy; 2024 Maison Verlaine. Tous droits réservés.</p>
         <div class="footer-links">
-            <a href="#savoirFaire">Savoir-Faire</a>
-            <a href="#etoffes">Étoffes</a>
-            <a href="configurateur/">Configurateur</a>
-            <a href="#contact">Contact</a>
-            <a href="#">Mentions Légales</a>
-            <a href="#">Politique de Confidentialité</a>
+            <a href="#savoirFaire" data-i18n="footer_savoir">Savoir-Faire</a>
+            <a href="#etoffes" data-i18n="footer_etoffes">Étoffes</a>
+            <a href="configurateur/" data-i18n="footer_config">Configurateur</a>
+            <a href="#contact" data-i18n="footer_contact">Contact</a>
+            <a href="#" data-i18n="footer_legal">Mentions Légales</a>
+            <a href="#" data-i18n="footer_privacy">Politique de Confidentialité</a>
         </div>
     </footer>
 
     <!-- ==================== JAVASCRIPT ==================== -->
     <script>
+        // ==================== I18N ====================
+        const I18N = {
+            fr: {
+                page_title: "Maison Verlaine — Tailleur sur Mesure",
+                meta_desc: "Maison Verlaine - Atelier de tailleur sur mesure, tradition et raffinement",
+                hero_title: "Élégance Sur Mesure",
+                hero_desc: "Depuis 1985, Maison Verlaine incarne la tradition du tailleur français. Chaque costume est une œuvre d'art, confectionnée avec les plus belles étoffes et un savoir-faire inégalé.",
+                hero_cta: "Configurez Votre Costume",
+                sf_title: "Notre Savoir-Faire",
+                sf_p1_title: "Coupe Impeccable",
+                sf_p1_desc: "Chaque coupe est tracée à la main par nos maîtres tailleurs, respectant les proportions uniques de votre silhouette.",
+                sf_p2_title: "Étoffes Nobles",
+                sf_p2_desc: "Nous sélectionnons les plus belles étoffes auprès des manufactures italiennes et britanniques les plus prestigieuses.",
+                sf_p3_title: "Finitions Raffinées",
+                sf_p3_desc: "Main-d'œuvre minutieuse : doublures soignées, coutures invisibles, boutonnières parfaites. Aucun détail ne nous échappe.",
+                sf_cta: "Découvrir Plus",
+                etoffes_title: "Sélection d'Étoffes",
+                etoffes_desc: "Les plus belles matières du monde sélectionnées avec passion",
+                details_title: "Détails & Techniques",
+                details_desc: "Explorez notre processus de confection en haute définition",
+                config_title: "Configurateur Sur-Mesure",
+                config_desc: "Composez votre costume pièce par pièce — étoffe, revers, boutons, doublure, monogramme",
+                config_open: "Ouvrir le configurateur",
+                config_sub: "Aperçu en direct · prix instantané",
+                config_fabric_label: "Sélectionnez le Tissu",
+                config_fabric_1: "Laine Mérinos Bleu Marine",
+                config_fabric_2: "Laine Tweed Charbon",
+                config_fabric_3: "Laine Gabardine Noir",
+                config_fabric_4: "Soie & Lin Gris Perle",
+                config_style_label: "Style de Coupe",
+                config_style_1: "Classique Français",
+                config_style_2: "Moderne Épuré",
+                config_style_3: "Vintage Élégant",
+                config_style_4: "Ajusté Contemporain",
+                config_lining_label: "Couleur Doublure",
+                config_btn_label: "Type de Boutons",
+                config_btn_1: "Nacre Blanche",
+                config_btn_2: "Corne Noire",
+                config_btn_3: "Métal Doré",
+                config_btn_4: "Bois Noyer",
+                config_launch: "Lancer le configurateur",
+                lookbook_title: "Lookbook",
+                lookbook_desc: "Inspirations et réalisations de nos clients",
+                lookbook_card1_title: "Gentleman Classique",
+                lookbook_card1_desc: "Trois-pièces bleu marine intemporel",
+                lookbook_card2_title: "Élégance Moderne",
+                lookbook_card2_desc: "Costume gris perle ligne épurée",
+                lookbook_card3_title: "Charme Vintage",
+                lookbook_card3_desc: "Tweed marron détails dorés",
+                lookbook_card4_title: "Glamour Soirée",
+                lookbook_card4_desc: "Smoking noir perfectionniste",
+                parcours_title: "Notre Parcours",
+                parcours_desc: "39 ans d'excellence et de tradition",
+                parcours_1_title: "1985 - Fondation",
+                parcours_1_desc: "Pierre Verlaine fonde l'atelier dans le 7ème arrondissement de Paris avec l'ambition de créer des costumes intemporels.",
+                parcours_2_title: "1995 - Reconnaissance",
+                parcours_2_desc: "Maison Verlaine devient l'un des ateliers de référence, habillant hommes politiques et personnalités de haut rang.",
+                parcours_3_title: "2010 - Innovation",
+                parcours_3_desc: "Intégration de techniques numériques pour la prise de mesures et la personnalisation, tout en conservant le savoir-faire traditionnel.",
+                parcours_4_title: "2024 - Excellence Numérique",
+                parcours_4_desc: "Lancement de notre plateforme 3D et configurateur interactif pour offrir l'expérience Maison Verlaine à l'échelle mondiale.",
+                contact_title: "Demander Un Rendez-Vous",
+                contact_desc: "Prenez rendez-vous pour une consultation personnalisée avec nos maîtres tailleurs",
+                contact_name_label: "Nom Complet",
+                contact_email_label: "Adresse Email",
+                contact_phone_label: "Téléphone",
+                contact_msg_label: "Message",
+                contact_submit: "Envoyer",
+                contact_addr_title: "Adresse",
+                contact_addr: "12 rue de Grenelle<br>75007 Paris, France",
+                contact_phone_title: "Téléphone",
+                contact_email_title: "Email",
+                contact_hours_title: "Horaires",
+                contact_hours: "Lundi - Vendredi : 10h - 19h<br>Samedi : 10h - 18h<br>Dimanche : Sur rendez-vous",
+                contact_thanks: "Merci ! Nous vous recontacterons bientôt.",
+                footer_copy: "© 2024 Maison Verlaine. Tous droits réservés.",
+                footer_savoir: "Savoir-Faire",
+                footer_etoffes: "Étoffes",
+                footer_config: "Configurateur",
+                footer_contact: "Contact",
+                footer_legal: "Mentions Légales",
+                footer_privacy: "Politique de Confidentialité",
+            },
+            en: {
+                page_title: "Maison Verlaine — Bespoke Tailoring",
+                meta_desc: "Maison Verlaine - Bespoke tailoring atelier, tradition and refinement since 1985",
+                hero_title: "Bespoke Elegance",
+                hero_desc: "Since 1985, Maison Verlaine embodies the tradition of French tailoring. Each suit is a work of art, crafted with the finest fabrics and unparalleled craftsmanship.",
+                hero_cta: "Configure Your Suit",
+                sf_title: "Our Expertise",
+                sf_p1_title: "Impeccable Cut",
+                sf_p1_desc: "Every cut is traced by hand by our master tailors, respecting the unique proportions of your silhouette.",
+                sf_p2_title: "Noble Fabrics",
+                sf_p2_desc: "We source the finest fabrics from the most prestigious Italian and British mills.",
+                sf_p3_title: "Refined Finishes",
+                sf_p3_desc: "Meticulous craftsmanship: impeccable linings, invisible seams, perfect buttonholes. No detail escapes us.",
+                sf_cta: "Discover More",
+                etoffes_title: "Fabric Selection",
+                etoffes_desc: "The world's finest materials, passionately curated",
+                details_title: "Details & Techniques",
+                details_desc: "Explore our tailoring process in high definition",
+                config_title: "Bespoke Configurator",
+                config_desc: "Compose your suit piece by piece — fabric, lapels, buttons, lining, monogram",
+                config_open: "Open the configurator",
+                config_sub: "Live preview · instant pricing",
+                config_fabric_label: "Select Fabric",
+                config_fabric_1: "Navy Blue Merino Wool",
+                config_fabric_2: "Charcoal Tweed Wool",
+                config_fabric_3: "Black Gabardine Wool",
+                config_fabric_4: "Silk & Linen Pearl Grey",
+                config_style_label: "Cut Style",
+                config_style_1: "French Classic",
+                config_style_2: "Modern Clean",
+                config_style_3: "Elegant Vintage",
+                config_style_4: "Contemporary Fitted",
+                config_lining_label: "Lining Color",
+                config_btn_label: "Button Type",
+                config_btn_1: "White Mother-of-Pearl",
+                config_btn_2: "Black Horn",
+                config_btn_3: "Gold Metal",
+                config_btn_4: "Walnut Wood",
+                config_launch: "Launch configurator",
+                lookbook_title: "Lookbook",
+                lookbook_desc: "Inspirations and client creations",
+                lookbook_card1_title: "Classic Gentleman",
+                lookbook_card1_desc: "Timeless navy blue three-piece",
+                lookbook_card2_title: "Modern Elegance",
+                lookbook_card2_desc: "Pearl grey suit, clean lines",
+                lookbook_card3_title: "Vintage Charm",
+                lookbook_card3_desc: "Brown tweed with golden details",
+                lookbook_card4_title: "Evening Glamour",
+                lookbook_card4_desc: "Perfectionist black tuxedo",
+                parcours_title: "Our Journey",
+                parcours_desc: "39 years of excellence and tradition",
+                parcours_1_title: "1985 - Foundation",
+                parcours_1_desc: "Pierre Verlaine founded the atelier in the 7th arrondissement of Paris with the ambition to create timeless suits.",
+                parcours_2_title: "1995 - Recognition",
+                parcours_2_desc: "Maison Verlaine became one of the leading ateliers, dressing politicians and high-profile personalities.",
+                parcours_3_title: "2010 - Innovation",
+                parcours_3_desc: "Integration of digital techniques for measurements and customization, while preserving traditional craftsmanship.",
+                parcours_4_title: "2024 - Digital Excellence",
+                parcours_4_desc: "Launch of our 3D platform and interactive configurator to bring the Maison Verlaine experience worldwide.",
+                contact_title: "Book an Appointment",
+                contact_desc: "Schedule a personalized consultation with our master tailors",
+                contact_name_label: "Full Name",
+                contact_email_label: "Email Address",
+                contact_phone_label: "Phone",
+                contact_msg_label: "Message",
+                contact_submit: "Send",
+                contact_addr_title: "Address",
+                contact_addr: "12 rue de Grenelle<br>75007 Paris, France",
+                contact_phone_title: "Phone",
+                contact_email_title: "Email",
+                contact_hours_title: "Opening Hours",
+                contact_hours: "Monday – Friday: 10am – 7pm<br>Saturday: 10am – 6pm<br>Sunday: By appointment",
+                contact_thanks: "Thank you! We will get back to you shortly.",
+                footer_copy: "© 2024 Maison Verlaine. All rights reserved.",
+                footer_savoir: "Expertise",
+                footer_etoffes: "Fabrics",
+                footer_config: "Configurator",
+                footer_contact: "Contact",
+                footer_legal: "Legal Notice",
+                footer_privacy: "Privacy Policy",
+            },
+            de: {
+                page_title: "Maison Verlaine — Maßschneiderei",
+                meta_desc: "Maison Verlaine - Maßschneiderei-Atelier, Tradition und Raffinesse seit 1985",
+                hero_title: "Maßgeschneiderte Eleganz",
+                hero_desc: "Seit 1985 verkörpert Maison Verlaine die Tradition der französischen Schneiderei. Jeder Anzug ist ein Kunstwerk, gefertigt aus den feinsten Stoffen mit unübertroffener Handwerkskunst.",
+                hero_cta: "Ihren Anzug konfigurieren",
+                sf_title: "Unsere Expertise",
+                sf_p1_title: "Tadellose Schnittführung",
+                sf_p1_desc: "Jeder Schnitt wird von unseren Meisterschneidern von Hand gezeichnet, unter Berücksichtigung der einzigartigen Proportionen Ihrer Silhouette.",
+                sf_p2_title: "Edle Stoffe",
+                sf_p2_desc: "Wir beziehen die schönsten Stoffe von den renommiertesten italienischen und britischen Manufakturen.",
+                sf_p3_title: "Raffinierte Verarbeitung",
+                sf_p3_desc: "Akribische Handarbeit: sorgfältige Futter, unsichtbare Nähte, perfekte Knopflöcher. Kein Detail entgeht uns.",
+                sf_cta: "Mehr entdecken",
+                etoffes_title: "Stoffauswahl",
+                etoffes_desc: "Die schönsten Materialien der Welt, leidenschaftlich ausgewählt",
+                details_title: "Details & Techniken",
+                details_desc: "Entdecken Sie unseren Schneider-Prozess in höchster Auflösung",
+                config_title: "Maßkonfektor",
+                config_desc: "Gestalten Sie Ihren Anzug Stück für Stück — Stoff, Revers, Knöpfe, Futter, Monogramm",
+                config_open: "Konfigurator öffnen",
+                config_sub: "Live-Vorschau · Sofortpreis",
+                config_fabric_label: "Stoff auswählen",
+                config_fabric_1: "Marineblau Merinowolle",
+                config_fabric_2: "Anthrazit Tweedwolle",
+                config_fabric_3: "Schwarz Gabardine",
+                config_fabric_4: "Seide & Leinen Perlgrau",
+                config_style_label: "Schnitt-Stil",
+                config_style_1: "Französisch Klassisch",
+                config_style_2: "Modern Schlicht",
+                config_style_3: "Elegant Vintage",
+                config_style_4: "Zeitgenössisch Tailliert",
+                config_lining_label: "Futterfarbe",
+                config_btn_label: "Knopf-Typ",
+                config_btn_1: "Weißes Perlmutt",
+                config_btn_2: "Schwarzes Horn",
+                config_btn_3: "Gold-Metall",
+                config_btn_4: "Walnussholz",
+                config_launch: "Konfigurator starten",
+                lookbook_title: "Lookbook",
+                lookbook_desc: "Inspirationen und Kundenkreationen",
+                lookbook_card1_title: "Klassischer Gentleman",
+                lookbook_card1_desc: "Zeitloser Marineblau-Dreiteilar",
+                lookbook_card2_title: "Moderne Eleganz",
+                lookbook_card2_desc: "Perlgrauer Anzug, klare Linien",
+                lookbook_card3_title: "Vintage-Charme",
+                lookbook_card3_desc: "Brauner Tweed mit goldenen Details",
+                lookbook_card4_title: "Abend-Glamour",
+                lookbook_card4_desc: "Perfektionistischer schwarzer Smoking",
+                parcours_title: "Unsere Geschichte",
+                parcours_desc: "39 Jahre Exzellenz und Tradition",
+                parcours_1_title: "1985 - Gründung",
+                parcours_1_desc: "Pierre Verlaine gründete das Atelier im 7. Arrondissement von Paris mit dem Ehrgeiz, zeitlose Anzüge zu kreieren.",
+                parcours_2_title: "1995 - Anerkennung",
+                parcours_2_desc: "Maison Verlaine wurde zu einem der führenden Ateliers und kleidete Politiker und hochrangige Persönlichkeiten ein.",
+                parcours_3_title: "2010 - Innovation",
+                parcours_3_desc: "Integration digitaler Techniken für Maßnahmen und Personalisierung unter Beibehaltung des traditionellen Handwerks.",
+                parcours_4_title: "2024 - Digitale Exzellenz",
+                parcours_4_desc: "Start unserer 3D-Plattform und des interaktiven Konfigurators, um das Maison-Verlaine-Erlebnis weltweit anzubieten.",
+                contact_title: "Termin anfragen",
+                contact_desc: "Vereinbaren Sie eine persönliche Beratung mit unseren Meisterschneidern",
+                contact_name_label: "Vollständiger Name",
+                contact_email_label: "E-Mail-Adresse",
+                contact_phone_label: "Telefon",
+                contact_msg_label: "Nachricht",
+                contact_submit: "Senden",
+                contact_addr_title: "Adresse",
+                contact_addr: "12 rue de Grenelle<br>75007 Paris, Frankreich",
+                contact_phone_title: "Telefon",
+                contact_email_title: "E-Mail",
+                contact_hours_title: "Öffnungszeiten",
+                contact_hours: "Montag – Freitag: 10 – 19 Uhr<br>Samstag: 10 – 18 Uhr<br>Sonntag: Nach Vereinbarung",
+                contact_thanks: "Danke! Wir melden uns bald bei Ihnen.",
+                footer_copy: "© 2024 Maison Verlaine. Alle Rechte vorbehalten.",
+                footer_savoir: "Expertise",
+                footer_etoffes: "Stoffe",
+                footer_config: "Konfigurator",
+                footer_contact: "Kontakt",
+                footer_legal: "Impressum",
+                footer_privacy: "Datenschutz",
+            }
+        };
+
+        const LANG_LABELS = { fr: 'FR', en: 'EN', de: 'DE' };
+
+        function applyLanguage(lang) {
+            const dict = I18N[lang] || I18N.fr;
+            document.documentElement.lang = lang;
+            document.title = dict.page_title;
+            const metaDesc = document.querySelector('meta[name="description"]');
+            if (metaDesc) metaDesc.content = dict.meta_desc;
+
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.dataset.i18n;
+                if (dict[key] !== undefined) el.textContent = dict[key];
+            });
+            document.querySelectorAll('[data-i18n-html]').forEach(el => {
+                const key = el.dataset.i18nHtml;
+                if (dict[key] !== undefined) el.innerHTML = dict[key];
+            });
+
+            // Switcher UI
+            const cur = document.getElementById('langSwitchCurrent');
+            if (cur) cur.textContent = LANG_LABELS[lang] || lang.toUpperCase();
+            document.querySelectorAll('#langSwitchMenu [data-lang]').forEach(btn => {
+                btn.setAttribute('aria-current', btn.dataset.lang === lang ? 'true' : 'false');
+            });
+
+            try { localStorage.setItem('mv-lang', lang); } catch(e) {}
+        }
+
         // ==================== SÉQUENCE D'ENTRÉE ====================
         document.addEventListener('DOMContentLoaded', () => {
+            // Appliquer la langue mémorisée dès le chargement
+            const savedLang = (() => { try { return localStorage.getItem('mv-lang'); } catch(e) {} })();
+            applyLanguage(savedLang || 'fr');
             const introWrap = document.getElementById('introWrap');
             const langPhase = document.getElementById('introLangPhase');
 
@@ -2060,6 +2406,26 @@
                 introWrap.style.transition = 'opacity .5s ease';
                 introWrap.style.opacity = '0';
                 setTimeout(() => introWrap.classList.add('is-gone'), 520);
+            }
+
+            // Switcher langue (top-right fixe)
+            const switchBtn  = document.getElementById('langSwitchBtn');
+            const switchMenu = document.getElementById('langSwitchMenu');
+            if (switchBtn && switchMenu) {
+                switchBtn.addEventListener('click', () => {
+                    switchMenu.hidden = !switchMenu.hidden;
+                });
+                switchMenu.querySelectorAll('[data-lang]').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        applyLanguage(btn.dataset.lang);
+                        switchMenu.hidden = true;
+                    });
+                });
+                document.addEventListener('click', e => {
+                    if (!switchBtn.contains(e.target) && !switchMenu.contains(e.target)) {
+                        switchMenu.hidden = true;
+                    }
+                });
             }
 
             // Clic sur une carte langue → entrer dans le site
@@ -2195,7 +2561,8 @@
 
                 const submitBtn = contactForm.querySelector('.submit-button');
                 const originalText = submitBtn.textContent;
-                submitBtn.textContent = 'Merci! Nous vous recontacterons bientôt.';
+                const lang2 = (() => { try { return localStorage.getItem('mv-lang') || 'fr'; } catch(e) { return 'fr'; } })();
+                submitBtn.textContent = (I18N[lang2] || I18N.fr).contact_thanks;
                 submitBtn.disabled = true;
 
                 setTimeout(() => {
