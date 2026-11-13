@@ -7,6 +7,10 @@
     <meta name="theme-color" content="#0d1014">
     <title>Maison Verlaine — Tailleur sur Mesure</title>
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400;1,600&family=Raleway:wght@200;300;400&display=swap" rel="stylesheet">
+
     <style>
         /* ==================== RESET & VARIABLES ==================== */
         * {
@@ -39,7 +43,136 @@
         }
 
         /* ==================== PRE-ENTRY VIDEO ==================== */
-        .pre-entry-video {
+        /* ==================== SÉQUENCE D'ENTRÉE ==================== */
+        .intro-wrap {
+            position: fixed;
+            inset: 0;
+            z-index: 10000;
+            background: #000;
+        }
+        .intro-wrap.is-gone { display: none; }
+        .intro-video-phase { position: absolute; inset: 0; transition: opacity .5s ease; }
+        .intro-video-phase.fade-out { opacity: 0; pointer-events: none; }
+        .intro-video-phase video { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .intro-lang-phase {
+            position: absolute; inset: 0;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            padding: 24px; gap: 0;
+            background: radial-gradient(ellipse at 50% 36%, rgba(44,37,27,.6), rgba(9,10,12,.97) 62%), #090a0c;
+            opacity: 0; transition: opacity .5s ease .1s;
+        }
+        .intro-lang-phase:not([hidden]) { opacity: 1; }
+        .intro-lang-phase[hidden] { display: none; }
+
+        /* ── Typographie de la gate langue ── */
+        .lang-gate-monogram {
+            display: block;
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+            font-style: italic;
+            font-size: clamp(48px, 7vw, 88px);
+            line-height: 1;
+            letter-spacing: .18em;
+            color: #d4af37;
+            text-shadow: 0 0 40px rgba(212,175,55,.35);
+            margin-bottom: 10px;
+        }
+        .lang-gate-brand {
+            display: block;
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 300;
+            font-size: clamp(13px, 1.6vw, 20px);
+            letter-spacing: .55em;
+            text-transform: uppercase;
+            color: rgba(245,245,245,.75);
+            margin-bottom: 18px;
+        }
+        .lang-gate-prompt {
+            font-family: 'Raleway', sans-serif;
+            font-weight: 200;
+            font-size: clamp(10px, 1.1vw, 13px);
+            letter-spacing: .28em;
+            text-transform: uppercase;
+            color: rgba(245,245,245,.35);
+            margin-bottom: 0;
+        }
+
+        /* Cartes de langue */
+        .lang-cards {
+            display: flex;
+            gap: 20px;
+            margin-top: 32px;
+            align-items: stretch;
+        }
+        .lang-card {
+            position: relative;
+            width: clamp(200px, 24vw, 320px);
+            aspect-ratio: 16/9;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 2px solid rgba(212,175,55,.35);
+            background: #0a0b0d;
+            cursor: pointer;
+            transition: border-color .3s ease, box-shadow .3s ease, transform .2s ease;
+            padding: 0;
+        }
+        .lang-card:hover { transform: translateY(-3px); }
+        .lang-card.is-ready {
+            border-color: var(--gold, #d4af37);
+            box-shadow: 0 0 32px rgba(212,175,55,.4), 0 0 8px rgba(212,175,55,.2);
+            animation: lang-pulse 2s ease-in-out infinite;
+        }
+        @keyframes lang-pulse {
+            0%,100% { box-shadow: 0 0 24px rgba(212,175,55,.35), 0 0 6px rgba(212,175,55,.18); }
+            50%     { box-shadow: 0 0 48px rgba(212,175,55,.7),  0 0 14px rgba(212,175,55,.4); }
+        }
+        .lang-card-video {
+            width: 100%; height: 100%;
+            object-fit: cover; display: block;
+        }
+        /* Overlay "tap" qui apparaît quand la vidéo est finie */
+        .lang-card-ready {
+            position: absolute; inset: 0;
+            display: flex; align-items: flex-end; justify-content: center;
+            padding-bottom: 14px;
+            opacity: 0; pointer-events: none;
+            transition: opacity .4s ease;
+        }
+        .lang-card.is-ready .lang-card-ready { opacity: 1; }
+        .lang-card-ready span {
+            font: 500 11px/1 var(--serif, serif);
+            letter-spacing: .18em;
+            text-transform: uppercase;
+            color: rgba(212,175,55,.9);
+            background: rgba(9,10,12,.72);
+            padding: 5px 12px;
+            border-radius: 20px;
+            border: 1px solid rgba(212,175,55,.4);
+        }
+        /* Placeholders DE / FR */
+        .lang-card-ph {
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            gap: 8px; cursor: default;
+            border-style: dashed;
+        }
+        .lang-ph-code {
+            color: rgba(212,175,55,.5);
+            font: 700 32px/1 var(--serif, serif);
+            letter-spacing: .12em;
+        }
+        .lang-ph-name {
+            color: rgba(245,245,245,.3);
+            font: 400 12px/1 var(--sans, sans-serif);
+            letter-spacing: .14em;
+        }
+        @media (max-width: 600px) {
+            .lang-cards { flex-direction: column; gap: 14px; }
+            .lang-card { width: min(85vw, 320px); }
+        }
+
+        /* STUB vide — anciens styles remplacés */
+        .__removed {
             position: fixed;
             top: 0;
             left: 0;
@@ -197,6 +330,8 @@
             }
         }
 
+        }
+
         /* ==================== LAYOUT & STRUCTURE ==================== */
         body {
             scroll-snap-type: y mandatory;
@@ -221,68 +356,94 @@
             min-height: 600px;
             overflow: hidden;
             background-color: var(--dark-bg);
+            display: grid;
+            grid-template-columns: 55% 45%;
+        }
+
+        /* Mobile hero : image composite (cachée sur desktop) */
+        .hero-panel-mobile {
+            display: none;
+        }
+
+        /* Zone 1 : vidéo à gauche */
+        .hero-panel-video {
+            position: relative;
+            overflow: hidden;
         }
 
         .hero-video {
-            position: absolute;
-            top: 0;
-            left: 0;
             width: 100%;
             height: 100%;
             object-fit: cover;
-            animation: kenBurnsZoom 8s var(--easing-ease-out) forwards;
-            will-change: transform;
+            display: block;
         }
 
-        .hero-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
+        /* Zone 3 : photo mannequins à droite */
+        .hero-panel-photo {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-panel-photo img {
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.2) 100%);
+            object-fit: cover;
+            object-position: center top;
+            display: block;
+        }
+
+        /* Liseré doré entre les deux panneaux */
+        .hero-panel-video::after {
+            content: "";
+            position: absolute;
+            top: 0; right: 0; bottom: 0;
+            width: 1px;
+            background: linear-gradient(to bottom, transparent, rgba(212,175,55,.5) 30%, rgba(212,175,55,.5) 70%, transparent);
             z-index: 2;
         }
 
+        .hero-overlay { display: none; }
+
         .hero-content {
             position: absolute;
-            bottom: 60px;
-            right: 60px;
+            bottom: 36px;
+            right: 36px;
             z-index: 3;
-            max-width: 500px;
-            background: rgba(13, 16, 20, 0.7);
+            max-width: 320px;
+            background: rgba(13, 16, 20, 0.72);
             backdrop-filter: blur(10px);
             border: 1px solid rgba(212, 175, 55, 0.2);
-            border-radius: 8px;
-            padding: 40px;
+            border-radius: 7px;
+            padding: 22px 26px;
             animation: fadeInUp 0.8s var(--easing-smooth) 0.6s forwards;
             opacity: 0;
         }
 
         .hero-content h1 {
-            font-size: clamp(24px, 5vw, 48px);
+            font-size: clamp(18px, 2.4vw, 28px);
             font-weight: 700;
-            margin-bottom: 20px;
+            margin-bottom: 12px;
             color: var(--primary);
             letter-spacing: 2px;
             text-transform: uppercase;
         }
 
         .hero-content p {
-            font-size: 16px;
-            line-height: 1.6;
-            color: rgba(245, 245, 245, 0.85);
-            margin-bottom: 20px;
+            font-size: 13px;
+            line-height: 1.55;
+            color: rgba(245, 245, 245, 0.82);
+            margin-bottom: 16px;
             font-weight: 300;
         }
 
         .hero-cta {
             display: inline-block;
-            padding: 12px 32px;
+            padding: 9px 22px;
             background-color: var(--primary);
             color: var(--dark-bg);
             text-decoration: none;
             font-weight: 600;
+            font-size: 11px;
             letter-spacing: 1px;
             text-transform: uppercase;
             font-size: 12px;
@@ -384,6 +545,9 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+            object-position: center center;
+            transform: scale(1.08);
+            transform-origin: center center;
         }
 
         .savoir-faire-content h2 {
@@ -539,64 +703,55 @@
 
         .etoffes-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: 1fr 1fr;
             gap: 24px;
             max-width: 1400px;
             margin: 0 auto;
-            auto-rows: 300px;
         }
 
-        .etoffes-grid-item {
+        .etoffe-banner {
             position: relative;
             border-radius: 8px;
             overflow: hidden;
             border: 1px solid rgba(212, 175, 55, 0.2);
             background-color: var(--accent-dark);
+            aspect-ratio: 3 / 1;
             transition: all 0.4s var(--easing-smooth);
             cursor: pointer;
             animation: staggerScaleUp 0.6s var(--easing-smooth) forwards;
             opacity: 0;
-            will-change: transform, filter;
+            will-change: transform;
         }
 
-        .etoffes-grid-item:nth-child(1) {
-            grid-column: span 2;
-            grid-row: span 1;
-            animation-delay: 0s;
-        }
-        .etoffes-grid-item:nth-child(2) {
-            animation-delay: 0.08s;
-        }
-        .etoffes-grid-item:nth-child(3) {
-            animation-delay: 0.16s;
-        }
-        .etoffes-grid-item:nth-child(4) {
-            animation-delay: 0.24s;
-        }
-        .etoffes-grid-item:nth-child(5) {
-            animation-delay: 0.32s;
-        }
-        .etoffes-grid-item:nth-child(6) {
-            animation-delay: 0.4s;
+        /* La vedette (Flanelle Royale) et la dernière bannière occupent toute la largeur */
+        .etoffe-banner.featured,
+        .etoffe-banner.wide {
+            grid-column: 1 / -1;
         }
 
-        .etoffes-grid-item img,
-        .etoffes-grid-item video {
+        .etoffe-banner:nth-child(1) { animation-delay: 0s; }
+        .etoffe-banner:nth-child(2) { animation-delay: 0.08s; }
+        .etoffe-banner:nth-child(3) { animation-delay: 0.16s; }
+        .etoffe-banner:nth-child(4) { animation-delay: 0.24s; }
+        .etoffe-banner:nth-child(5) { animation-delay: 0.32s; }
+        .etoffe-banner:nth-child(6) { animation-delay: 0.4s; }
+
+        .etoffe-banner img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.5s var(--easing-smooth);
+            display: block;
+            transition: transform 0.6s var(--easing-smooth);
         }
 
-        .etoffes-grid-item:hover {
-            transform: scale(1.05);
+        .etoffe-banner:hover {
+            transform: translateY(-3px);
             border-color: var(--primary);
             box-shadow: 0 0 40px var(--gold-glow);
         }
 
-        .etoffes-grid-item:hover img,
-        .etoffes-grid-item:hover video {
-            transform: scale(1.08);
+        .etoffe-banner:hover img {
+            transform: scale(1.04);
         }
 
         @keyframes staggerScaleUp {
@@ -1231,14 +1386,8 @@
             }
 
             .etoffes-grid {
-                grid-template-columns: repeat(2, 1fr);
-                auto-rows: 250px;
                 gap: 16px;
                 padding: 0 24px;
-            }
-
-            .etoffes-grid-item:nth-child(1) {
-                grid-column: span 2;
             }
 
             .details-grid {
@@ -1277,223 +1426,144 @@
         }
 
         @media (max-width: 768px) {
-            .hero-content {
-                bottom: 40px;
-                right: 40px;
-                left: 40px;
-                max-width: none;
-                padding: 30px;
+            /* ── scroll-snap désactivé + toutes les animations forcées visibles ── */
+            body { scroll-snap-type: none; }
+            /* Toutes les animations css (opacity:0 → opacity:1) forcées à l'état final */
+            .etoffes-title, .etoffes-title h2, .etoffes-title p,
+            .details-video-title, .details-video-title h2,
+            .savoir-faire-content h2, .pillar, .etoffe-banner,
+            .savoir-faire-grid-item, .details-grid-item,
+            .lookbook-card, .timeline-item, .hero-content {
+                animation: none !important;
+                opacity: 1 !important;
+                clip-path: none !important;
+                transform: none !important;
             }
+            /* Cacher le gros video player de la section Détails sur mobile */
+            .hero-video-container { display: none; }
 
-            .hero-content h1 {
-                font-size: 28px;
-            }
-
-            .hero-content p {
-                font-size: 14px;
-            }
-
-            .savoir-faire {
-                padding: 60px 24px;
-            }
-
-            .savoir-faire-container {
-                padding: 0;
-            }
-
-            .savoir-faire-grid {
-                grid-template-columns: 1fr;
-                gap: 16px;
-            }
-
-            .etoffes {
-                padding: 60px 24px;
-            }
-
-            .etoffes-grid {
-                grid-template-columns: 1fr;
-                auto-rows: auto;
-                padding: 0;
-            }
-
-            .etoffes-grid-item:nth-child(1) {
-                grid-column: span 1;
-                aspect-ratio: 16/9;
-            }
-
-            .etoffes-grid-item {
-                aspect-ratio: 16/9;
-            }
-
-            .details-video {
-                padding: 60px 24px;
-            }
-
-            .details-grid {
-                grid-template-columns: 1fr;
-                padding: 0;
-            }
-
-            .details-grid-item {
-                aspect-ratio: 16/9;
-            }
-
-            .configurateur {
-                padding: 60px 24px;
-            }
-
-            .configurateur-container {
-                padding: 30px;
-            }
-
-            .configurateur-3d {
-                height: 300px;
-            }
-
-            .lookbook {
-                padding: 60px 24px;
-            }
-
-            .lookbook-grid {
-                grid-template-columns: 1fr;
-                gap: 20px;
-                padding: 0;
-            }
-
-            .lookbook-card {
-                aspect-ratio: 1/1;
-            }
-
-            .parcours {
-                padding: 60px 24px;
-            }
-
-            .contact {
-                padding: 60px 24px;
-            }
-
-            footer {
-                padding: 40px 24px;
-            }
-
-            .footer-links {
+            /* ══ HERO MOBILE ══ */
+            .hero {
+                display: flex;
                 flex-direction: column;
-                gap: 12px;
+                height: auto;
+                min-height: 100svh;
             }
+            /* Cacher les panneaux desktop */
+            .hero-panel-video,
+            .hero-panel-photo { display: none; }
+            .hero-panel-video::after { display: none; }
+            /* Afficher l'image composite mobile plein écran */
+            .hero-panel-mobile {
+                display: block;
+                flex: 1 1 auto;
+                min-height: 72svh;
+                overflow: hidden;
+            }
+            .hero-panel-mobile img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                object-position: center top;
+                display: block;
+            }
+            /* text box en flow sous l'image, pas absolue */
+            .hero-content {
+                position: static;
+                width: 100%;
+                max-width: none;
+                margin: 0;
+                padding: 20px 16px 24px;
+                border-radius: 0;
+                border-left: 0; border-right: 0; border-bottom: 0;
+                background: rgba(13,16,20,.95);
+                animation: none;
+                opacity: 1;
+            }
+            .hero-content h1 { font-size: 22px; margin-bottom: 10px; }
+            .hero-content p  { font-size: 13px; margin-bottom: 14px; line-height: 1.5; }
+            .scroll-cue { display: none; }
+
+            /* ══ SAVOIR-FAIRE ══ */
+            .savoir-faire { padding: 48px 16px; }
+            .savoir-faire-container {
+                display: flex;
+                flex-direction: column;
+                gap: 28px;
+                padding: 0;
+            }
+            .savoir-faire-video {
+                position: static !important;
+                width: 100%;
+                aspect-ratio: 16/9;
+                border-radius: 10px;
+                min-height: 0;
+            }
+            .savoir-faire-content h2 { font-size: 26px; margin-bottom: 24px; }
+            .savoir-faire-pillars { gap: 16px; margin-bottom: 28px; }
+            .pillar { padding: 14px 0; }
+            .pillar h3 { font-size: 14px; }
+            .pillar p  { font-size: 13px; line-height: 1.6; }
+            .savoir-faire-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 10px;
+                margin-bottom: 24px;
+            }
+            .savoir-faire-cta { padding: 11px 28px; font-size: 11px; }
+
+            /* ══ ÉTOFFES ══ */
+            .etoffes { padding: 48px 16px; }
+            .etoffes-title { margin-bottom: 32px; }
+            .etoffes-title h2 { font-size: 26px; letter-spacing: 1px; }
+            .etoffes-title p  { font-size: 13px; }
+            .etoffes-grid { grid-template-columns: 1fr; padding: 0; gap: 12px; }
+            .etoffe-banner { aspect-ratio: 2.6/1; }
+            .etoffe-banner.featured { aspect-ratio: 2.6/1; }
+            .etoffe-banner.wide     { aspect-ratio: 2.6/1; }
+
+            /* ══ DETAILS VIDEO ══ */
+            .details-video { padding: 48px 16px; }
+            .details-video-title { margin-bottom: 28px; }
+            .details-video-title h2 { font-size: 26px; }
+            .hero-video-container { display: none !important; }
+            .details-grid {
+                display: grid !important;
+                grid-template-columns: repeat(2, minmax(0,1fr)) !important;
+                gap: 8px !important;
+                padding: 0 !important;
+            }
+            .details-grid-item {
+                position: relative;
+                aspect-ratio: 4/3;
+                border-radius: 8px;
+                overflow: hidden;
+            }
+            .details-grid-item img {
+                position: absolute !important;
+                inset: 0;
+                width: 100% !important;
+                height: 100% !important;
+                object-fit: cover;
+            }
+
+            /* ══ CONFIGURATEUR / LOOKBOOK / PARCOURS / CONTACT / FOOTER ══ */
+            .configurateur { padding: 48px 16px; }
+            .configurateur-container { padding: 22px 16px; }
+            .configurateur-3d { height: 260px; }
+            .lookbook { padding: 48px 16px; }
+            .lookbook-grid { grid-template-columns: 1fr 1fr; gap: 10px; padding: 0; }
+            .lookbook-card { aspect-ratio: 3/4; }
+            .parcours { padding: 48px 16px; }
+            .contact { padding: 48px 16px; }
+            footer { padding: 36px 16px; }
+            .footer-links { flex-direction: column; gap: 12px; text-align: center; }
         }
 
         @media (max-width: 480px) {
-            html, body {
-                font-size: 14px;
-            }
-
-            .hero-content {
-                bottom: 20px;
-                right: 20px;
-                left: 20px;
-                padding: 20px;
-            }
-
-            .hero-content h1 {
-                font-size: 20px;
-                margin-bottom: 12px;
-            }
-
-            .hero-content p {
-                font-size: 12px;
-                margin-bottom: 12px;
-            }
-
-            .hero-cta {
-                padding: 10px 24px;
-                font-size: 11px;
-            }
-
-            .scroll-cue {
-                bottom: 15px;
-            }
-
-            .savoir-faire {
-                padding: 40px 16px;
-            }
-
-            .savoir-faire-content h2 {
-                font-size: 24px;
-                margin-bottom: 24px;
-            }
-
-            .pillar {
-                padding: 16px 0;
-            }
-
-            .savoir-faire-cta {
-                padding: 10px 24px;
-                font-size: 11px;
-            }
-
-            .etoffes {
-                padding: 40px 16px;
-            }
-
-            .etoffes-title h2 {
-                font-size: 24px;
-            }
-
-            .details-video {
-                padding: 40px 16px;
-            }
-
-            .details-video-title h2 {
-                font-size: 24px;
-            }
-
-            .configurateur {
-                padding: 40px 16px;
-            }
-
-            .configurateur-title h2 {
-                font-size: 24px;
-            }
-
-            .configurateur-container {
-                padding: 20px;
-            }
-
-            .configurateur-3d {
-                height: 250px;
-            }
-
-            .lookbook {
-                padding: 40px 16px;
-            }
-
-            .lookbook-title h2 {
-                font-size: 24px;
-            }
-
-            .parcours {
-                padding: 40px 16px;
-            }
-
-            .parcours-title h2 {
-                font-size: 24px;
-            }
-
-            .timeline-item {
-                margin-bottom: 40px;
-            }
-
-            .contact {
-                padding: 40px 16px;
-            }
-
-            .contact-title h2 {
-                font-size: 24px;
-            }
-
-            footer {
-                padding: 30px 16px;
-            }
+            .hero-content h1 { font-size: 20px; }
+            .details-grid { grid-template-columns: 1fr; }
+            .lookbook-grid { grid-template-columns: 1fr; }
+            .savoir-faire-grid { grid-template-columns: 1fr 1fr; }
         }
 
         /* ==================== WEBGL GRAIN EFFECT (CSS-based) ==================== */
@@ -1535,19 +1605,49 @@
 </head>
 <body>
 
-    <!-- ==================== PRE-ENTRY VIDEO ==================== -->
-    <div class="pre-entry-video" id="preEntry">
-        <video id="preEntryVideo" autoplay muted playsinline>
-            <source src="assets-raw/intro.mp4" type="video/mp4">
-        </video>
-    </div>
-
-    <!-- ==================== SPLASH SCREEN ==================== -->
-    <div class="splash-screen" id="splashScreen">
-        <video class="splash-video" autoplay muted playsinline>
-            <source src="assets-raw/video-hero-macro.mp4" type="video/mp4">
-        </video>
-        <div class="splash-logo">MV</div>
+    <!-- ==================== INTRO + LANGUE ==================== -->
+    <div class="intro-wrap" id="introWrap">
+        <!-- Phase 1 : vidéo d'entrée plein écran -->
+        <div class="intro-video-phase" id="introVideoPhase">
+            <video id="introVideo" autoplay muted playsinline preload="auto">
+                <source src="assets-raw/intro-entry.mp4" type="video/mp4">
+            </video>
+        </div>
+        <!-- Phase 2 : sélection de langue par carte vidéo brodée -->
+        <div class="intro-lang-phase" id="introLangPhase" hidden>
+            <span class="lang-gate-monogram">MV</span>
+            <span class="lang-gate-brand">Maison Verlaine</span>
+            <p class="lang-gate-prompt">Choose your language · Sprache wählen · Choisissez votre langue</p>
+            <div class="lang-cards">
+                <!-- English : vidéo brodée -->
+                <button class="lang-card" id="langCardEn" type="button" data-lang="en" aria-label="English">
+                    <video class="lang-card-video" id="langVideoEn" muted playsinline preload="auto" poster="assets-raw/lang-en-poster.webp">
+                        <source src="assets-raw/lang-en.mp4" type="video/mp4">
+                    </video>
+                    <div class="lang-card-ready" id="langCardEnReady">
+                        <span>Tap to enter</span>
+                    </div>
+                </button>
+                <!-- Deutsch : vidéo brodée -->
+                <button class="lang-card" id="langCardDe" type="button" data-lang="de" aria-label="Deutsch">
+                    <video class="lang-card-video" id="langVideoDe" muted playsinline preload="auto">
+                        <source src="assets-raw/lang-de.mp4" type="video/mp4">
+                    </video>
+                    <div class="lang-card-ready" id="langCardDeReady">
+                        <span>Eintreten</span>
+                    </div>
+                </button>
+                <!-- Français : vidéo brodée -->
+                <button class="lang-card" id="langCardFr" type="button" data-lang="fr" aria-label="Français">
+                    <video class="lang-card-video" id="langVideoFr" muted playsinline preload="auto">
+                        <source src="assets-raw/lang-fr.mp4" type="video/mp4">
+                    </video>
+                    <div class="lang-card-ready" id="langCardFrReady">
+                        <span>Entrer</span>
+                    </div>
+                </button>
+            </div>
+        </div>
     </div>
 
     <!-- ==================== GRAIN OVERLAY ==================== -->
@@ -1558,14 +1658,26 @@
 
         <!-- ==================== HERO SECTION ==================== -->
         <section class="hero" id="heroSection">
-            <video class="hero-video" autoplay muted playsinline loop>
-                <source src="assets-raw/video-hero-macro.mp4" type="video/mp4">
-            </video>
+            <!-- Mobile uniquement : image composite plein écran -->
+            <div class="hero-panel-mobile">
+                <img src="assets-raw/hero-mobile.webp" alt="Maison Verlaine — élégance sur mesure" loading="eager">
+            </div>
+            <!-- Desktop uniquement : vidéo gauche + photo droite -->
+            <div class="hero-panel-video">
+                <video class="hero-video" autoplay muted playsinline loop preload="auto">
+                    <source src="assets-raw/hero-video-new.mp4" type="video/mp4">
+                </video>
+            </div>
+            <!-- Zone 3 : photo 2 mannequins -->
+            <div class="hero-panel-photo">
+                <img src="assets-raw/hero-mannequins.webp" alt="Deux mannequins en costume Maison Verlaine" loading="eager">
+            </div>
             <div class="hero-overlay"></div>
+            <!-- Zone 2 : texte (reste intact) -->
             <div class="hero-content">
                 <h1>Élégance Sur Mesure</h1>
                 <p>Depuis 1985, Maison Verlaine incarne la tradition du tailleur francais. Chaque costume est une œuvre d'art, confectionnée avec les plus belles étoffes et un savoir-faire inégalé.</p>
-                <a href="#configurateur" class="hero-cta">Configurez Votre Costume</a>
+                <a href="configurateur/" class="hero-cta">Configurez Votre Costume</a>
             </div>
             <div class="scroll-cue">
                 <div class="scroll-cue-line"></div>
@@ -1576,8 +1688,8 @@
         <section class="savoir-faire" id="savoirFaire">
             <div class="savoir-faire-container">
                 <div>
-                    <video class="savoir-faire-video" autoplay muted loop playsinline>
-                        <source src="assets-raw/T3.mp4" type="video/mp4">
+                    <video class="savoir-faire-video" autoplay muted loop playsinline preload="auto">
+                        <source src="assets-raw/no1-loop.mp4" type="video/mp4">
                     </video>
                 </div>
                 <div>
@@ -1598,16 +1710,16 @@
                     </div>
                     <div class="savoir-faire-grid">
                         <div class="savoir-faire-grid-item">
-                            <img src="assets-raw/K1.png" alt="Détail de coupe" loading="lazy">
+                            <img src="assets-raw/sf-img2.webp" alt="Tissu laine et doublure soie" loading="lazy">
                         </div>
                         <div class="savoir-faire-grid-item">
-                            <img src="assets-raw/K2.png" alt="Tissu premium" loading="lazy">
+                            <img src="assets-raw/sf-img3.webp" alt="Ciseaux de tailleur sur étoffe" loading="lazy">
                         </div>
                         <div class="savoir-faire-grid-item">
-                            <img src="assets-raw/K3.png" alt="Finition détail" loading="lazy">
+                            <img src="assets-raw/sf-img4.webp" alt="Bouton corne cousu à la main" loading="lazy">
                         </div>
                         <div class="savoir-faire-grid-item">
-                            <img src="assets-raw/K4.png" alt="Travail main" loading="lazy">
+                            <img src="assets-raw/sf-img5.webp" alt="Aiguille et fil de couturier" loading="lazy">
                         </div>
                     </div>
                     <button class="savoir-faire-cta">Découvrir Plus</button>
@@ -1622,25 +1734,23 @@
                 <p>Les plus belles matières du monde sélectionnées avec passion</p>
             </div>
             <div class="etoffes-grid">
-                <div class="etoffes-grid-item">
-                    <video autoplay muted loop playsinline>
-                        <source src="assets-raw/T5.mp4" type="video/mp4">
-                    </video>
+                <div class="etoffe-banner featured">
+                    <img src="assets-raw/etoffe-flanelle-royale.webp" alt="Flanelle Royale — laine et cachemire" loading="lazy">
                 </div>
-                <div class="etoffes-grid-item">
-                    <img src="assets-raw/K5.png" alt="Étoffe 1" loading="lazy">
+                <div class="etoffe-banner">
+                    <img src="assets-raw/etoffe-velours-himalaya.webp" alt="Velours d'Himalaya — cachemire pur" loading="lazy">
                 </div>
-                <div class="etoffes-grid-item">
-                    <img src="assets-raw/K6.png" alt="Étoffe 2" loading="lazy">
+                <div class="etoffe-banner">
+                    <img src="assets-raw/etoffe-tweed-harris.webp" alt="Harris Heritage — tweed d'Écosse" loading="lazy">
                 </div>
-                <div class="etoffes-grid-item">
-                    <img src="assets-raw/K7.png" alt="Carte couleur 1" loading="lazy">
+                <div class="etoffe-banner">
+                    <img src="assets-raw/etoffe-riviera.webp" alt="Élégance Riviera — lin et soie" loading="lazy">
                 </div>
-                <div class="etoffes-grid-item">
-                    <img src="assets-raw/K8.png" alt="Carte couleur 2" loading="lazy">
+                <div class="etoffe-banner">
+                    <img src="assets-raw/etoffe-satin-imperial.webp" alt="Satin impérial" loading="lazy">
                 </div>
-                <div class="etoffes-grid-item">
-                    <img src="assets-raw/K9.png" alt="Carte couleur 3" loading="lazy">
+                <div class="etoffe-banner wide">
+                    <img src="assets-raw/etoffe-rayures-dorees.webp" alt="Étoffe sartoriale aux rayures dorées" loading="lazy">
                 </div>
             </div>
         </section>
@@ -1730,15 +1840,19 @@
         <!-- ==================== CONFIGURATEUR 3D ==================== -->
         <section class="configurateur" id="configurateur">
             <div class="configurateur-title">
-                <h2>Configurateur 3D</h2>
-                <p>Visualisez votre costume personnalisé en temps réel</p>
+                <h2>Configurateur Sur-Mesure</h2>
+                <p>Composez votre costume pièce par pièce — étoffe, revers, boutons, doublure, monogramme</p>
             </div>
 
             <div class="configurateur-container">
                 <div class="configurateur-grid">
-                    <div class="configurateur-3d">
-                        <iframe src="3d-configurateur.html" title="Configurateur 3D Costume"></iframe>
-                    </div>
+                    <a class="configurateur-3d" href="configurateur/" style="text-decoration:none;display:flex;align-items:center;justify-content:center;background:radial-gradient(900px 500px at 50% 0%, rgba(212,175,55,.1), transparent 60%), #0d1014;">
+                        <span style="text-align:center;color:#f5f5f5;font-family:'Cormorant Garamond',serif;padding:24px;">
+                            <span style="display:block;font-size:52px;color:#d4af37;line-height:1;">⌁</span>
+                            <span style="display:block;font-size:26px;margin:14px 0 6px;letter-spacing:1px;">Ouvrir le configurateur</span>
+                            <span style="display:block;font-family:'Jost',sans-serif;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#9a958b;">Aperçu en direct · prix instantané</span>
+                        </span>
+                    </a>
                     <div class="configurateur-controls">
                         <div class="control-group">
                             <label for="tissus">Sélectionnez le Tissu</label>
@@ -1775,7 +1889,7 @@
                             </select>
                         </div>
 
-                        <button class="config-button">Demander Rendez-vous</button>
+                        <a class="config-button" href="configurateur/" style="display:inline-block;text-align:center;text-decoration:none;">Lancer le configurateur</a>
                     </div>
                 </div>
             </div>
@@ -1926,7 +2040,7 @@
         <div class="footer-links">
             <a href="#savoirFaire">Savoir-Faire</a>
             <a href="#etoffes">Étoffes</a>
-            <a href="#configurateur">Configurateur</a>
+            <a href="configurateur/">Configurateur</a>
             <a href="#contact">Contact</a>
             <a href="#">Mentions Légales</a>
             <a href="#">Politique de Confidentialité</a>
@@ -1935,53 +2049,71 @@
 
     <!-- ==================== JAVASCRIPT ==================== -->
     <script>
-        // ==================== PRE-ENTRY VIDEO (ACCELERATED) ====================
-        function initPreEntry() {
-            const preVideo = document.getElementById('preEntryVideo');
-            const preEntry = document.getElementById('preEntry');
-
-            if (preVideo) {
-                // Vitesse normale pour bien voir
-                preVideo.playbackRate = 1;
-
-                // Forcer la lecture
-                const playPromise = preVideo.play();
-                if (playPromise !== undefined) {
-                    playPromise.catch(error => {
-                        console.log('Autoplay prevented, retrying...');
-                        // Retry après interaction
-                        document.addEventListener('click', () => preVideo.play(), { once: true });
-                    });
-                }
-
-                // Masquer la pré-vidéo après 13s
-                setTimeout(() => {
-                    if (preEntry) preEntry.classList.add('hidden');
-                }, 13000);
-            }
-        }
-
-        // ==================== SPLASH SCREEN MANAGEMENT ====================
+        // ==================== SÉQUENCE D'ENTRÉE ====================
         document.addEventListener('DOMContentLoaded', () => {
-            // Initialiser la pré-vidéo accélérée
-            initPreEntry();
+            const introWrap    = document.getElementById('introWrap');
+            const introVideo   = document.getElementById('introVideo');
+            const videoPhase   = document.getElementById('introVideoPhase');
+            const langPhase    = document.getElementById('introLangPhase');
 
-            const splashScreen = document.getElementById('splashScreen');
-            const splashKey = 'mv-splash-shown-' + new Date().toDateString();
-
-            // Check if splash already shown today
-            if (sessionStorage.getItem(splashKey)) {
-                splashScreen.classList.add('hidden');
-                splashScreen.style.pointerEvents = 'none';
-                splashScreen.style.opacity = '0';
-            } else {
-                // Mark splash as shown
-                sessionStorage.setItem(splashKey, 'true');
-
-                // Auto-hide splash after 4 seconds
+            function showLangPhase() {
+                videoPhase.classList.add('fade-out');
+                langPhase.hidden = false;
+                requestAnimationFrame(() => { langPhase.style.opacity = '1'; });
+                // Lancer les 3 vidéos de langue simultanément
                 setTimeout(() => {
-                    splashScreen.classList.add('hidden');
-                }, 4000);
+                    [
+                        { vid: 'langVideoEn', card: 'langCardEn' },
+                        { vid: 'langVideoDe', card: 'langCardDe' },
+                        { vid: 'langVideoFr', card: 'langCardFr' }
+                    ].forEach(({ vid, card }) => {
+                        const v = document.getElementById(vid);
+                        const c = document.getElementById(card);
+                        if (v && c) {
+                            v.play().catch(() => {});
+                            v.addEventListener('ended', () => {
+                                c.classList.add('is-ready');
+                            }, { once: true });
+                        }
+                    });
+                }, 300);
+            }
+
+            function enterSite(lang) {
+                // stocker la langue choisie pour le sélecteur dans la topbar
+                try { localStorage.setItem('mv-lang', lang); } catch(e) {}
+                introWrap.style.transition = 'opacity .5s ease';
+                introWrap.style.opacity = '0';
+                setTimeout(() => introWrap.classList.add('is-gone'), 520);
+            }
+
+            // Fin de vidéo → sélection de langue
+            if (introVideo) {
+                introVideo.play().catch(() => {
+                    document.addEventListener('click', () => introVideo.play(), { once: true });
+                });
+                introVideo.addEventListener('ended', showLangPhase);
+                // Fallback : si autoplay bloqué et vidéo n'avance pas après 10s
+                setTimeout(() => { if (introVideo.currentTime < 0.5) showLangPhase(); }, 10000);
+            } else {
+                showLangPhase();
+            }
+
+            // Clic sur une carte langue → entrer dans le site
+            if (langPhase) {
+                langPhase.querySelectorAll('[data-lang]').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        // Seulement si la vidéo est finie (carte prête) ou skip autorisé
+                        const vid = btn.querySelector('.lang-card-video');
+                        if (!vid || vid.ended || !btn.querySelector('.lang-card-video')) {
+                            enterSite(btn.dataset.lang);
+                        } else {
+                            // Double-clic / clic avant la fin → skip vers la fin + entrer
+                            vid.addEventListener('ended', () => enterSite(btn.dataset.lang), { once: true });
+                            vid.currentTime = vid.duration - 0.05;
+                        }
+                    });
+                });
             }
         });
 
@@ -2057,23 +2189,23 @@
         const revealer = new StaggerRevealer();
         revealer.observe('[data-stagger-parent]');
 
-        // ==================== PARALLAX SCROLL EFFECT ====================
-        let ticking = false;
-        const parallaxElements = document.querySelectorAll('.hero-video');
-
-        function updateParallax() {
-            const scrollY = window.scrollY;
-            parallaxElements.forEach(el => {
-                if (el.offsetParent !== null) {
-                    const rect = el.getBoundingClientRect();
-                    if (rect.top < window.innerHeight && rect.bottom > 0) {
-                        const offset = scrollY * 0.3;
-                        el.style.transform = `translateY(${offset}px) scale(1.08)`;
-                    }
-                }
+        // Sur mobile : forcer tous les éléments animés à l'état visible
+        if (window.innerWidth <= 768) {
+            const animated = document.querySelectorAll(
+                '.etoffes-title, .etoffes-title h2, .etoffes-title p, ' +
+                '.details-video-title, .details-video-title h2, .details-video-title p, ' +
+                '.savoir-faire-content h2, .pillar, .etoffe-banner, ' +
+                '.savoir-faire-grid-item, .details-grid-item, .lookbook-card, ' +
+                '.timeline-item, .timeline-content, .contact-form, .hero-content'
+            );
+            animated.forEach(el => {
+                el.style.cssText += ';animation:none!important;opacity:1!important;clip-path:none!important;transform:none!important;';
             });
-            ticking = false;
         }
+
+        // parallax désactivé (hero splitté en panneaux)
+        let ticking = false;
+        function updateParallax() { ticking = false; }
 
         window.addEventListener('scroll', () => {
             if (!ticking) {
@@ -2164,11 +2296,7 @@
             }
         }
 
-        if (configButton) {
-            configButton.addEventListener('click', () => {
-                document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
-            });
-        }
+        // config-button is now a link to configurateur.html — no handler needed
 
         // ==================== PERFORMANCE: REDUCE ANIMATIONS ON LOW-END DEVICES ====================
         if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
