@@ -1934,6 +1934,51 @@
             .mv-banner-text { animation: none; background-position: 50% 0; }
             .mv-win, .mv-collections.is-in .mv-win { clip-path: none; transition: none; }
         }
+
+        /* ==================== HERO : SIGNATURE + LÉGENDE + FIL ROUGE ==================== */
+        .hero-panel-video::before {
+            content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+            background: linear-gradient(180deg, rgba(8,9,11,0) 55%, rgba(8,9,11,.78) 100%);
+        }
+        .hero-sign {
+            position: absolute; left: 48px; bottom: 44px; z-index: 3;
+            opacity: 0; animation: fadeInUp 1s var(--easing-smooth) .9s forwards;
+        }
+        .hero-sign-name {
+            display: block;
+            font-family: 'Cormorant Garamond', serif; font-weight: 300;
+            font-size: clamp(34px, 4vw, 62px); line-height: 1; letter-spacing: .03em;
+            color: #ece4d3;
+        }
+        .hero-sign-place {
+            display: block; margin-top: 12px;
+            font-family: 'Raleway', sans-serif; font-weight: 300;
+            font-size: 11px; letter-spacing: .46em; text-transform: uppercase;
+            color: #c9a96a;
+        }
+        .hero-sign-caption {
+            display: flex; align-items: center; gap: 14px; margin-top: 22px;
+            font-family: 'Cormorant Garamond', serif; font-style: italic;
+            font-size: 17px; letter-spacing: .02em; color: rgba(236,228,211,.72);
+        }
+        .hero-sign-caption::before { content: ""; width: 38px; height: 1px; background: #8e1b2c; }
+        .hero-thread {
+            position: absolute; inset: 0; width: 100%; height: 100%;
+            z-index: 2; pointer-events: none; overflow: visible;
+        }
+        .hero-thread path {
+            fill: none; stroke: #a11f33; stroke-width: 1.6; stroke-linecap: round;
+            filter: drop-shadow(0 2px 3px rgba(0,0,0,.6));
+            stroke-dasharray: 1; stroke-dashoffset: 1;
+            animation: heroThread 2.6s cubic-bezier(.65,0,.2,1) 1.4s forwards;
+        }
+        .hero-thread circle { fill: #a11f33; opacity: 0; animation: fadeIn .4s ease 3.9s forwards; }
+        @keyframes heroThread { to { stroke-dashoffset: 0; } }
+        @keyframes fadeIn { to { opacity: 1; } }
+        /* Titre : ne déborde plus de la carte en allemand */
+        html[lang="de"] .hero-content h1 { font-size: clamp(15px, 1.75vw, 21px); letter-spacing: 1px; }
+        @media (max-width: 900px) { .hero-sign, .hero-thread { display: none; } }
+        @media (prefers-reduced-motion: reduce) { .hero-thread path { animation: none; stroke-dashoffset: 0; } .hero-thread circle { animation: none; opacity: 1; } }
     </style>
 </head>
 <body>
@@ -2006,7 +2051,13 @@
                 <video class="hero-video" autoplay muted playsinline loop preload="auto">
                     <source src="assets-raw/hero-video-new.mp4" type="video/mp4">
                 </video>
+                <div class="hero-sign">
+                    <span class="hero-sign-name">Maison Verlaine</span>
+                    <span class="hero-sign-place">Paris · 1985</span>
+                    <span class="hero-sign-caption" data-i18n="hero_caption">Boutonnière cousue main, fil de soie</span>
+                </div>
             </div>
+            <svg class="hero-thread" id="heroThread" aria-hidden="true"><path pathLength="1"/><circle r="3"/></svg>
             <!-- Zone 3 : photo 2 mannequins -->
             <div class="hero-panel-photo">
                 <img src="assets-raw/hero-mannequins.webp" alt="Deux mannequins en costume Maison Verlaine" loading="eager">
@@ -2470,6 +2521,7 @@
                 col_4_color: "Soie ocre rouge",
                 col_4_desc: "Les rouges et les carreaux du shúkà, traduits en étoffes de tailleur : un hommage, coupé sur mesure.",
                 col_cta: "Découvrir",
+                hero_caption: "Boutonnière cousue main, fil de soie",
                 hero_desc: "Depuis 1985, Maison Verlaine incarne la tradition du tailleur français. Chaque costume est une œuvre d'art, confectionnée avec les plus belles étoffes et un savoir-faire inégalé.",
                 hero_cta: "Configurez Votre Costume",
                 sf_title: "Notre Savoir-Faire",
@@ -2567,6 +2619,7 @@
                 col_4_color: "Red ochre silk",
                 col_4_desc: "The reds and checks of the shúkà, translated into tailoring cloths: a tribute, cut to measure.",
                 col_cta: "Discover",
+                hero_caption: "Hand-sewn buttonhole, silk thread",
                 hero_desc: "Since 1985, Maison Verlaine embodies the tradition of French tailoring. Each suit is a work of art, crafted with the finest fabrics and unparalleled craftsmanship.",
                 hero_cta: "Configure Your Suit",
                 sf_title: "Our Expertise",
@@ -2664,6 +2717,7 @@
                 col_4_color: "Seide Rotocker",
                 col_4_desc: "Die Rottöne und Karos der Shúkà, übersetzt in Schneiderstoffe: eine Hommage nach Maß.",
                 col_cta: "Entdecken",
+                hero_caption: "Handgenähtes Knopfloch, Seidenfaden",
                 hero_desc: "Seit 1985 verkörpert Maison Verlaine die Tradition der französischen Schneiderei. Jeder Anzug ist ein Kunstwerk, gefertigt aus den feinsten Stoffen mit unübertroffener Handwerkskunst.",
                 hero_cta: "Ihren Anzug konfigurieren",
                 sf_title: "Unsere Expertise",
@@ -3099,6 +3153,27 @@
             } else {
                 section.classList.add('is-in');
             }
+        })();
+    </script>
+    <script>
+        // Fil rouge : de la boutonnière (vidéo) jusqu'au bouton « Configurez »
+        (function () {
+            const hero = document.getElementById('heroSection'), svg = document.getElementById('heroThread');
+            if (!hero || !svg) return;
+            const path = svg.querySelector('path'), dot = svg.querySelector('circle');
+            function place() {
+                const h = hero.getBoundingClientRect();
+                const v = hero.querySelector('.hero-panel-video').getBoundingClientRect();
+                const c = hero.querySelector('.hero-cta').getBoundingClientRect();
+                if (!v.width) return;
+                const x1 = v.width * 0.80, y1 = h.height * 0.64;
+                const x2 = c.left - h.left - 14, y2 = c.top - h.top + c.height / 2;
+                const mx = (x1 + x2) / 2;
+                path.setAttribute('d', `M ${x1} ${y1} C ${mx} ${y1 + 150}, ${mx - 60} ${y2 + 30}, ${x2} ${y2}`);
+                dot.setAttribute('cx', x2); dot.setAttribute('cy', y2);
+            }
+            place(); window.addEventListener('resize', place); window.addEventListener('load', place);
+            setTimeout(place, 1500);
         })();
     </script>
 </body>
