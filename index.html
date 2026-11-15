@@ -1660,13 +1660,10 @@
             const hint = document.getElementById('gHint');
             const langBtns = gate ? [...gate.querySelectorAll('.g-lang')] : [];
 
-            // Si langue déjà mémorisée → masquer la gate sans animation
-            if (savedLang && gate) {
-                gate.classList.add('is-gone');
-            } else if (gate) {
-                // Pré-souligner la langue du navigateur
+            if (gate) {
+                // Pré-souligner la langue mémorisée, sinon celle du navigateur
                 const nav = (navigator.language || 'fr').slice(0, 2);
-                const pre = langBtns.find(b => b.dataset.lang === nav) || langBtns[0];
+                const pre = langBtns.find(b => b.dataset.lang === (savedLang || nav)) || langBtns[0];
                 if (pre) {
                     langBtns.forEach(b => b.classList.toggle('is-pick', b === pre));
                     if (hint) hint.textContent = pre.dataset.hint || '';
