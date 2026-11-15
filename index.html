@@ -420,13 +420,8 @@
             .f-row{grid-template-columns:1fr}
         }
 
-        /* ═══ OPTION A. CURSEUR AIGUILLE (pointer:fine uniquement — bloc isolé) ═══ */
-        @media (pointer:fine){
-            body.needle-on,body.needle-on a,body.needle-on button,body.needle-on input,body.needle-on textarea{cursor:none}
-            .needle-cur{position:fixed;left:0;top:0;z-index:90;pointer-events:none;width:34px;height:34px;margin:-2px 0 0 -2px;display:none;transition:transform .25s ease}
-            body.needle-on .needle-cur{display:block}
-            .needle-cur.is-hot{transform:scale(1.25) rotate(-12deg)}
-        }
+        /* ═══ CURSEUR AIGUILLE — masquer le curseur système sur souris uniquement ═══ */
+        @media (pointer:fine){html,body,a,button,input,textarea,select,label{cursor:none}}
 
         /* ==================== LANGUAGE SWITCHER (main page) ==================== */
         .lang-switch-main {
@@ -1088,8 +1083,6 @@
     <div class="grain" aria-hidden="true"></div>
 
     <!-- ==================== NEEDLE CURSOR ==================== -->
-    <svg class="needle-cur" id="needleCur" viewBox="0 0 34 34" aria-hidden="true"><path d="M2 2 L27 27" stroke="#e9d9b0" stroke-width="1.6" stroke-linecap="round"/><ellipse cx="26" cy="26" rx="4.6" ry="1.9" transform="rotate(45 26 26)" fill="none" stroke="#d4af37" stroke-width="1.3"/><path d="M26 26 q6 0 6 6" fill="none" stroke="#a11f33" stroke-width="1.2" stroke-linecap="round"/></svg>
-
     <!-- ==================== MAIN CONTENT ==================== -->
     <div class="page" id="pageTop">
     <svg class="thread" id="pageThread" aria-hidden="true"><path class="ghost"/><path class="live"/><path class="needle"/></svg>
@@ -2217,21 +2210,7 @@
             }), { threshold: 0.1 }).observe(stage);
         })();
     </script>
-    <script>
-        /* ═══ OPTION A. CURSEUR AIGUILLE — bloc isolé, retirable facilement ═══ */
-        (function () {
-            // Uniquement sur appareils à souris (pointer:fine), jamais sur tactile
-            if (!window.matchMedia('(pointer:fine)').matches) return;
-            const cur = document.getElementById('needleCur');
-            if (!cur) return;
-            document.body.classList.add('needle-on');
-            addEventListener('pointermove', e => {
-                cur.style.left = e.clientX + 'px';
-                cur.style.top = e.clientY + 'px';
-                cur.classList.toggle('is-hot', !!e.target.closest('a,button,input,textarea,label'));
-            });
-        })();
-    </script>
+    <script src="cursor.js"></script>
     <script>
         // ═══ TRANSITION — LE TRAIT DE CRAIE ═══
         window.MVTransition = (function () {
