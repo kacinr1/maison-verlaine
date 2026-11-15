@@ -399,8 +399,7 @@
         #mvCut{position:fixed;inset:0;z-index:80;display:none;pointer-events:none;background:#0c0e12;place-items:center}
         #mvCut[style*="block"]{display:grid}
         #mvCut::before{content:"";position:absolute;inset:0;opacity:.13;mix-blend-mode:overlay;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9 .55' numOctaves='3' seed='7'/%3E%3CfeColorMatrix values='0 0 0 0 .92 0 0 0 0 .88 0 0 0 0 .8 0 0 0 .9 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
-        #mvCutMono{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:300;font-size:min(34vw,330px);line-height:1;letter-spacing:.05em;color:transparent;-webkit-text-stroke:1.1px rgba(236,228,211,.45);opacity:.5;user-select:none}
-        #mvCutEdge{position:fixed;top:-12vh;left:0;height:124vh;width:2px;z-index:81;display:none;pointer-events:none;transform:translateX(-12vw);
+#mvCutEdge{position:fixed;top:-12vh;left:0;height:124vh;width:2px;z-index:81;display:none;pointer-events:none;transform:translateX(-12vw);
             background:linear-gradient(180deg,transparent 2%,rgba(236,228,211,.82) 12%,#fff 50%,rgba(236,228,211,.82) 88%,transparent 98%);
             box-shadow:0 0 16px 2px rgba(236,228,211,.5),0 0 48px 10px rgba(212,175,55,.16)}
         #mvCutEdge::before{content:"";position:absolute;top:0;bottom:0;left:3px;width:calc(var(--dust,1)*112px);
@@ -1031,7 +1030,7 @@
     <div class="gate" id="gate">
         <div class="gate-bg" aria-hidden="true">
             <video muted playsinline autoplay loop>
-                <source src="assets-raw/bg-video.mp4" type="video/mp4">
+                <source src="assets-raw/into.mp4" type="video/mp4">
             </video>
         </div>
         <div class="g-logo">
@@ -1064,7 +1063,7 @@
     </header>
 
     <!-- ==================== TRANSITION TRAIT DE CRAIE ==================== -->
-    <div id="mvCut"><span id="mvCutMono">MV</span></div>
+    <div id="mvCut"></div>
     <div id="mvCutEdge"></div>
 
     <!-- ==================== LANGUAGE SWITCHER ==================== -->
