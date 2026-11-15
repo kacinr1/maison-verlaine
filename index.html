@@ -865,142 +865,6 @@
             transform: translate(-50%, -50%) scale(1.1);
         }
 
-        /* ==================== CONFIGURATEUR SECTION ==================== */
-        .configurateur {
-            position: relative;
-            padding: 100px 40px;
-            background-color: var(--dark-bg);
-            z-index: 1;
-            min-height: 100vh;
-        }
-
-        .configurateur-title {
-            text-align: center;
-            margin-bottom: 80px;
-            animation: fadeInUp 0.8s var(--easing-smooth) forwards;
-        }
-
-        .configurateur-title h2 {
-            font-size: clamp(36px, 6vw, 56px);
-            color: var(--primary);
-            font-weight: 700;
-            letter-spacing: 2px;
-            margin-bottom: 20px;
-        }
-
-        .configurateur-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            background: rgba(26, 31, 46, 0.8);
-            border: 1px solid rgba(212, 175, 55, 0.2);
-            border-radius: 12px;
-            padding: 60px;
-            backdrop-filter: blur(10px);
-            animation: fadeInUp 0.8s var(--easing-smooth) 0.2s forwards;
-            opacity: 0;
-        }
-
-        .configurateur-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: center;
-        }
-
-        .configurateur-3d {
-            position: relative;
-            width: 100%;
-            height: 500px;
-            border-radius: 8px;
-            overflow: hidden;
-            border: 1px solid rgba(212, 175, 55, 0.2);
-            background: radial-gradient(circle at center, rgba(212, 175, 55, 0.05) 0%, rgba(0, 0, 0, 0.5) 100%);
-        }
-
-        .configurateur-3d iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-            border-radius: 8px;
-        }
-
-        .configurateur-controls {
-            display: flex;
-            flex-direction: column;
-            gap: 30px;
-        }
-
-        .control-group {
-            animation: staggerFadeIn 0.6s var(--easing-smooth) forwards;
-            opacity: 0;
-        }
-
-        .control-group:nth-child(1) { animation-delay: 0.3s; }
-        .control-group:nth-child(2) { animation-delay: 0.38s; }
-        .control-group:nth-child(3) { animation-delay: 0.46s; }
-        .control-group:nth-child(4) { animation-delay: 0.54s; }
-
-        .control-group label {
-            display: block;
-            font-size: 14px;
-            font-weight: 600;
-            color: var(--primary);
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            margin-bottom: 12px;
-        }
-
-        .control-group select,
-        .control-group input[type="color"] {
-            width: 100%;
-            padding: 12px 16px;
-            background-color: var(--accent-dark);
-            color: var(--dark-text);
-            border: 1px solid rgba(212, 175, 55, 0.2);
-            border-radius: 4px;
-            font-size: 14px;
-            font-family: inherit;
-            transition: all 0.3s var(--easing-smooth);
-            cursor: pointer;
-        }
-
-        .control-group select:hover,
-        .control-group input[type="color"]:hover {
-            border-color: var(--primary);
-            box-shadow: 0 0 10px rgba(212, 175, 55, 0.2);
-        }
-
-        .control-group select:focus,
-        .control-group input[type="color"]:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 20px var(--gold-glow);
-        }
-
-        .config-button {
-            padding: 14px 40px;
-            background-color: var(--primary);
-            color: var(--dark-bg);
-            border: 2px solid var(--primary);
-            border-radius: 4px;
-            font-weight: 600;
-            font-size: 12px;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: all 0.3s var(--easing-smooth);
-            margin-top: 10px;
-            animation: staggerFadeIn 0.6s var(--easing-smooth) 0.62s forwards;
-            opacity: 0;
-        }
-
-        .config-button:hover {
-            transform: scale(1.05);
-            background-color: transparent;
-            color: var(--primary);
-            box-shadow: 0 0 30px var(--gold-glow);
-        }
-
         /* ==================== LOOKBOOK SECTION ==================== */
         .lookbook {
             position: relative;
@@ -1979,6 +1843,115 @@
         html[lang="de"] .hero-content h1 { font-size: clamp(15px, 1.75vw, 21px); letter-spacing: 1px; }
         @media (max-width: 900px) { .hero-sign, .hero-thread { display: none; } }
         @media (prefers-reduced-motion: reduce) { .hero-thread path { animation: none; stroke-dashoffset: 0; } .hero-thread circle { animation: none; opacity: 1; } }
+        /* ==================== CONFIGURATEUR — L'INVITATION ==================== */
+        .mv-cfg {
+            --ivory:#ece4d3; --ivory-dim:rgba(236,228,211,.62); --gold:#d4af37; --gold-soft:#c9a96a;
+            position:relative; background:#0d1014; padding:120px 40px; overflow:hidden;
+        }
+        .mv-cfg::before {
+            content:""; position:absolute; left:8%; top:50%; width:46vw; height:46vw; transform:translateY(-50%);
+            background:radial-gradient(circle, rgba(212,175,55,.09), transparent 62%); pointer-events:none;
+        }
+        .mv-cfg-inner {
+            position:relative; max-width:1280px; margin:0 auto;
+            display:grid; grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr); gap:90px; align-items:center;
+        }
+        .mv-cfg-stage {
+            --x:50%;
+            position:relative; display:block; aspect-ratio:4/5; max-height:78vh; width:100%;
+            overflow:hidden; border-radius:3px; cursor:ew-resize; touch-action:pan-y;
+            background:#15181d; text-decoration:none; user-select:none;
+        }
+        .mv-cfg-stage img {
+            position:absolute; inset:0; width:100%; height:100%;
+            object-fit:cover; object-position:50% 18%;
+            filter:brightness(.8) contrast(1.06) saturate(.92);
+            pointer-events:none;
+        }
+        .mv-cfg-stage img.is-top { clip-path:inset(0 calc(100% - var(--x)) 0 0); }
+        .mv-cfg-stage::before {
+            content:""; position:absolute; inset:0; z-index:2; pointer-events:none;
+            background:
+                radial-gradient(ellipse at 50% 38%, rgba(13,16,20,0) 38%, rgba(13,16,20,.72) 100%),
+                linear-gradient(180deg, rgba(13,16,20,.25) 0%, rgba(13,16,20,0) 30%, rgba(13,16,20,0) 62%, rgba(13,16,20,.88) 100%);
+        }
+        .mv-cfg-stage::after {
+            content:""; position:absolute; inset:14px; z-index:4; pointer-events:none;
+            border:1px solid rgba(212,175,55,.3);
+        }
+        .mv-cfg-line {
+            position:absolute; top:0; bottom:0; left:var(--x); width:1px; z-index:3; pointer-events:none;
+            background:linear-gradient(180deg, transparent, rgba(212,175,55,.95) 12%, rgba(236,228,211,.95) 50%, rgba(212,175,55,.95) 88%, transparent);
+            box-shadow:0 0 18px rgba(212,175,55,.55);
+        }
+        .mv-cfg-line::after {
+            content:""; position:absolute; left:50%; top:50%; width:13px; height:13px;
+            transform:translate(-50%,-50%) rotate(45deg);
+            background:#0d1014; border:1px solid var(--gold);
+        }
+        .mv-cfg-tag {
+            position:absolute; bottom:44px; z-index:5; pointer-events:none;
+            font-family:'Raleway',sans-serif; font-weight:300; font-size:10px; letter-spacing:.34em; text-transform:uppercase;
+            color:var(--ivory-dim); transition:opacity .5s ease;
+        }
+        .mv-cfg-tag b { display:block; margin-bottom:6px; font-family:'Cormorant Garamond',serif; font-style:italic; font-weight:400;
+            font-size:20px; letter-spacing:.02em; text-transform:none; color:var(--ivory); }
+        .mv-cfg-tag.is-a { left:38px; }
+        .mv-cfg-tag.is-b { right:38px; text-align:right; }
+        .mv-cfg-tape {
+            position:absolute; left:14px; right:14px; bottom:14px; height:12px; z-index:5; pointer-events:none; opacity:.55;
+            background:
+                repeating-linear-gradient(90deg, rgba(212,175,55,.9) 0 1px, transparent 1px 60px) bottom/100% 100% no-repeat,
+                repeating-linear-gradient(90deg, rgba(212,175,55,.55) 0 1px, transparent 1px 12px) bottom/100% 45% no-repeat;
+        }
+        .mv-cfg-kicker {
+            font-family:'Raleway',sans-serif; font-weight:300; font-size:11px; letter-spacing:.42em; text-transform:uppercase;
+            color:var(--gold-soft); margin-bottom:22px;
+        }
+        .mv-cfg h2 {
+            font-family:'Cormorant Garamond',serif; font-weight:300;
+            font-size:clamp(40px,4.6vw,68px); line-height:1.04; letter-spacing:.01em; color:var(--ivory);
+        }
+        .mv-cfg h2 em { display:block; font-style:italic; font-weight:400; color:var(--gold-soft); }
+        .mv-cfg-lede {
+            margin-top:30px; max-width:440px;
+            font-family:'Raleway',sans-serif; font-weight:300; font-size:15px; line-height:1.85; color:var(--ivory-dim);
+        }
+        .mv-cfg-steps {
+            display:flex; flex-wrap:wrap; gap:10px 0; margin-top:34px; padding:18px 0; list-style:none;
+            border-top:1px solid rgba(212,175,55,.2); border-bottom:1px solid rgba(212,175,55,.2);
+        }
+        .mv-cfg-steps li {
+            font-family:'Raleway',sans-serif; font-weight:400; font-size:10px; letter-spacing:.3em; text-transform:uppercase; color:var(--ivory);
+        }
+        /* Losange séparateur — entre items uniquement, jamais en début de ligne */
+        .mv-cfg-steps li + li::before {
+            content: ""; display:inline-block; width:4px; height:4px; margin:0 16px 2px;
+            transform:rotate(45deg); background:var(--gold);
+        }
+        /* Mobile : liste verticale sans losanges orphelins */
+        @media (max-width:600px) {
+            .mv-cfg-steps { flex-direction:column; gap:12px; }
+            .mv-cfg-steps li + li::before { display:none; }
+        }
+        .mv-cfg-cta {
+            display:inline-flex; align-items:center; gap:18px; margin-top:44px; padding:19px 34px;
+            font-family:'Raleway',sans-serif; font-weight:500; font-size:11px; letter-spacing:.34em; text-transform:uppercase; text-decoration:none;
+            color:#0d1014; background:linear-gradient(100deg,#c9a24a,#e6cf8e 50%,#c9a24a); background-size:220% 100%; background-position:100% 0;
+            transition:background-position .9s ease, gap .5s ease;
+        }
+        .mv-cfg-cta::after { content:\; width:26px; height:1px; background:#0d1014; transition:width .5s ease; }
+        .mv-cfg-cta:hover { background-position:0 0; gap:24px; }
+        .mv-cfg-cta:hover::after { width:40px; }
+        .mv-cfg-note {
+            margin-top:20px; font-family:'Cormorant Garamond',serif; font-style:italic; font-size:16px; color:var(--ivory-dim);
+        }
+        @media (max-width:900px) {
+            .mv-cfg { padding:64px 18px; }
+            .mv-cfg-inner { grid-template-columns:1fr; gap:40px; }
+            .mv-cfg-stage { max-height:none; }
+            .mv-cfg-tag b { font-size:17px; }
+        }
     </style>
 </head>
 <body>
@@ -2134,6 +2107,30 @@
             </div>
         </section>
 
+        <!-- ==================== CONFIGURATEUR L'INVITATION ==================== -->
+        <section class="mv-cfg" id="configurateur">
+            <div class="mv-cfg-inner">
+                <a class="mv-cfg-stage" id="cfgStage" href="configurateur/" aria-label="Ouvrir le configurateur">
+                    <img src="assets-raw/collections/cfg-rayures.webp" alt="" loading="lazy">
+                    <img class="is-top" src="assets-raw/collections/cfg-carreaux.webp" alt="" loading="lazy">
+                    <span class="mv-cfg-line"></span>
+                    <span class="mv-cfg-tag is-a"><b data-i18n="cfg_tag_a_name">Carreaux fenêtre</b><span data-i18n="cfg_tag_a_sub">Trois-pièces</span></span>
+                    <span class="mv-cfg-tag is-b"><b data-i18n="cfg_tag_b_name">Rayures tennis</b><span data-i18n="cfg_tag_b_sub">Marine</span></span>
+                    <span class="mv-cfg-tape"></span>
+                </a>
+                <div>
+                    <p class="mv-cfg-kicker" data-i18n="cfg_kicker">Le Configurateur</p>
+                    <h2><span data-i18n="cfg_title_1">Même homme,</span><em data-i18n="cfg_title_2">autre étoffe.</em></h2>
+                    <p class="mv-cfg-lede" data-i18n="cfg_lede">Faites glisser le trait d'or : le costume change, l'homme reste. Dans l'atelier, c'est vous qui tenez la craie, et le prix s'ajuste à chaque choix.</p>
+                    <ul class="mv-cfg-steps">
+                        <li data-i18n="cfg_step_1">Étoffe</li><li data-i18n="cfg_step_2">Revers</li><li data-i18n="cfg_step_3">Boutons</li><li data-i18n="cfg_step_4">Doublure</li><li data-i18n="cfg_step_5">Monogramme</li>
+                    </ul>
+                    <a class="mv-cfg-cta" href="configurateur/" data-i18n="cfg_cta">Entrer dans l'atelier</a>
+                    <p class="mv-cfg-note" data-i18n="cfg_note">Aperçu en direct · prix instantané</p>
+                </div>
+            </div>
+        </section>
+
         <!-- ==================== SAVOIR-FAIRE SECTION ==================== -->
         <section class="savoir-faire" id="savoirFaire">
             <div class="savoir-faire-container">
@@ -2282,64 +2279,6 @@
                         <svg viewBox="0 0 24 24" fill="currentColor">
                             <path d="M8 5v14l11-7z"/>
                         </svg>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ==================== CONFIGURATEUR 3D ==================== -->
-        <section class="configurateur" id="configurateur">
-            <div class="configurateur-title">
-                <h2 data-i18n="config_title">Configurateur Sur-Mesure</h2>
-                <p data-i18n="config_desc">Composez votre costume pièce par pièce — étoffe, revers, boutons, doublure, monogramme</p>
-            </div>
-
-            <div class="configurateur-container">
-                <div class="configurateur-grid">
-                    <a class="configurateur-3d" href="configurateur/" style="text-decoration:none;display:flex;align-items:center;justify-content:center;background:radial-gradient(900px 500px at 50% 0%, rgba(212,175,55,.1), transparent 60%), #0d1014;">
-                        <span style="text-align:center;color:#f5f5f5;font-family:'Cormorant Garamond',serif;padding:24px;">
-                            <span style="display:block;font-size:52px;color:#d4af37;line-height:1;">⌁</span>
-                            <span data-i18n="config_open" style="display:block;font-size:26px;margin:14px 0 6px;letter-spacing:1px;">Ouvrir le configurateur</span>
-                            <span data-i18n="config_sub" style="display:block;font-family:'Jost',sans-serif;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#9a958b;">Aperçu en direct · prix instantané</span>
-                        </span>
-                    </a>
-                    <div class="configurateur-controls">
-                        <div class="control-group">
-                            <label for="tissus" data-i18n="config_fabric_label">Sélectionnez le Tissu</label>
-                            <select id="tissus">
-                                <option value="laine-merinos" data-i18n="config_fabric_1">Laine Mérinos Bleu Marine</option>
-                                <option value="laine-tweed" data-i18n="config_fabric_2">Laine Tweed Charbon</option>
-                                <option value="laine-gabardine" data-i18n="config_fabric_3">Laine Gabardine Noir</option>
-                                <option value="soie-lin" data-i18n="config_fabric_4">Soie & Lin Gris Perle</option>
-                            </select>
-                        </div>
-
-                        <div class="control-group">
-                            <label for="style" data-i18n="config_style_label">Style de Coupe</label>
-                            <select id="style">
-                                <option value="classique" data-i18n="config_style_1">Classique Français</option>
-                                <option value="moderne" data-i18n="config_style_2">Moderne Épuré</option>
-                                <option value="vintage" data-i18n="config_style_3">Vintage Élégant</option>
-                                <option value="ajuste" data-i18n="config_style_4">Ajusté Contemporain</option>
-                            </select>
-                        </div>
-
-                        <div class="control-group">
-                            <label for="couleur" data-i18n="config_lining_label">Couleur Doublure</label>
-                            <input type="color" id="couleur" value="#d4af37">
-                        </div>
-
-                        <div class="control-group">
-                            <label for="boutons" data-i18n="config_btn_label">Type de Boutons</label>
-                            <select id="boutons">
-                                <option value="nacre" data-i18n="config_btn_1">Nacre Blanche</option>
-                                <option value="corne" data-i18n="config_btn_2">Corne Noire</option>
-                                <option value="metal" data-i18n="config_btn_3">Métal Doré</option>
-                                <option value="bois" data-i18n="config_btn_4">Bois Noyer</option>
-                            </select>
-                        </div>
-
-                        <a class="config-button" href="configurateur/" style="display:inline-block;text-align:center;text-decoration:none;" data-i18n="config_launch">Lancer le configurateur</a>
                     </div>
                 </div>
             </div>
@@ -2521,6 +2460,21 @@
                 col_4_color: "Soie ocre rouge",
                 col_4_desc: "Les rouges et les carreaux du shúkà, traduits en étoffes de tailleur : un hommage, coupé sur mesure.",
                 col_cta: "Découvrir",
+                cfg_kicker: "Le Configurateur",
+                cfg_title_1: "Même homme,",
+                cfg_title_2: "autre étoffe.",
+                cfg_lede: "Faites glisser le trait d'or : le costume change, l'homme reste. Dans l'atelier, c'est vous qui tenez la craie, et le prix s'ajuste à chaque choix.",
+                cfg_step_1: "Étoffe",
+                cfg_step_2: "Revers",
+                cfg_step_3: "Boutons",
+                cfg_step_4: "Doublure",
+                cfg_step_5: "Monogramme",
+                cfg_cta: "Entrer dans l'atelier",
+                cfg_note: "Aperçu en direct · prix instantané",
+                cfg_tag_a_name: "Carreaux fenêtre",
+                cfg_tag_a_sub: "Trois-pièces",
+                cfg_tag_b_name: "Rayures tennis",
+                cfg_tag_b_sub: "Marine",
                 hero_caption: "Boutonnière cousue main, fil de soie",
                 hero_desc: "Depuis 1985, Maison Verlaine incarne la tradition du tailleur français. Chaque costume est une œuvre d'art, confectionnée avec les plus belles étoffes et un savoir-faire inégalé.",
                 hero_cta: "Configurez Votre Costume",
@@ -2536,27 +2490,27 @@
                 etoffes_desc: "Les plus belles matières du monde sélectionnées avec passion",
                 details_title: "Détails & Techniques",
                 details_desc: "Explorez notre processus de confection en haute définition",
-                config_title: "Configurateur Sur-Mesure",
-                config_desc: "Composez votre costume pièce par pièce — étoffe, revers, boutons, doublure, monogramme",
-                config_open: "Ouvrir le configurateur",
-                config_sub: "Aperçu en direct · prix instantané",
-                config_fabric_label: "Sélectionnez le Tissu",
-                config_fabric_1: "Laine Mérinos Bleu Marine",
-                config_fabric_2: "Laine Tweed Charbon",
-                config_fabric_3: "Laine Gabardine Noir",
-                config_fabric_4: "Soie & Lin Gris Perle",
-                config_style_label: "Style de Coupe",
-                config_style_1: "Classique Français",
-                config_style_2: "Moderne Épuré",
-                config_style_3: "Vintage Élégant",
-                config_style_4: "Ajusté Contemporain",
-                config_lining_label: "Couleur Doublure",
-                config_btn_label: "Type de Boutons",
-                config_btn_1: "Nacre Blanche",
-                config_btn_2: "Corne Noire",
-                config_btn_3: "Métal Doré",
-                config_btn_4: "Bois Noyer",
-                config_launch: "Lancer le configurateur",
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
                 lookbook_title: "Lookbook",
                 lookbook_desc: "Inspirations et réalisations de nos clients",
                 lookbook_card1_title: "Gentleman Classique",
@@ -2619,6 +2573,21 @@
                 col_4_color: "Red ochre silk",
                 col_4_desc: "The reds and checks of the shúkà, translated into tailoring cloths: a tribute, cut to measure.",
                 col_cta: "Discover",
+                cfg_kicker: "The Configurator",
+                cfg_title_1: "Same man,",
+                cfg_title_2: "another cloth.",
+                cfg_lede: "Drag the gold line: the suit changes, the man remains. In the atelier, you hold the chalk, and the price adjusts with every choice.",
+                cfg_step_1: "Cloth",
+                cfg_step_2: "Lapels",
+                cfg_step_3: "Buttons",
+                cfg_step_4: "Lining",
+                cfg_step_5: "Monogram",
+                cfg_cta: "Enter the atelier",
+                cfg_note: "Live preview · instant price",
+                cfg_tag_a_name: "Windowpane check",
+                cfg_tag_a_sub: "Three-piece",
+                cfg_tag_b_name: "Pinstripe",
+                cfg_tag_b_sub: "Navy",
                 hero_caption: "Hand-sewn buttonhole, silk thread",
                 hero_desc: "Since 1985, Maison Verlaine embodies the tradition of French tailoring. Each suit is a work of art, crafted with the finest fabrics and unparalleled craftsmanship.",
                 hero_cta: "Configure Your Suit",
@@ -2634,27 +2603,27 @@
                 etoffes_desc: "The world's finest materials, passionately curated",
                 details_title: "Details & Techniques",
                 details_desc: "Explore our tailoring process in high definition",
-                config_title: "Bespoke Configurator",
-                config_desc: "Compose your suit piece by piece — fabric, lapels, buttons, lining, monogram",
-                config_open: "Open the configurator",
-                config_sub: "Live preview · instant pricing",
-                config_fabric_label: "Select Fabric",
-                config_fabric_1: "Navy Blue Merino Wool",
-                config_fabric_2: "Charcoal Tweed Wool",
-                config_fabric_3: "Black Gabardine Wool",
-                config_fabric_4: "Silk & Linen Pearl Grey",
-                config_style_label: "Cut Style",
-                config_style_1: "French Classic",
-                config_style_2: "Modern Clean",
-                config_style_3: "Elegant Vintage",
-                config_style_4: "Contemporary Fitted",
-                config_lining_label: "Lining Color",
-                config_btn_label: "Button Type",
-                config_btn_1: "White Mother-of-Pearl",
-                config_btn_2: "Black Horn",
-                config_btn_3: "Gold Metal",
-                config_btn_4: "Walnut Wood",
-                config_launch: "Launch configurator",
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
                 lookbook_title: "Lookbook",
                 lookbook_desc: "Inspirations and client creations",
                 lookbook_card1_title: "Classic Gentleman",
@@ -2717,6 +2686,21 @@
                 col_4_color: "Seide Rotocker",
                 col_4_desc: "Die Rottöne und Karos der Shúkà, übersetzt in Schneiderstoffe: eine Hommage nach Maß.",
                 col_cta: "Entdecken",
+                cfg_kicker: "Der Konfigurator",
+                cfg_title_1: "Derselbe Mann,",
+                cfg_title_2: "ein anderer Stoff.",
+                cfg_lede: "Ziehen Sie die goldene Linie: Der Anzug wechselt, der Mann bleibt. Im Atelier führen Sie die Kreide, und der Preis passt sich jeder Wahl an.",
+                cfg_step_1: "Stoff",
+                cfg_step_2: "Revers",
+                cfg_step_3: "Knöpfe",
+                cfg_step_4: "Futter",
+                cfg_step_5: "Monogramm",
+                cfg_cta: "Atelier betreten",
+                cfg_note: "Live-Vorschau · Sofortpreis",
+                cfg_tag_a_name: "Fensterkaro",
+                cfg_tag_a_sub: "Dreiteiler",
+                cfg_tag_b_name: "Nadelstreifen",
+                cfg_tag_b_sub: "Marineblau",
                 hero_caption: "Handgenähtes Knopfloch, Seidenfaden",
                 hero_desc: "Seit 1985 verkörpert Maison Verlaine die Tradition der französischen Schneiderei. Jeder Anzug ist ein Kunstwerk, gefertigt aus den feinsten Stoffen mit unübertroffener Handwerkskunst.",
                 hero_cta: "Ihren Anzug konfigurieren",
@@ -2732,27 +2716,27 @@
                 etoffes_desc: "Die schönsten Materialien der Welt, leidenschaftlich ausgewählt",
                 details_title: "Details & Techniken",
                 details_desc: "Entdecken Sie unseren Schneider-Prozess in höchster Auflösung",
-                config_title: "Maßkonfektor",
-                config_desc: "Gestalten Sie Ihren Anzug Stück für Stück — Stoff, Revers, Knöpfe, Futter, Monogramm",
-                config_open: "Konfigurator öffnen",
-                config_sub: "Live-Vorschau · Sofortpreis",
-                config_fabric_label: "Stoff auswählen",
-                config_fabric_1: "Marineblau Merinowolle",
-                config_fabric_2: "Anthrazit Tweedwolle",
-                config_fabric_3: "Schwarz Gabardine",
-                config_fabric_4: "Seide & Leinen Perlgrau",
-                config_style_label: "Schnitt-Stil",
-                config_style_1: "Französisch Klassisch",
-                config_style_2: "Modern Schlicht",
-                config_style_3: "Elegant Vintage",
-                config_style_4: "Zeitgenössisch Tailliert",
-                config_lining_label: "Futterfarbe",
-                config_btn_label: "Knopf-Typ",
-                config_btn_1: "Weißes Perlmutt",
-                config_btn_2: "Schwarzes Horn",
-                config_btn_3: "Gold-Metall",
-                config_btn_4: "Walnussholz",
-                config_launch: "Konfigurator starten",
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
                 lookbook_title: "Lookbook",
                 lookbook_desc: "Inspirationen und Kundenkreationen",
                 lookbook_card1_title: "Klassischer Gentleman",
@@ -3174,6 +3158,35 @@
             }
             place(); window.addEventListener('resize', place); window.addEventListener('load', place);
             setTimeout(place, 1500);
+        })();
+    </script>
+    <script>
+        // Trait d'or : balayage automatique + suivi souris / doigt
+        (function () {
+            const stage = document.getElementById('cfgStage');
+            if (!stage) return;
+            const still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            let x = 50, target = 50, manual = false, moved = false, visible = false, raf = 0;
+            function fromPointer(e) {
+                const r = stage.getBoundingClientRect();
+                target = Math.min(96, Math.max(4, (e.clientX - r.left) / r.width * 100));
+            }
+            stage.addEventListener('pointerenter', e => { if (e.pointerType === 'mouse') { manual = true; fromPointer(e); } });
+            stage.addEventListener('pointermove', e => { manual = true; moved = true; fromPointer(e); });
+            stage.addEventListener('pointerleave', () => { manual = false; });
+            stage.addEventListener('pointerup', e => { if (e.pointerType !== 'mouse') manual = false; });
+            stage.addEventListener('pointerdown', () => { moved = false; });
+            stage.addEventListener('click', e => { if (moved && matchMedia('(hover: none)').matches) e.preventDefault(); });
+            function loop(now) {
+                raf = 0; if (!visible) return;
+                if (!manual && !still) target = 50 + Math.sin(now / 2600) * 34;
+                x += (target - x) * 0.09;
+                stage.style.setProperty('--x', x.toFixed(2) + '%');
+                raf = requestAnimationFrame(loop);
+            }
+            new IntersectionObserver(es => es.forEach(e => {
+                visible = e.isIntersecting; if (visible && !raf) raf = requestAnimationFrame(loop);
+            }), { threshold: 0.1 }).observe(stage);
         })();
     </script>
 </body>
