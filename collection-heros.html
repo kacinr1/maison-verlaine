@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0d1014">
+<title id="pageTitle">Trois-Pièces Classique — Maison Verlaine</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Raleway:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+/* ── Variables & reset ── */
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --gold:#d4af37;
+  --gold-soft:#c9a96a;
+  --gold-glow:rgba(212,175,55,.4);
+  --bg:#0d1014;
+  --ivory:#ece4d3;
+  --ivory-dim:rgba(236,228,211,.62);
+  --accent:#16223a;      /* bleu minuit — surchargé par JS */
+  --accent-rgb:22,34,58; /* version rgb — surchargé par JS */
+  --easing:.65s cubic-bezier(.22,.8,.2,1);
+}
+html,body{font-family:'Raleway',sans-serif;background:var(--bg);color:var(--ivory);overflow-x:hidden;scroll-behavior:smooth}
+
+/* ── NAV ── */
+.mv-nav{
+  position:fixed;top:0;left:0;right:0;z-index:900;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 40px;height:64px;
+  background:rgba(13,16,20,.88);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(212,175,55,.18);
+}
+.mv-nav-back{
+  display:flex;align-items:center;gap:10px;
+  font-family:'Raleway',sans-serif;font-weight:300;font-size:11px;
+  letter-spacing:.28em;text-transform:uppercase;color:var(--ivory-dim);
+  text-decoration:none;transition:color .3s ease;
+}
+.mv-nav-back svg{flex-shrink:0;transition:transform .3s ease}
+.mv-nav-back:hover{color:var(--gold)}
+.mv-nav-back:hover svg{transform:translateX(-4px)}
+.mv-nav-logo{
+  position:absolute;left:50%;transform:translateX(-50%);
+  text-align:center;text-decoration:none;
+}
+.mv-nav-mono{
+  display:block;font-family:'Cormorant Garamond',serif;font-style:italic;
+  font-weight:600;font-size:22px;letter-spacing:.18em;color:var(--gold);
+  line-height:1;
+}
+.mv-nav-brand{
+  display:block;font-family:'Cormorant Garamond',serif;font-weight:300;
+  font-size:9px;letter-spacing:.5em;text-transform:uppercase;
+  color:rgba(245,245,245,.55);margin-top:2px;
+}
+.mv-nav-lang{position:relative}
+.mv-lang-btn{
+  display:flex;align-items:center;gap:6px;
+  background:transparent;border:1px solid rgba(212,175,55,.3);
+  color:var(--gold-soft);font-family:'Raleway',sans-serif;font-weight:300;
+  font-size:10px;letter-spacing:.22em;text-transform:uppercase;
+  padding:7px 14px;border-radius:2px;cursor:pointer;
+  transition:border-color .3s,color .3s;
+}
+.mv-lang-btn:hover{border-color:var(--gold);color:var(--gold)}
+.mv-lang-btn svg{width:10px;height:10px;transition:transform .2s}
+.mv-lang-btn.open svg{transform:rotate(180deg)}
+.mv-lang-menu{
+  position:absolute;right:0;top:calc(100% + 8px);
+  background:rgba(13,16,20,.98);border:1px solid rgba(212,175,55,.22);
+  min-width:110px;border-radius:3px;overflow:hidden;
+  box-shadow:0 8px 32px rgba(0,0,0,.6);
+}
+.mv-lang-menu.hidden{display:none}
+.mv-lang-menu button{
+  display:block;width:100%;padding:10px 18px;
+  background:transparent;border:none;color:var(--ivory-dim);
+  font-family:'Raleway',sans-serif;font-weight:300;font-size:11px;
+  letter-spacing:.18em;text-transform:uppercase;cursor:pointer;
+  text-align:left;transition:background .2s,color .2s;
+}
+.mv-lang-menu button:hover,.mv-lang-menu button[aria-current="true"]{
+  background:rgba(212,175,55,.1);color:var(--gold);
+}
+@media(max-width:600px){
+  .mv-nav{padding:0 18px}
+  .mv-nav-back span{display:none}
+  .mv-nav-brand{display:none}
+}
+
+/* ── HERO ── */
+.col-hero{
+  position:relative;height:92vh;min-height:560px;
+  display:flex;align-items:flex-end;overflow:hidden;
+}
+.col-hero-img{
+  position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;object-position:50% 18%;
+  transform:scale(1.06);
+  animation:heroZoom 12s ease-out forwards;
+}
+@keyframes heroZoom{to{transform:scale(1)}}
+.col-hero-veil{
+  position:absolute;inset:0;
+  background:
+    linear-gradient(180deg,
+      rgba(13,16,20,.55) 0%,
+      rgba(13,16,20,.12) 35%,
+      rgba(13,16,20,.05) 55%,
+      rgba(13,16,20,.75) 78%,
+      rgba(13,16,20,.97) 100%);
+}
+.col-hero-body{
+  position:relative;z-index:1;
+  padding:0 60px 72px;width:100%;
+}
+.col-hero-num{
+  font-family:'Cormorant Garamond',serif;font-style:italic;
+  font-size:18px;color:var(--gold);letter-spacing:.28em;
+  margin-bottom:14px;display:block;
+}
+.col-hero-name{
+  font-family:'Cormorant Garamond',serif;font-weight:300;
+  font-size:clamp(44px,6vw,88px);line-height:1.03;
+  letter-spacing:.03em;color:var(--ivory);
+  max-width:800px;
+}
+.col-hero-name em{font-style:italic;color:var(--gold-soft)}
+.col-hero-color{
+  margin-top:16px;display:block;
+  font-family:'Raleway',sans-serif;font-weight:300;font-size:11px;
+  letter-spacing:.42em;text-transform:uppercase;color:var(--ivory-dim);
+}
+.col-hero-sep{
+  display:block;width:48px;height:1px;
+  background:linear-gradient(90deg,var(--gold),transparent);
+  margin:24px 0;
+}
+.col-hero-desc{
+  font-family:'Raleway',sans-serif;font-weight:300;font-size:15px;
+  line-height:1.8;color:var(--ivory-dim);max-width:540px;
+}
+@media(max-width:768px){
+  .col-hero-body{padding:0 24px 56px}
+  .col-hero-name{font-size:clamp(36px,9vw,52px)}
+}
+
+/* ── ORNEMENT SÉPARATEUR ── */
+.mv-orn{
+  display:flex;align-items:center;justify-content:center;
+  gap:18px;padding:56px 40px 48px;
+}
+.mv-orn-line{flex:1;max-width:260px;height:1px;background:linear-gradient(90deg,transparent,rgba(212,175,55,.4))}
+.mv-orn-line:last-child{background:linear-gradient(90deg,rgba(212,175,55,.4),transparent)}
+.mv-orn-diamond{
+  width:8px;height:8px;border:1px solid rgba(212,175,55,.7);
+  transform:rotate(45deg);flex-shrink:0;
+}
+
+/* ── INTRO TEXTE ── */
+.col-intro{
+  text-align:center;padding:0 24px 80px;
+  max-width:720px;margin:0 auto;
+}
+.col-intro-kicker{
+  font-family:'Raleway',sans-serif;font-weight:300;font-size:10px;
+  letter-spacing:.46em;text-transform:uppercase;color:var(--gold-soft);
+  margin-bottom:22px;
+}
+.col-intro-title{
+  font-family:'Cormorant Garamond',serif;font-weight:300;
+  font-size:clamp(28px,3.6vw,46px);letter-spacing:.04em;
+  color:var(--ivory);margin-bottom:28px;line-height:1.2;
+}
+.col-intro-text{
+  font-family:'Raleway',sans-serif;font-weight:300;font-size:15px;
+  line-height:1.9;color:var(--ivory-dim);
+}
+
+/* ── SECTION PRODUITS ── */
+.col-products{
+  padding:0 40px 100px;max-width:1360px;margin:0 auto;
+}
+.col-products-head{
+  display:flex;align-items:flex-end;justify-content:space-between;
+  padding-bottom:48px;border-bottom:1px solid rgba(212,175,55,.14);
+  margin-bottom:52px;
+  flex-wrap:wrap;gap:20px;
+}
+.col-products-titles .kicker{
+  font-family:'Raleway',sans-serif;font-weight:300;font-size:10px;
+  letter-spacing:.46em;text-transform:uppercase;color:var(--gold-soft);
+  margin-bottom:12px;display:block;
+}
+.col-products-titles h2{
+  font-family:'Cormorant Garamond',serif;font-weight:300;
+  font-size:clamp(32px,3.8vw,52px);letter-spacing:.03em;color:var(--ivory);
+}
+.col-products-count{
+  font-family:'Cormorant Garamond',serif;font-style:italic;
+  font-size:14px;color:var(--ivory-dim);letter-spacing:.08em;
+  white-space:nowrap;
+}
+
+/* ── GRID PRODUITS ── */
+.col-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:28px 24px;
+}
+@media(max-width:1024px){.col-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.col-grid{grid-template-columns:1fr;gap:36px}}
+
+/* ── CARTE PRODUIT ── */
+.col-card{
+  display:flex;flex-direction:column;
+  background:rgba(255,255,255,.025);
+  border:1px solid rgba(212,175,55,.1);
+  border-radius:3px;overflow:hidden;
+  transition:border-color .4s,transform .4s,box-shadow .4s;
+  cursor:default;
+}
+.col-card:hover{
+  border-color:rgba(212,175,55,.35);
+  transform:translateY(-6px);
+  box-shadow:0 24px 56px rgba(0,0,0,.45),0 0 0 1px rgba(212,175,55,.08);
+}
+
+/* image */
+.col-card-img{
+  position:relative;aspect-ratio:3/4;overflow:hidden;
+  background:rgb(var(--accent-rgb));
+}
+.col-card-img img{
+  width:100%;height:100%;object-fit:cover;object-position:50% 10%;
+  transition:transform 1s cubic-bezier(.22,.8,.2,1),filter .6s ease;
+  filter:saturate(.85)brightness(.9);
+}
+.col-card:hover .col-card-img img{transform:scale(1.04);filter:none}
+.col-card-badge{
+  position:absolute;top:16px;left:16px;
+  font-family:'Raleway',sans-serif;font-weight:400;font-size:9px;
+  letter-spacing:.24em;text-transform:uppercase;
+  color:var(--bg);background:var(--gold);
+  padding:5px 12px;border-radius:1px;
+}
+.col-card-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(180deg,transparent 55%,rgba(13,16,20,.7) 100%);
+  opacity:0;transition:opacity .4s ease;
+}
+.col-card:hover .col-card-overlay{opacity:1}
+/* placeholder quand pas d'image */
+.col-card-ph{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:12px;height:100%;
+}
+.col-card-ph-icon{
+  width:48px;height:48px;border:1px solid rgba(212,175,55,.3);
+  border-radius:50%;display:flex;align-items:center;justify-content:center;
+}
+.col-card-ph-icon svg{opacity:.5}
+.col-card-ph-label{
+  font-family:'Raleway',sans-serif;font-weight:300;font-size:9px;
+  letter-spacing:.32em;text-transform:uppercase;color:var(--ivory-dim);opacity:.5;
+}
+
+/* infos */
+.col-card-body{padding:28px 24px 32px;flex:1;display:flex;flex-direction:column}
+.col-card-ref{
+  font-family:'Raleway',sans-serif;font-weight:300;font-size:9px;
+  letter-spacing:.32em;text-transform:uppercase;color:var(--gold-soft);
+  margin-bottom:10px;
+}
+.col-card-name{
+  font-family:'Cormorant Garamond',serif;font-weight:400;
+  font-size:22px;line-height:1.2;letter-spacing:.02em;color:var(--ivory);
+  margin-bottom:10px;
+}
+.col-card-details{
+  font-family:'Raleway',sans-serif;font-weight:300;font-size:11px;
+  line-height:1.7;color:var(--ivory-dim);flex:1;margin-bottom:20px;
+}
+.col-card-price{
+  font-family:'Cormorant Garamond',serif;font-weight:300;font-size:19px;
+  color:var(--ivory);letter-spacing:.04em;margin-bottom:22px;
+}
+.col-card-price strong{color:var(--gold);font-weight:400}
+.col-card-ctas{display:flex;flex-direction:column;gap:10px}
+.col-btn-primary{
+  display:block;text-align:center;padding:13px 20px;
+  border:1px solid var(--gold);color:var(--gold);
+  font-family:'Raleway',sans-serif;font-weight:300;font-size:10px;
+  letter-spacing:.28em;text-transform:uppercase;text-decoration:none;
+  border-radius:1px;transition:background .3s,color .3s;
+}
+.col-btn-primary:hover{background:var(--gold);color:var(--bg)}
+.col-btn-secondary{
+  display:block;text-align:center;padding:10px 20px;
+  color:var(--ivory-dim);font-family:'Raleway',sans-serif;font-weight:300;
+  font-size:10px;letter-spacing:.22em;text-transform:uppercase;
+  text-decoration:none;transition:color .3s;
+}
+.col-btn-secondary:hover{color:var(--gold)}
+/* Carte "coming soon" */
+.col-card-soon .col-card-img{opacity:.45}
+.col-card-soon .col-card-name,.col-card-soon .col-card-ref{opacity:.4}
+.col-card-soon .col-card-details,.col-card-soon .col-card-price{opacity:.3}
+.col-card-soon .col-card-ctas{opacity:.3;pointer-events:none}
+
+/* état vide (0 produits) */
+.col-empty{
+  grid-column:1/-1;
+  text-align:center;padding:80px 24px;
+  border:1px dashed rgba(212,175,55,.2);border-radius:3px;
+}
+.col-empty-title{
+  font-family:'Cormorant Garamond',serif;font-style:italic;
+  font-weight:300;font-size:28px;color:var(--ivory-dim);
+  margin-bottom:14px;
+}
+.col-empty-sub{
+  font-family:'Raleway',sans-serif;font-weight:300;font-size:11px;
+  letter-spacing:.22em;text-transform:uppercase;color:var(--ivory-dim);opacity:.5;
+}
+
+@media(max-width:768px){.col-products{padding:0 18px 72px}}
+
+/* ── BANDE ATOUT (3 piliers) ── */
+.col-pillars{
+  background:rgba(255,255,255,.025);
+  border-top:1px solid rgba(212,175,55,.12);
+  border-bottom:1px solid rgba(212,175,55,.12);
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:0;margin:0 0 100px;
+}
+.col-pillar{
+  padding:48px 36px;text-align:center;
+  border-right:1px solid rgba(212,175,55,.1);
+}
+.col-pillar:last-child{border-right:none}
+.col-pillar-icon{
+  width:36px;height:36px;margin:0 auto 20px;
+  opacity:.6;
+}
+.col-pillar-title{
+  font-family:'Cormorant Garamond',serif;font-weight:400;
+  font-size:18px;color:var(--ivory);margin-bottom:10px;letter-spacing:.04em;
+}
+.col-pillar-text{
+  font-family:'Raleway',sans-serif;font-weight:300;font-size:12px;
+  line-height:1.7;color:var(--ivory-dim);
+}
+@media(max-width:768px){
+  .col-pillars{grid-template-columns:1fr}
+  .col-pillar{border-right:none;border-bottom:1px solid rgba(212,175,55,.1);padding:36px 24px}
+  .col-pillar:last-child{border-bottom:none}
+}
+
+/* ── CTA BANDE ── */
+.col-cta-band{
+  position:relative;overflow:hidden;margin:0 40px 100px;
+  border-radius:4px;min-height:380px;
+  display:flex;align-items:center;justify-content:center;
+}
+.col-cta-bg{
+  position:absolute;inset:0;
+  object-fit:cover;width:100%;height:100%;
+  filter:saturate(.5)brightness(.35);
+}
+.col-cta-veil{
+  position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(13,16,20,.85) 0%,rgba(13,16,20,.55) 100%);
+}
+.col-cta-content{
+  position:relative;z-index:1;
+  text-align:center;padding:64px 40px;max-width:640px;
+}
+.col-cta-kicker{
+  font-family:'Raleway',sans-serif;font-weight:300;font-size:10px;
+  letter-spacing:.42em;text-transform:uppercase;color:var(--gold-soft);
+  margin-bottom:18px;
+}
+.col-cta-title{
+  font-family:'Cormorant Garamond',serif;font-weight:300;
+  font-size:clamp(28px,4vw,46px);letter-spacing:.04em;color:var(--ivory);
+  margin-bottom:14px;line-height:1.2;
+}
+.col-cta-sub{
+  font-family:'Raleway',sans-serif;font-weight:300;font-size:14px;
+  line-height:1.8;color:var(--ivory-dim);margin-bottom:38px;
+}
+.col-cta-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+.col-cta-btns .col-btn-primary{padding:15px 36px;font-size:10px}
+.col-cta-btns .col-btn-secondary{
+  padding:15px 24px;border:1px solid rgba(212,175,55,.3);border-radius:1px;
+}
+.col-cta-btns .col-btn-secondary:hover{border-color:var(--gold)}
+@media(max-width:768px){
+  .col-cta-band{margin:0 0 72px;border-radius:0}
+  .col-cta-content{padding:48px 24px}
+}
+
+/* ── FOOTER ── */
+.mv-footer{
+  background:#080a0c;
+  border-top:1px solid rgba(212,175,55,.14);
+  padding:52px 40px 36px;text-align:center;
+}
+.mv-footer-mono{
+  font-family:'Cormorant Garamond',serif;font-style:italic;
+  font-weight:600;font-size:28px;letter-spacing:.18em;color:var(--gold);
+  display:block;margin-bottom:6px;
+}
+.mv-footer-brand{
+  font-family:'Cormorant Garamond',serif;font-weight:300;
+  font-size:10px;letter-spacing:.5em;text-transform:uppercase;
+  color:rgba(245,245,245,.35);display:block;margin-bottom:28px;
+}
+.mv-footer-links{
+  display:flex;flex-wrap:wrap;gap:10px 28px;justify-content:center;
+  margin-bottom:28px;
+}
+.mv-footer-links a{
+  font-family:'Raleway',sans-serif;font-weight:300;font-size:10px;
+  letter-spacing:.22em;text-transform:uppercase;color:var(--ivory-dim);
+  text-decoration:none;transition:color .3s;
+}
+.mv-footer-links a:hover{color:var(--gold)}
+.mv-footer-copy{
+  font-family:'Raleway',sans-serif;font-weight:300;font-size:10px;
+  letter-spacing:.12em;color:rgba(245,245,245,.22);
+}
+</style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav class="mv-nav">
+  <a class="mv-nav-back" href="index.html#collections">
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M10 3L5 8L10 13" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <span data-i18n="nav_back">Les Collections</span>
+  </a>
+  <a class="mv-nav-logo" href="index.html">
+    <span class="mv-nav-mono">MV</span>
+    <span class="mv-nav-brand">Maison Verlaine</span>
+  </a>
+  <div class="mv-nav-lang">
+    <button class="mv-lang-btn" id="langBtn" aria-label="Langue">
+      <span id="langLabel">FR</span>
+      <svg viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M2 3.5L5 6.5L8 3.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+      </svg>
+    </button>
+    <div class="mv-lang-menu hidden" id="langMenu">
+      <button data-lang="fr" aria-current="false">Français</button>
+      <button data-lang="en" aria-current="false">English</button>
+      <button data-lang="de" aria-current="false">Deutsch</button>
+    </div>
+  </div>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="col-hero">
+  <img class="col-hero-img" id="heroImg" src="assets-raw/collections/heros.webp" alt="">
+  <div class="col-hero-veil"></div>
+  <div class="col-hero-body">
+    <span class="col-hero-num" id="heroNum">I</span>
+    <h1 class="col-hero-name" id="heroName">Trois-Pièces Classique</h1>
+    <span class="col-hero-color" id="heroColor">Soie bleu minuit</span>
+    <span class="col-hero-sep"></span>
+    <p class="col-hero-desc" id="heroDesc">Veste, gilet, pantalon : la silhouette fondatrice de la Maison, coupée dans la rigueur.</p>
+  </div>
+</section>
+
+<!-- ── INTRO ── -->
+<div class="mv-orn">
+  <span class="mv-orn-line"></span>
+  <span class="mv-orn-diamond"></span>
+  <span class="mv-orn-line"></span>
+</div>
+<div class="col-intro">
+  <p class="col-intro-kicker" data-i18n="intro_kicker">La Collection</p>
+  <h2 class="col-intro-title" id="introTitle">L'élégance à l'état pur</h2>
+  <p class="col-intro-text" id="introText">La collection Classique est l'expression la plus pure de l'héritage Maison Verlaine. Chaque pièce est taillée à la main dans les ateliers du 7ᵉ arrondissement, dans un bleu minuit qui traverse les époques sans jamais vieillir.</p>
+</div>
+
+<!-- ── PRODUITS ── -->
+<section class="col-products">
+  <div class="col-products-head">
+    <div class="col-products-titles">
+      <span class="kicker" data-i18n="prod_kicker">Nos Modèles</span>
+      <h2 id="prodTitle">Chaque pièce, une signature</h2>
+    </div>
+    <span class="col-products-count" id="prodCount"></span>
+  </div>
+
+  <!-- ======================================================== -->
+  <!--  AJOUTEZ VOS PRODUITS ICI                                  -->
+  <!--  Copiez le bloc <div class="col-card"> et modifiez les   -->
+  <!--  attributs data-* pour chaque nouveau costume.           -->
+  <!--  Laissez data-img="" pour afficher un placeholder.       -->
+  <!-- ======================================================== -->
+  <div class="col-grid" id="colGrid">
+    <!-- Les cartes sont rendues par le script ci-dessous -->
+  </div>
+</section>
+
+<!-- ── PILIERS ── -->
+<div class="col-pillars">
+  <div class="col-pillar">
+    <svg class="col-pillar-icon" viewBox="0 0 36 36" fill="none">
+      <circle cx="18" cy="18" r="17" stroke="#d4af37" stroke-width="1"/>
+      <path d="M11 18h14M18 11v14" stroke="#d4af37" stroke-width="1.2" stroke-linecap="round"/>
+    </svg>
+    <p class="col-pillar-title" data-i18n="pillar1_title">Consultation privée</p>
+    <p class="col-pillar-text" data-i18n="pillar1_text">Un maître tailleur dédié vous reçoit en atelier pour prendre vos mesures et affiner chaque détail.</p>
+  </div>
+  <div class="col-pillar">
+    <svg class="col-pillar-icon" viewBox="0 0 36 36" fill="none">
+      <rect x="8" y="8" width="20" height="20" rx="1" stroke="#d4af37" stroke-width="1"/>
+      <path d="M13 18l4 4 7-8" stroke="#d4af37" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <p class="col-pillar-title" data-i18n="pillar2_title">Confection artisanale</p>
+    <p class="col-pillar-text" data-i18n="pillar2_text">Six à huit semaines de travail par des mains expertes, pour une pièce qui épouse parfaitement votre silhouette.</p>
+  </div>
+  <div class="col-pillar">
+    <svg class="col-pillar-icon" viewBox="0 0 36 36" fill="none">
+      <path d="M18 7l2.9 8.9H29l-7.3 5.3 2.8 8.9L18 25l-6.5 5.1 2.8-8.9L7 15.9h8.1z" stroke="#d4af37" stroke-width="1" fill="none"/>
+    </svg>
+    <p class="col-pillar-title" data-i18n="pillar3_title">Garantie à vie</p>
+    <p class="col-pillar-text" data-i18n="pillar3_text">Retouches illimitées incluses. Votre costume Maison Verlaine évolue avec vous pour toujours vous être fidèle.</p>
+  </div>
+</div>
+
+<!-- ── CTA ── -->
+<div class="col-cta-band">
+  <img class="col-cta-bg" src="assets-raw/collections/heros.webp" alt="" id="ctaBg">
+  <div class="col-cta-veil"></div>
+  <div class="col-cta-content">
+    <p class="col-cta-kicker" data-i18n="cta_kicker">Sur mesure</p>
+    <h2 class="col-cta-title" id="ctaTitle">Votre Classique sur mesure</h2>
+    <p class="col-cta-sub" id="ctaSub">Prenez rendez-vous avec nos maîtres tailleurs ou commencez à composer votre costume dès maintenant.</p>
+    <div class="col-cta-btns">
+      <a class="col-btn-primary" href="configurateur/" data-i18n="cta_config">Configurer ce modèle</a>
+      <a class="col-btn-secondary" href="index.html#contact" data-i18n="cta_rdv">Prendre rendez-vous</a>
+    </div>
+  </div>
+</div>
+
+<!-- ── FOOTER ── -->
+<footer class="mv-footer">
+  <span class="mv-footer-mono">MV</span>
+  <span class="mv-footer-brand">Maison Verlaine</span>
+  <div class="mv-footer-links">
+    <a href="index.html" data-i18n="footer_home">Accueil</a>
+    <a href="index.html#collections" data-i18n="footer_col">Collections</a>
+    <a href="index.html#savoirFaire" data-i18n="footer_savoir">Savoir-Faire</a>
+    <a href="configurateur/" data-i18n="footer_config">Configurateur</a>
+    <a href="index.html#contact" data-i18n="footer_contact">Contact</a>
+  </div>
+  <p class="mv-footer-copy" data-i18n="footer_copy">© 2024 Maison Verlaine. Tous droits réservés.</p>
+</footer>
+
+<script>
+// ═══════════════════════════════════════════════════════════════════
+//  DONNÉES DE LA COLLECTION — modifiez uniquement ce bloc
+// ═══════════════════════════════════════════════════════════════════
+const COL = {
+  id:          'heros',
+  silk:        'amethyste',
+  accentHex:   '#2b1a3d',
+  accentRgb:   '43, 26, 61',
+  num:         'III',
+  heroImg:     'assets-raw/collections/heros.webp',
+
+  fr: {
+    pageTitle:  'Super Héros — Maison Verlaine',
+    heroName:   '<em>Super</em><br>Héros',
+    heroColor:  'Soie améthyste',
+    heroDesc:   'Épaule affirmée, taille dessinée, doublure éclatante&nbsp;: l\'armure de ville de ceux qui entrent en scène.',
+    introTitle: 'Pour ceux qui entrent en scène',
+    introText:  'La collection Super Héros est née d\'une conviction&nbsp;: le costume doit être une armure. Une épaule structurée, une taille sculptée au millimètre, une doublure éclatante couleur améthyste. Pour l\'homme qui fait impression avant d\'avoir prononcé un mot.',
+    prodTitle:  'L\'armure de ville',
+    ctaTitle:   'Votre Super Héros sur mesure',
+    ctaSub:     'Prenez rendez-vous avec nos maîtres tailleurs ou composez votre armure dès maintenant.',
+  },
+  en: {
+    pageTitle:  'Super Hero — Maison Verlaine',
+    heroName:   '<em>Super</em><br>Hero',
+    heroColor:  'Amethyst silk',
+    heroDesc:   'Strong shoulder, drawn waist, vivid lining: city armour for those who make an entrance.',
+    introTitle: 'For those who make an entrance',
+    introText:  'The Super Hero collection was born from a conviction: the suit must be armour. A structured shoulder, a waist sculpted to the millimetre, a vivid amethyst lining. For the man who makes an impression before saying a word.',
+    prodTitle:  'City armour',
+    ctaTitle:   'Your Super Hero, made to measure',
+    ctaSub:     'Book a consultation with our master tailors or start composing your armour right now.',
+  },
+  de: {
+    pageTitle:  'Superheld — Maison Verlaine',
+    heroName:   '<em>Super</em><br>Held',
+    heroColor:  'Seide Amethyst',
+    heroDesc:   'Betonte Schulter, gezeichnete Taille, leuchtendes Futter: die Stadtrüstung für den großen Auftritt.',
+    introTitle: 'Für diejenigen, die einen Auftritt machen',
+    introText:  'Die Superheld-Kollektion entstand aus einer Überzeugung: Der Anzug muss eine Rüstung sein. Eine strukturierte Schulter, eine auf den Millimeter geschnittene Taille, ein leuchtendes Amethyst-Futter.',
+    prodTitle:  'Stadtrüstung',
+    ctaTitle:   'Ihr Superheld nach Maß',
+    ctaSub:     'Vereinbaren Sie einen Termin mit unseren Meisterschneidern oder gestalten Sie Ihre Rüstung direkt.',
+  },
+};
+
+// ═══════════════════════════════════════════════════════════════════
+//  PRODUITS — AJOUTEZ VOS COSTUMES ICI
+//  Copiez-collez un objet par costume. img peut être vide.
+// ═══════════════════════════════════════════════════════════════════
+COL.products = [
+  // {
+  //   ref:   'MV-C001',
+  //   img:   'assets-raw/produits/classique-01.webp',
+  //   badge: 'Bestseller',  // '' | 'Nouveau' | 'Bestseller' | 'Exclusif'
+  //   fr:    { name: 'Veste Trois-Pièces Classique', details: 'Soie bleu minuit · Revers à crans · Boutons corne noire', price: 'À partir de 3 800 €' },
+  //   en:    { name: 'Classic Three-Piece Jacket', details: 'Midnight blue silk · Notched lapels · Black horn buttons', price: 'From €3,800' },
+  //   de:    { name: 'Klassik Dreiteilige Jacke', details: 'Mitternachtsblau Seide · Kerbrevers · Schwarze Hornknöpfe', price: 'Ab 3.800 €' },
+  // },
+];
+
+// ═══════════════════════════════════════════════════════════════════
+//  TRADUCTIONS UI (ne pas modifier)
+// ═══════════════════════════════════════════════════════════════════
+const UI = {
+  fr: {
+    nav_back:      'Les Collections',
+    intro_kicker:  'La Collection',
+    prod_kicker:   'Nos Modèles',
+    pillar1_title: 'Consultation privée',
+    pillar1_text:  'Un maître tailleur dédié vous reçoit en atelier pour prendre vos mesures et affiner chaque détail.',
+    pillar2_title: 'Confection artisanale',
+    pillar2_text:  'Six à huit semaines de travail par des mains expertes, pour une pièce qui épouse parfaitement votre silhouette.',
+    pillar3_title: 'Garantie à vie',
+    pillar3_text:  'Retouches illimitées incluses. Votre costume Maison Verlaine évolue avec vous pour toujours vous être fidèle.',
+    cta_kicker:    'Sur mesure',
+    cta_config:    'Configurer ce modèle',
+    cta_rdv:       'Prendre rendez-vous',
+    footer_home:   'Accueil',
+    footer_col:    'Collections',
+    footer_savoir: 'Savoir-Faire',
+    footer_config: 'Configurateur',
+    footer_contact:'Contact',
+    footer_copy:   '© 2024 Maison Verlaine. Tous droits réservés.',
+    empty_title:   'Modèles bientôt disponibles',
+    empty_sub:     'Notre collection sera disponible très prochainement',
+    prod_count_one:'{n} modèle',
+    prod_count:    '{n} modèles',
+  },
+  en: {
+    nav_back:      'The Collections',
+    intro_kicker:  'The Collection',
+    prod_kicker:   'Our Models',
+    pillar1_title: 'Private consultation',
+    pillar1_text:  'A dedicated master tailor receives you in the atelier to take your measurements and refine every detail.',
+    pillar2_title: 'Artisanal craftsmanship',
+    pillar2_text:  'Six to eight weeks of work by expert hands, for a piece that perfectly fits your silhouette.',
+    pillar3_title: 'Lifetime guarantee',
+    pillar3_text:  'Unlimited alterations included. Your Maison Verlaine suit evolves with you to always remain faithful.',
+    cta_kicker:    'Made to measure',
+    cta_config:    'Configure this model',
+    cta_rdv:       'Book an appointment',
+    footer_home:   'Home',
+    footer_col:    'Collections',
+    footer_savoir: 'Expertise',
+    footer_config: 'Configurator',
+    footer_contact:'Contact',
+    footer_copy:   '© 2024 Maison Verlaine. All rights reserved.',
+    empty_title:   'Models coming soon',
+    empty_sub:     'Our collection will be available very soon',
+    prod_count_one:'{n} model',
+    prod_count:    '{n} models',
+  },
+  de: {
+    nav_back:      'Die Kollektionen',
+    intro_kicker:  'Die Kollektion',
+    prod_kicker:   'Unsere Modelle',
+    pillar1_title: 'Private Beratung',
+    pillar1_text:  'Ein engagierter Meisterschneider empfängt Sie im Atelier, nimmt Maß und verfeinert jedes Detail.',
+    pillar2_title: 'Handwerkliche Fertigung',
+    pillar2_text:  'Sechs bis acht Wochen Arbeit durch Expertenhände für ein Stück, das Ihre Silhouette perfekt umhüllt.',
+    pillar3_title: 'Lebenslange Garantie',
+    pillar3_text:  'Unbegrenzte Änderungen inklusive. Ihr Maison Verlaine Anzug entwickelt sich mit Ihnen.',
+    cta_kicker:    'Maßgeschneidert',
+    cta_config:    'Dieses Modell konfigurieren',
+    cta_rdv:       'Termin vereinbaren',
+    footer_home:   'Startseite',
+    footer_col:    'Kollektionen',
+    footer_savoir: 'Expertise',
+    footer_config: 'Konfigurator',
+    footer_contact:'Kontakt',
+    footer_copy:   '© 2024 Maison Verlaine. Alle Rechte vorbehalten.',
+    empty_title:   'Modelle demnächst verfügbar',
+    empty_sub:     'Unsere Kollektion wird sehr bald verfügbar sein',
+    prod_count_one:'{n} Modell',
+    prod_count:    '{n} Modelle',
+  },
+};
+
+// ═══════════════════════════════════════════════════════════════════
+//  MOTEUR (ne pas modifier)
+// ═══════════════════════════════════════════════════════════════════
+let currentLang = (() => {
+  try { return localStorage.getItem('mv-lang') || 'fr'; } catch(e) { return 'fr'; }
+})();
+if (!['fr','en','de'].includes(currentLang)) currentLang = 'fr';
+
+function applyLang(lang) {
+  currentLang = lang;
+  try { localStorage.setItem('mv-lang', lang); } catch(e) {}
+  document.documentElement.lang = lang;
+  document.getElementById('langLabel').textContent = lang.toUpperCase();
+
+  // CSS accent
+  document.documentElement.style.setProperty('--accent', COL.accentHex);
+  document.documentElement.style.setProperty('--accent-rgb', COL.accentRgb);
+
+  // Data i18n (UI strings)
+  const ui = UI[lang];
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const k = el.dataset.i18n;
+    if (ui[k]) el.innerHTML = ui[k];
+  });
+
+  // Data dynamique collection
+  const d = COL[lang];
+  document.title = d.pageTitle;
+  document.getElementById('heroName').innerHTML = d.heroName;
+  document.getElementById('heroColor').textContent = d.heroColor;
+  document.getElementById('heroDesc').innerHTML = d.heroDesc;
+  document.getElementById('introTitle').textContent = d.introTitle;
+  document.getElementById('introText').textContent = d.introText;
+  document.getElementById('prodTitle').textContent = d.prodTitle;
+  document.getElementById('ctaTitle').textContent = d.ctaTitle;
+  document.getElementById('ctaSub').textContent = d.ctaSub;
+  document.getElementById('heroNum').textContent = COL.num;
+
+  // Compteur produits
+  const n = COL.products.length;
+  if (n > 0) {
+    const tpl = n === 1 ? ui.prod_count_one : ui.prod_count;
+    document.getElementById('prodCount').textContent = tpl.replace('{n}', n);
+  } else {
+    document.getElementById('prodCount').textContent = '';
+  }
+
+  // aria-current langue
+  document.querySelectorAll('#langMenu button').forEach(btn => {
+    btn.setAttribute('aria-current', btn.dataset.lang === lang ? 'true' : 'false');
+  });
+
+  // Re-render produits (textes)
+  renderProducts(lang);
+}
+
+function renderProducts(lang) {
+  const grid = document.getElementById('colGrid');
+  grid.innerHTML = '';
+  const ui = UI[lang];
+
+  if (COL.products.length === 0) {
+    grid.innerHTML = `
+      <div class="col-empty">
+        <p class="col-empty-title">${ui.empty_title}</p>
+        <p class="col-empty-sub">${ui.empty_sub}</p>
+      </div>`;
+    return;
+  }
+
+  COL.products.forEach((p, i) => {
+    const ld = p[lang] || p.fr;
+    const hasImg = !!p.img;
+    const imgHtml = hasImg
+      ? `<img src="${p.img}" alt="${ld.name}" loading="${i < 3 ? 'eager' : 'lazy'}">`
+      : `<div class="col-card-ph">
+           <div class="col-card-ph-icon">
+             <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+               <rect x="3" y="3" width="14" height="14" rx="1" stroke="#d4af37" stroke-width="1"/>
+               <circle cx="7.5" cy="7.5" r="1.5" stroke="#d4af37" stroke-width="1"/>
+               <path d="M3 13l4-4 3 3 2-2 5 5" stroke="#d4af37" stroke-width="1" stroke-linecap="round"/>
+             </svg>
+           </div>
+           <span class="col-card-ph-label">Photo bientôt</span>
+         </div>`;
+
+    grid.insertAdjacentHTML('beforeend', `
+      <article class="col-card${hasImg ? '' : ' col-card-soon'}">
+        <div class="col-card-img">
+          ${imgHtml}
+          ${p.badge ? `<span class="col-card-badge">${p.badge}</span>` : ''}
+          <div class="col-card-overlay"></div>
+        </div>
+        <div class="col-card-body">
+          ${p.ref ? `<span class="col-card-ref">Réf. ${p.ref}</span>` : ''}
+          <h3 class="col-card-name">${ld.name}</h3>
+          <p class="col-card-details">${ld.details}</p>
+          <p class="col-card-price">${ld.price}</p>
+          <div class="col-card-ctas">
+            <a class="col-btn-primary" href="configurateur/">${ui.cta_config}</a>
+            <a class="col-btn-secondary" href="index.html#contact">${ui.cta_rdv}</a>
+          </div>
+        </div>
+      </article>`);
+  });
+}
+
+// Lang switcher
+document.addEventListener('DOMContentLoaded', () => {
+  applyLang(currentLang);
+
+  const btn  = document.getElementById('langBtn');
+  const menu = document.getElementById('langMenu');
+
+  btn.addEventListener('click', () => {
+    menu.classList.toggle('hidden');
+    btn.classList.toggle('open');
+  });
+  document.addEventListener('click', e => {
+    if (!btn.contains(e.target) && !menu.contains(e.target)) {
+      menu.classList.add('hidden');
+      btn.classList.remove('open');
+    }
+  });
+  menu.querySelectorAll('[data-lang]').forEach(b => {
+    b.addEventListener('click', () => {
+      applyLang(b.dataset.lang);
+      menu.classList.add('hidden');
+      btn.classList.remove('open');
+    });
+  });
+});
+</script>
+</body>
+</html>
